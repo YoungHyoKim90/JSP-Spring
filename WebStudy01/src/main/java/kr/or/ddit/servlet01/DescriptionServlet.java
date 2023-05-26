@@ -39,10 +39,10 @@ import javax.servlet.http.HttpServletResponse;
  * 			: 내부에서 관리되는 객체의 생명주기 관리자. (생성에서 사용, 소멸까지.)
  * Servlet Container : 내부에서 관리되는 Servlet 객체의 생명주기 관리자
  * JSP Container : 내부에서 관리되는 JSP 객체의 생명주기 관리자
- * 				   일반적인 컨테이너의 특징
+ * 				   
+ * 					일반적인 컨테이너의 특징
  * 				   서블릿 컨테이너는 확장 CGI 방식에 따라 하나의 요청을 하나의 쓰레드로 처리함.
  * 				   톰켓은 쓰레드 풀링 구조 - 미리 쓰레드를 만들어 놓고 사용한다.					
- * 
  * 					1) 싱글턴 구조로 서블릿을 관리함.
  * 					2) 생명주기를 관리하는 과정에서 여러가지 상황에 대한 콜백 구조를 가짐.
  * 
@@ -56,7 +56,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  *** 멀티태스킹 - 	1 멀티프로세싱 	: 하나하나의 프로그램이 동시에 실행 
  *				2 멀티스레싱 	: 하나의 프로그램이 여러개로 쪼개져서 실행 => 톰캣방식.
- *** 확장 CGI방식
+ *** 멀티 스레싱 -> 확장 CGI방식을 이용하여 콜백이 가능한 싱글턴 패턴을 가진 생명주기 관리자.
  *
  *
  */
@@ -68,7 +68,7 @@ public class DescriptionServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		System.out.printf("%s 서블릿 초기화\n",this.getClass().getSimpleName());
-	}
+	} //인스턴스가 실행되었을때 생성 되고, 한번 실행.
 	
 	@Override // 해당 코드의 super가 없으면 doget이 실행 안됨.  http request method에 따른 분기자이다.
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -76,8 +76,6 @@ public class DescriptionServlet extends HttpServlet {
 		//super.service(req, resp); //분기!하는 코드를 가진것이 service이다.
 		System.out.println("서비스 종료");
 	}
-	
-	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
