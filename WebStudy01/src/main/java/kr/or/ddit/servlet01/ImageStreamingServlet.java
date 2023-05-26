@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public class ImageStreamingServlet extends HttpServlet {
 
+	private String folderPath;
+	private ServletContext application;
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		System.out.printf("%s 서블릿 초기화\n", this.getClass().getSimpleName());
+		application = getServletContext();
+
+	
+		folderPath = application.getInitParameter("mediaFolder");
+	
 	}
 
 	/*
@@ -28,7 +36,6 @@ public class ImageStreamingServlet extends HttpServlet {
 
 		System.out.println("doGet 실행");
 
-		String folderPath = "D:/medias/images";
 		String fileName = req.getParameter("image");
 		
 		if(fileName == null || fileName.isEmpty()) { // 요청 검증 isEmpty는 화이트스페이스 검증 !! 클라이언트가 보내는 내용은 무조건 믿지마라.

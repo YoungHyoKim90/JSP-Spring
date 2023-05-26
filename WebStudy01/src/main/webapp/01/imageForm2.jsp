@@ -11,8 +11,8 @@
    <form action='<%=request.getContextPath() %>/image.do'>
 
       <select name='image' onchange='this.form.submit()'>
-      <%
-         String folderPath = "D:/medias/images";
+      <% 
+         String folderPath = application.getInitParameter("mediaFolder");
          File folder = new File(folderPath);
          
          String[] imageFiles = folder.list((d, n) -> {

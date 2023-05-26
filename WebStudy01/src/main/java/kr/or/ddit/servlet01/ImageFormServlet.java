@@ -28,7 +28,7 @@ public class ImageFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=utf-8");
 
-		String folderPath = "D:/medias/images";
+		String folderPath = application.getInitParameter("mediaFolder");
 		File folder = new File(folderPath);
 
 		String[] imageFiles = folder.list((d, n) -> {
