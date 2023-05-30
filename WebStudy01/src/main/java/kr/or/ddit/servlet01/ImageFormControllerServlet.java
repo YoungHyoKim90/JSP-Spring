@@ -35,7 +35,7 @@ public class ImageFormControllerServlet extends HttpServlet{
 		
 		
 	
-	req.setAttribute("imagerFiles", imageFiles);
+	req.setAttribute("imageFiles", imageFiles);
 	
 	String viewName = "/WEB-INF/views/images/imageForm3.jsp";
 	
