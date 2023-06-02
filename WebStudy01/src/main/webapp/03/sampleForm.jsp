@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>03/sampleForm.jsp</title>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-3.7.0.js"></script>
 </head>
 <body>
 <form id="sampleForm" action="<%=request.getContextPath()%>/03/payloadDataProcess.do" method="post">
@@ -64,7 +64,7 @@
 		let setting = {
 			url : url,
 			method : method,
-			data : data,
+			data : JSON.stringify( data ), //marshalling
 			headers : {
 				
 				"Content-Type" : "application/json"

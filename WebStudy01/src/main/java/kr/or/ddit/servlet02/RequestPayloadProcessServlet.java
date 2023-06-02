@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.or.ddit.vo.SampleFormVO;
+
 @WebServlet("/03/payloadDataProcess.do")
 public class RequestPayloadProcessServlet extends HttpServlet {
 
@@ -28,10 +30,8 @@ public class RequestPayloadProcessServlet extends HttpServlet {
 				InputStream is = req.getInputStream();
 				){
 			//JSON -> Native - UnMarshalling(+deserialzation)
-			Map<String, Object> target = mapper.readValue(is, HashMap.class);
-			target.forEach((k,v)->{
-				System.out.printf("%s : %s\n", k, v);
-			});
+			SampleFormVO target = mapper.readValue(is, SampleFormVO.class);
+			System.out.println(target);
 		}
 
 		
