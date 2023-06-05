@@ -6,7 +6,7 @@ import kr.or.ddit.calculate.BiOperandOperator;
 
 public enum OperatorType {
 	PLUS('+',(l,r)->l+r),
-	MUNUS('-',(l,r)->l-r),
+	MINUS('-',(l,r)->l-r),
 	MULTPLY('*',(l,r)->l*r),
 	DIVIDE('/',(l,r)->l/r);
 	

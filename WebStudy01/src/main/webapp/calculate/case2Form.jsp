@@ -9,12 +9,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>/calculate/case2Form.jsp</title>
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-3.7.0.js"></script>
 
 </head>
 <body>
-<form id="calForm" action="<%=request.getContextPath() %>/calculate/Case1ProcessServlet" method="post">
+<form id="calForm" action="<%=request.getContextPath() %>/calculate/Case2ProcessServlet" method="post">
    <input type="number" name="leftOp" />
    <select name="opParam">
       <option value>연산자</option>
@@ -52,8 +52,8 @@
 //Accept(request header), content-Type(response header)
 			success : function(resp) {
 				
-//				resultArea.innerHTML = `<p>\${resp}</p>`;
-				$(resultArea).html( $("<p>").html(resp) );
+//				resultArea.innerHTML = `<p>\${resp.expr}</p>`;
+				$(resultArea).html( $("<p>").html(resp['expr']) );
 			},
 			error : function(jqXHR, status, error) {
 				console.log(jqXHR)
