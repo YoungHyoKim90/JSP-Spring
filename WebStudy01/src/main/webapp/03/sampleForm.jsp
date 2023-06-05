@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>03/sampleForm.jsp</title>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-3.7.0.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/customLibs.js"></script>
 </head>
 <body>
