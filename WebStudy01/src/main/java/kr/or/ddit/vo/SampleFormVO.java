@@ -8,7 +8,7 @@ public class SampleFormVO implements Serializable {
 	private String dateParam;
 	private String datetimeParam;
 	private String param1;
-	private String param2;
+	private int param2;
 	private String rdoParam;
 	private String[] selParamMulti;
 	private String selParamSingle;
@@ -46,10 +46,10 @@ public class SampleFormVO implements Serializable {
 	public void setParam1(String param1) {
 		this.param1 = param1;
 	}
-	public String getParam2() {
+	public int getParam2() {
 		return param2;
 	}
-	public void setParam2(String param2) {
+	public void setParam2(int param2) {
 		this.param2 = param2;
 	}
 	public String getRdoParam() {

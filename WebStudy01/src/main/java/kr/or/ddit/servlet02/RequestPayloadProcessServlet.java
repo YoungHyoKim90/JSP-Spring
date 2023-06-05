@@ -32,7 +32,7 @@ public class RequestPayloadProcessServlet extends HttpServlet {
 			//JSON -> Native - UnMarshalling(+deserialzation)
 			SampleFormVO target = mapper.readValue(is, SampleFormVO.class);
 			System.out.println(target);
-		}
+		} // 역직렬화, 언마샬링
 
 		
 		String accept =  req.getHeader("accept");
