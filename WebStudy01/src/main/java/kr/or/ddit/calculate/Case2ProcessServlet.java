@@ -15,11 +15,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.or.ddit.enumpkg.OperatorType;
 
-
 @WebServlet("/calculate/Case2ProcessServlet")
 public class Case2ProcessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -29,37 +27,52 @@ public class Case2ProcessServlet extends HttpServlet {
 		String opParam = request.getParameter("opParam");
 		
 		try {
-			double left = Double.parseDouble(leftOp);
-			double right = Double.parseDouble(rightOp);
+			double left = Double.parseDouble(leftOp); 
+			double right = Double.parseDouble(rightOp); 
 			OperatorType operator = OperatorType.valueOf(opParam);
-			double result =operator.biOperate(left, right);
-			
+			double result = operator.biOperate(left, right);
 			
 			String expr = operator.expression(left, right);
 			
-			//native data
+			// native
 			Map<String, Object> target = new HashMap<>();
-			target.put("expr",expr);
-			target.put("result",result);
-			target.put("left",left);
-			target.put("right",right);
-			target.put("operator",operator);
-			//마샬링하고, 직렬화!
-
-			response.setContentType("application/Json;charset=UTF-8");
+			target.put("expr", expr);
+			target.put("result", result);
+			target.put("left", left);
+			target.put("right", right);
+			target.put("operator", operator);
+			
+			response.setContentType("application/json;charset=UTF-8");
 			
 			try(
-			
-				PrintWriter out = response.getWriter();
-	
-			){ 
-//				out.print(expr);
+				PrintWriter out = response.getWriter();	
+			){
+//				out.println(expr);
 				new ObjectMapper().writeValue(out, target);
-			} // 마샬링 함으로 제이슨데이터가 나옴! 그래서 직렬화도 함!
-		} catch (Exception e) {
+			}
+		}catch (Exception e) {
 			response.sendError(400);
 		}
-		
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

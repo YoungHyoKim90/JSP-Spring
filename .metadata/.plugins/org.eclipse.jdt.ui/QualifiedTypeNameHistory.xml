@@ -4,7 +4,6 @@
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="java.io.OutputStream"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletConfig"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="org.apache.tomcat.util.net.ApplicationBufferHandler"/>
@@ -25,7 +24,6 @@
     <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="kr.or.ddit.vo.SampleFormVO"/>
-    <fullyQualifiedTypeName name="kr.or.ddit.enumpkg.OperatorType"/>
     <fullyQualifiedTypeName name="java.lang.FunctionalInterface"/>
     <fullyQualifiedTypeName name="kr.or.ddit.calculate.BiOperandOperator"/>
     <fullyQualifiedTypeName name="java.text.MessageFormat"/>
@@ -33,4 +31,7 @@
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.enumpkg.OperatorType"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.calculate.CalculateVO"/>
 </qualifiedTypeNameHistroy>

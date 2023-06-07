@@ -9,50 +9,46 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/calculate/case2Form.jsp</title>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-3.7.0.js"></script>
-
+<title>Insert title here</title>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
 <form id="calForm" action="<%=request.getContextPath() %>/calculate/Case2ProcessServlet" method="post">
-   <input type="number" name="leftOp" />
-   <select name="opParam">
-      <option value>연산자</option>
-      <%
-         OperatorType[] opTypes = OperatorType.values();
-         String options = Arrays.stream(opTypes)
-               .map(op -> MessageFormat.format("<option value=''{0}''>{1}</option>", op.name(), op.getSign()))
-               .collect(Collectors.joining("\n"));
-         out.println(options);
-      %>
-   </select>
-   <input type="number" name="rightOp" />
-   <button type="submit">=</button>
+	<input type="number" name="leftOp" />
+	<select name="opParam">
+		<option value>연산자</option>
+		<%
+			OperatorType[] opTypes = OperatorType.values();
+			String options = Arrays.stream(opTypes)
+								.map(op->MessageFormat.format("<option value=''{0}''>{1}</option>", op.name(), op.getSign()))
+								.collect(Collectors.joining("\n"));
+			out.println(options);
+		%>
+	</select>
+	<input type="number" name="rightOp" />
+	<button type="submit">=</button>
 </form>
-
 <div id="resultArea">
-	
-</div>
 
+</div>
 <script type="text/javascript">
-	$(calForm).on("submit",(event)=>{
+	$(calForm).on("submit", (event)=>{
 		event.preventDefault();
-		//this is window
+// 		this is window
 		let calForm = event.target;
 		let url = calForm.action;
-		let calForm = calForm.method;
-		let data = $(calForm).serialze();
+		let method = calForm.method;
+		let data = $(calForm).serialize();
 		
-		let setting = {
+		let settings = {
 			url : url,
 			method : method,
 			data : data,
-			dataType : "json", 
-//json(application/json),xml(application/xml),html(text/html),text(text/plain)
-//Accept(request header), content-Type(response header)
+			dataType : "json", // json(application/json), xml(application/xml), html(text/html), text(text/plain)
+							// Accept(request header), Content-Type(response header)
 			success : function(resp) {
 				
-//				resultArea.innerHTML = `<p>\${resp.expr}</p>`;
+// 				resultArea.innerHTML = `<p>\${resp.expr}</p>`;
 				$(resultArea).html( $("<p>").html(resp['expr']) );
 			},
 			error : function(jqXHR, status, error) {
@@ -60,11 +56,25 @@
 				console.log(status)
 				console.log(error)
 			}
-		} //request line, header, body -> response processing
+		} //request line,header,body -> response processing
 
-		$.ajax(setting);
-		
+		$.ajax(settings);
 	});
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

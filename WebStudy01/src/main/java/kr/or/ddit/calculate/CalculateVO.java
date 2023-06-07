@@ -29,8 +29,25 @@ public class CalculateVO {
 	public double getResult() {
 		return opParam.biOperate(leftOp, rightOp);
 	}
-
+	
 	public String getExpr() {
 		return opParam.expression(leftOp, rightOp);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

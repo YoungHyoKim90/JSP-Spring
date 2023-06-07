@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/imageForm3.do")	
+@WebServlet("/imageForm3.do")
 public class ImageFormControllerServlet extends HttpServlet{
 	private ServletContext application;
 	
@@ -19,29 +19,21 @@ public class ImageFormControllerServlet extends HttpServlet{
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		application = getServletContext();
-		
 	}
-	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		  String folderPath = application.getInitParameter("mediaFolder");
-	         File folder = new File(folderPath);
-	         
-	         String[] imageFiles = folder.list((d, n) -> {
-	            String mime = application.getMimeType(n);
-	            return mime != null && mime.startsWith("image/");
-	         });
+		String folderPath = application.getInitParameter("mediaFolder");
+		File folder = new File(folderPath);
 		
+		String[] imageFiles = folder.list((d,n)->{
+			String mime = application.getMimeType(n);
+			return mime!=null && mime.startsWith("image/");
+		});
 		
-	
-	req.setAttribute("imageFiles", imageFiles);
-	
-	String viewName = "/WEB-INF/views/images/imageForm3.jsp";
-	
-	req.getRequestDispatcher(viewName).forward(req, resp);
-	
-	
+		req.setAttribute("imageFiles", imageFiles);
+		String viewName = "/WEB-INF/views/images/imageForm3.jsp";
+		req.getRequestDispatcher(viewName).forward(req, resp);
 	}
 }
 
@@ -57,16 +49,3 @@ public class ImageFormControllerServlet extends HttpServlet{
 
 
 
-
-
-
-
-
-
-
-
-
-/*
- * 	req.setAttribute("", resp);
- *	req.getRequestDispatcher("").forward(req, resp);
-*/

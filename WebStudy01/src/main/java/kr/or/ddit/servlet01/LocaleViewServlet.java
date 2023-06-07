@@ -12,32 +12,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/localeView.nhn")
-public class LocaleViewServlet extends HttpServlet {
-	
+public class LocaleViewServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		Locale clientLocale = req.getLocale();
-		Locale serverLocale = Locale.getDefault();
-		
+		Locale clientLocale =  req.getLocale();
+		Locale serverLocale = Locale.getDefault(); 
 		
 		StringBuilder html = new StringBuilder();
 		
+		html.append(" <html>             ");
+		html.append(" 	<body>           ");
+		html.append(MessageFormat.format("<h4>client side locale : {0}</h4>", clientLocale) );
+		html.append(MessageFormat.format("<h4>server side locale : {0}</h4>", serverLocale) );
+		html.append(" 	</body>          ");
+		html.append(" </html>            ");
 		
-		html.append(" <html>            ");
-		html.append("	 <body>         ");
-		html.append(MessageFormat.format("<h4>client side locale : {0} </h4>", clientLocale));
-		html.append(MessageFormat.format("<h4>server side locale : {0} </h4>", serverLocale));
-		html.append("	 </body>        ");
-		html.append(" </html>           ");
-	
 		
 		try(
-				PrintWriter out = resp.getWriter();
-				){
+			PrintWriter out = resp.getWriter();	
+		){
 			out.println(html);
 		}
-		
-	
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@ package kr.or.ddit.vo;
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class SampleFormVO implements Serializable {
+public class SampleFormVO implements Serializable{
 	private String[] chkParam;
 	private String dateParam;
 	private String datetimeParam;
@@ -14,14 +14,12 @@ public class SampleFormVO implements Serializable {
 	private String selParamSingle;
 	
 	
-	
 	@Override
 	public String toString() {
 		return "SampleFormVO [chkParam=" + Arrays.toString(chkParam) + ", dateParam=" + dateParam + ", datetimeParam="
 				+ datetimeParam + ", param1=" + param1 + ", param2=" + param2 + ", rdoParam=" + rdoParam
 				+ ", selParamMulti=" + Arrays.toString(selParamMulti) + ", selParamSingle=" + selParamSingle + "]";
 	}
-	
 	public String[] getChkParam() {
 		return chkParam;
 	}
@@ -71,6 +69,4 @@ public class SampleFormVO implements Serializable {
 		this.selParamSingle = selParamSingle;
 	}
 	
-	
-
 }

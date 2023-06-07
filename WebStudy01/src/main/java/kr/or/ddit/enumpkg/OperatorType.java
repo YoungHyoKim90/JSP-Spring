@@ -5,14 +5,12 @@ import java.text.MessageFormat;
 import kr.or.ddit.calculate.BiOperandOperator;
 
 public enum OperatorType {
-	PLUS('+',(l,r)->l+r),
-	MINUS('-',(l,r)->l-r),
-	MULTPLY('*',(l,r)->l*r),
-	DIVIDE('/',(l,r)->l/r);
+	PLUS('+', (l,r)->l+r ),
+	MINUS('-', (l,r)->l-r), 
+	MULTIPLY('*', (l,r)->l*r), 
+	DIVIDE('/', (l,r)->l/r);
 	
-	
-	
-	private OperatorType(char sign,BiOperandOperator operator) {
+	private OperatorType(char sign, BiOperandOperator operator) {
 		this.sign = sign;
 		this.operator = operator;
 	}
@@ -26,11 +24,30 @@ public enum OperatorType {
 	}
 	
 	public double biOperate(double left, double right) {
-		return operator.operate(left,right);
+		return operator.operate(left, right);
 	}
-	
 	
 	public String expression(double left, double right) {
-		return MessageFormat.format("{0} {3} {1} ={2}" ,left,right,biOperate(left, right),sign);		
+		return MessageFormat.format("{0} {3} {1} = {2}", left, right, biOperate(left, right), sign);
 	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
