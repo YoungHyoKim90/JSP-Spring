@@ -16,8 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.or.ddit.enumpkg.OperatorType;
 
 
-@WebServlet("/calculate/Case2ProcessServlet")
-public class Case2ProcessServlet extends HttpServlet {
+@WebServlet("/calculate/Case3ProcessServlet")
+public class Case3ProcessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
@@ -46,15 +46,31 @@ public class Case2ProcessServlet extends HttpServlet {
 			target.put("operator",operator);
 			//마샬링하고, 직렬화!
 
-			response.setContentType("application/Json;charset=UTF-8");
+			String accept = request.getHeader("accept");
+			String contentType = null;
+			Object content =null;
+			if(accept.contains("json")) {
+				contentType = "application/Json;charset=UTF-8";
+				content = new ObjectMapper().writeValueAsString(target);			
+			}else if (accept.contains("xml"))  {
+				response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
+				return;
+
+			}else {
+				contentType = "text/html;charset=UTF-8";
+				content = target.get("expr");
+				
+			}
+			
+			response.setContentType(contentType);
 			
 			try(
 			
 				PrintWriter out = response.getWriter();
 	
 			){ 
-//				out.print(expr);
-				new ObjectMapper().writeValue(out, target);
+			out.println(content);
+
 			} // 마샬링 함으로 제이슨데이터가 나옴! 그래서 직렬화도 함!
 		} catch (Exception e) {
 			response.sendError(400);

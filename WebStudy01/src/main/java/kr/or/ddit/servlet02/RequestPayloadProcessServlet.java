@@ -57,7 +57,8 @@ public class RequestPayloadProcessServlet extends HttpServlet {
 		// Accept : text/plain
 		//Serializetion
 		resp.setContentType(contentType);
-		try(PrintWriter out = resp.getWriter();){
+		try(PrintWriter out = resp.getWriter();
+				){
 			out.println(Objects.toString(responseContent,""));
 		}
 		

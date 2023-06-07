@@ -9,12 +9,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/calculate/case2Form.jsp</title>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-3.7.0.js"></script>
+<title>/calculate/case4Form.jsp</title>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/customLibs.js"></script>
 
 </head>
 <body>
-<form id="calForm" action="<%=request.getContextPath() %>/calculate/Case2ProcessServlet" method="post">
+
+<div style="border: 1px solid black;">
+
+	<input type = "radio" name = "contentType" value="Parameter" checked />Parameter
+	<input type = "radio" name = "contentType" value="json" />JSON
+
+</div>
+
+<form id="calForm" action="<%=request.getContextPath() %>/calculate/Case4ProcessServlet" method="post">
    <input type="number" name="leftOp" />
    <select name="opParam">
       <option value>연산자</option>
@@ -41,12 +50,13 @@
 		let calForm = event.target;
 		let url = calForm.action;
 		let calForm = calForm.method;
+		
+		
 		let data = $(calForm).serialze();
 		
 		let setting = {
 			url : url,
 			method : method,
-			data : data,
 			dataType : "json", 
 //json(application/json),xml(application/xml),html(text/html),text(text/plain)
 //Accept(request header), content-Type(response header)
@@ -62,6 +72,16 @@
 			}
 		} //request line, header, body -> response processing
 
+		let contentType = $("[name=contnentType]:checked").val() ?? "Parameter";
+				
+		if(contentType.toLowerCase() == "JSON"){
+			settings.contentType= "application/json;charset=UTF-8"
+			let nativeData = $(calForm).seializeObject();
+			settings.data = JSON.stringify(nativeData);
+		}else{
+			settings.data = $(calForm).serialze();
+		}
+		
 		$.ajax(setting);
 		
 	});

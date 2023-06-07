@@ -16,8 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.or.ddit.enumpkg.OperatorType;
 
 
-@WebServlet("/calculate/Case2ProcessServlet")
-public class Case2ProcessServlet extends HttpServlet {
+@WebServlet("/calculate/Case4ProcessServlet")
+public class Case4ProcessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
@@ -32,19 +32,12 @@ public class Case2ProcessServlet extends HttpServlet {
 			double left = Double.parseDouble(leftOp);
 			double right = Double.parseDouble(rightOp);
 			OperatorType operator = OperatorType.valueOf(opParam);
-			double result =operator.biOperate(left, right);
 			
-			
-			String expr = operator.expression(left, right);
-			
-			//native data
-			Map<String, Object> target = new HashMap<>();
-			target.put("expr",expr);
-			target.put("result",result);
-			target.put("left",left);
-			target.put("right",right);
-			target.put("operator",operator);
-			//마샬링하고, 직렬화!
+			CalculateVO target = new CalculateVO();
+			target.setLeftOp(left);
+			target.setRightOp(right);
+			target.setOpParam(operator);
+		
 
 			response.setContentType("application/Json;charset=UTF-8");
 			
