@@ -19,7 +19,7 @@
 				value = $ipt.filter((idx, chkIpt)=>chkIpt.checked)
 							.get()
 							.map(i=>i.value);
-			}else if(type ="number"){
+			}else if(type == "number"){
 				value = $ipt.val(); // value 속성 값을 반환.(attribute는 String 타입)
 				value = parseInt(value); //여기부터 숫자.
 			}else{

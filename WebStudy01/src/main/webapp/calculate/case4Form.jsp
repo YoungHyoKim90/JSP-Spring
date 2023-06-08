@@ -15,6 +15,7 @@
 </head>
 <body>
 <div style="border: 1px solid black;">
+	<h4>request content-type header : server side unmarshalling 여부</h4>
 	<input type="radio" name="contentType" value="Parameter" checked />Parameter
 	<input type="radio" name="contentType" value="json"/>JSON
 </div>
@@ -67,7 +68,7 @@
 			settings.contentType = "application/json;charset=UTF-8";
 			let nativeData = $(calForm).serializeObject();
 			settings.data = JSON.stringify(nativeData);
-		}else{
+		}else{ // --> mashalling
 			settings.data = $(calForm).serialize();
 		}
 		

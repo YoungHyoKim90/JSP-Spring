@@ -14,6 +14,7 @@
 </head>
 <body>
 <div style="border: 1px solid black">
+	<h4>request accept header == response content-type : server side marshalling 여부</h4>
 	<input type="radio" name="acceptType" value="json"/>JSON
 	<input type="radio" name="acceptType" value="xml"/>XML
 	<input type="radio" name="acceptType" value="html" />HTML
