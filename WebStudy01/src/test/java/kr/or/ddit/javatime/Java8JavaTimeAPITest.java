@@ -1,7 +1,5 @@
 package kr.or.ddit.javatime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

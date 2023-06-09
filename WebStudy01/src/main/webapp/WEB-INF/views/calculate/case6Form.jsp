@@ -15,12 +15,12 @@
 </head>
 <body>
 <div style="border: 1px solid black;">
-	<h4>request content-type header : server side unmarshalling 여부</h4>
+	<h4><strong>request content-type header</strong> : server side unmarshalling 여부</h4>
 	<input type="radio" name="contentType" value="Parameter" checked />Parameter
 	<input type="radio" name="contentType" value="json"/>JSON
 </div>
 <div style="border: 1px solid black">
-	<h4>request accept header  == response content-type : server side marshalling 여부</h4>
+	<h4><strong>request accept header</strong>  == response content-type : server side marshalling 여부</h4>
 	<input type="radio" name="acceptType" value="json"/>JSON
 	<input type="radio" name="acceptType" value="xml"/>XML
 	<input type="radio" name="acceptType" value="html" />HTML
