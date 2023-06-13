@@ -40,12 +40,12 @@
     <fullyQualifiedTypeName name="java.time.YearMonth"/>
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
     <fullyQualifiedTypeName name="java.util.Locale"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
-    <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="java.time.ZoneId"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.datatype.jsr310.JavaTimeModule"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.SerializationFeature"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+    <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
 </qualifiedTypeNameHistroy>

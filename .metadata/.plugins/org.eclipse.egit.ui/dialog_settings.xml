@@ -15,8 +15,8 @@
 		<item value="YoungHyoKim90 &lt;younghyo1101@gmail.com&gt;"/>
 	</list>
 	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="158"/>
-		<item key="DIALOG_Y_ORIGIN" value="203"/>
+		<item key="DIALOG_X_ORIGIN" value="345"/>
+		<item key="DIALOG_Y_ORIGIN" value="207"/>
 		<item key="DIALOG_WIDTH" value="666"/>
 		<item key="DIALOG_HEIGHT" value="458"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
@@ -32,5 +32,35 @@
 		<item key="sortItemState" value="false"/>
 	</section>
 	<section name="GitCommitMessageComponent">
+		<list key="D:\0.tools\eGovFrameDev-4.1.0-64bit\workspace\.git">
+			<item value="false"/>
+			<item value="YoungHyoKim90 &lt;younghyo1101@gmail.com&gt;"/>
+			<item value="23.06.10 JSP"/>
+			<item value="YoungHyoKim90 &lt;younghyo1101@gmail.com&gt;"/>
+			<item value="1ca1f491e0d9172724f49c81e92ee2498423166f"/>
+			<item value="0"/>
+			<item value="false"/>
+		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.dialogs.MergeTargetSelectionDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="278"/>
+		<item key="DIALOG_Y_ORIGIN" value="75"/>
+		<item key="DIALOG_WIDTH" value="538"/>
+		<item key="DIALOG_HEIGHT" value="672"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.fetch.FetchResultDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="239"/>
+		<item key="DIALOG_Y_ORIGIN" value="218"/>
+		<item key="DIALOG_WIDTH" value="616"/>
+		<item key="DIALOG_HEIGHT" value="458"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="230"/>
+		<item key="DIALOG_Y_ORIGIN" value="327"/>
+		<item key="DIALOG_WIDTH" value="634"/>
+		<item key="DIALOG_HEIGHT" value="295"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 </section>
