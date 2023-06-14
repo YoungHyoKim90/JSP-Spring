@@ -33,13 +33,7 @@
 	</section>
 	<section name="GitCommitMessageComponent">
 		<list key="D:\0.tools\eGovFrameDev-4.1.0-64bit\workspace\.git">
-			<item value="false"/>
-			<item value="YoungHyoKim90 &lt;younghyo1101@gmail.com&gt;"/>
-			<item value="23.06.10 JSP"/>
-			<item value="YoungHyoKim90 &lt;younghyo1101@gmail.com&gt;"/>
-			<item value="1ca1f491e0d9172724f49c81e92ee2498423166f"/>
-			<item value="0"/>
-			<item value="false"/>
+			<item value="empty"/>
 		</list>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.dialogs.MergeTargetSelectionDialog.dialogBounds">

@@ -37,7 +37,7 @@
 </head>
 <body>
 <h4>TODAY : <span id="todayArea"></span></h4>
-<h4>server's CURRENT : <span id="currentArea"></span></h4>
+<h4>server's CURRENT : <span id="currentArea">Korean time  : 현재 시간</span></h4>
 <hr />
 
 <form action="<%=request.getContextPath() %>/calendarCase2" id="calendarForm" onchange="this.requestSubmit()" method="post"
@@ -81,14 +81,15 @@
 <script type="text/javascript">
 // 	JS scheduling function : setTimeout, setInterval
 	setInterval(() => {
-		fetch("<%=request.getContextPath()%>/05/serverTime", {
+		let queryString = new URLSearchParams( new FormData(calendarForm) ).toString();
+		fetch(`<%=request.getContextPath()%>/05/serverTime?\${queryString}`, {
 			method:"get",
 			headers:{
 				"Accept" : "application/json" // ajax dataType과 동일
 			}
 		}).then(resp=>resp.json())
 			.then(respObj=>{
-				currentArea.innerHTML = respObj.current;
+				currentArea.innerHTML = `\${respObj.zone}:\${respObj.current}`;
 				todayArea.innerHTML = respObj.today;
 			});
 	}, 1000);

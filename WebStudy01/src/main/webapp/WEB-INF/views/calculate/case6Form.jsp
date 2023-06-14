@@ -5,22 +5,13 @@
 <%@page import="kr.or.ddit.enumpkg.OperatorType"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-3.7.0.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/customLibs.js"></script>
-</head>
-<body>
 <div style="border: 1px solid black;">
-	<h4><strong>request content-type header</strong> : server side unmarshalling 여부</h4>
+	<h4>request content-type header : server side unmarshalling 여부</h4>
 	<input type="radio" name="contentType" value="Parameter" checked />Parameter
 	<input type="radio" name="contentType" value="json"/>JSON
 </div>
 <div style="border: 1px solid black">
-	<h4><strong>request accept header</strong>  == response content-type : server side marshalling 여부</h4>
+	<h4>request accept header  == response content-type : server side marshalling 여부</h4>
 	<input type="radio" name="acceptType" value="json"/>JSON
 	<input type="radio" name="acceptType" value="xml"/>XML
 	<input type="radio" name="acceptType" value="html" />HTML
@@ -94,8 +85,6 @@
 		$.ajax(settings);
 	});
 </script>
-</body>
-</html>
 
 
 
