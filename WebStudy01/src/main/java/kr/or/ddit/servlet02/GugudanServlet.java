@@ -29,10 +29,11 @@ public class GugudanServlet extends HttpServlet{
 		
 		req.setAttribute("minDan", minDan);
 		req.setAttribute("maxDan", maxDan);
-		String contentPage = "/WEB-INF/views/02/gugudan.jsp";
-		req.setAttribute("contentPage", contentPage);
 		
-		String viewName = "/WEB-INF/views/template.jsp";
+		
+		String logicalViewName = "02/gugudan";
+		
+		String viewName = "/"+logicalViewName+".miles";
 		req.getRequestDispatcher(viewName).forward(req, resp);
 	}
 }
