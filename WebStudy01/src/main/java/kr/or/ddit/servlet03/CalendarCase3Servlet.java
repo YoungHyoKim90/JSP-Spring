@@ -1,13 +1,17 @@
 package kr.or.ddit.servlet03;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.Locale;
 import java.util.Optional;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +27,9 @@ public class CalendarCase3Servlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("contentPage", "/WEB-INF/views/calendar/calendarCase3.jsp");
+		String logicalViewName = "calendar/calendarCase3";
 		
-		String viewName = "/WEB-INF/views/template.jsp";
+		String viewName = "/"+logicalViewName+".tiles";
 		req.getRequestDispatcher(viewName).forward(req, resp);
 	}
 	

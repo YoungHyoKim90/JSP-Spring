@@ -4,4 +4,6 @@
     <typeInfo handle="=WebStudy01/src\/main\/java&lt;kr.or.ddit.servlet01{ImageStreamingServlet.java[ImageStreamingServlet" modifiers="1" timestamp="1686130456104"/>
     <typeInfo handle="=WebStudy01/src\/main\/java&lt;kr.or.ddit.servlet01{ImageFormServlet.java[ImageFormServlet" modifiers="1" timestamp="1686130447605"/>
     <typeInfo handle="=WebStudy01/src\/main\/java&lt;kr.or.ddit.servlet01{ImageFormControllerServlet.java[ImageFormControllerServlet" modifiers="1" timestamp="1686130428385"/>
+    <typeInfo handle="=WebStudy01/D:\/0.tools\/eGovFrameDev-4.1.0-64bit\/workspace\/WebStudy01\/src\/main\/webapp\/WEB-INF\/lib\/tiles-servlet-3.0.8.jar&lt;org.apache.tiles.web.startup.simple(SimpleTilesListener.class[SimpleTilesListener" modifiers="33" timestamp="1686876025786"/>
+    <typeInfo handle="=WebStudy01/D:\/0.tools\/eGovFrameDev-4.1.0-64bit\/workspace\/WebStudy01\/src\/main\/webapp\/WEB-INF\/lib\/tiles-api-3.0.8.jar&lt;org.apache.tiles.preparer(ViewPreparer.class[ViewPreparer" modifiers="1537" timestamp="1686876025782"/>
 </typeInfoHistroy>

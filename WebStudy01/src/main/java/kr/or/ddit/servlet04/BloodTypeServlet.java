@@ -30,7 +30,7 @@ public class BloodTypeServlet extends HttpServlet{
 		req.setAttribute("bloodType", bloodType);
 		
 		String logicalViewName = "blood/formView";
-		String viewName = "/" + logicalViewName + ".miles";
+		String viewName = "/" + logicalViewName + ".tiles";
 		req.getRequestDispatcher(viewName).forward(req, resp);
 	}
 	
@@ -55,7 +55,7 @@ public class BloodTypeServlet extends HttpServlet{
 			resp.sendError(status);
 		}else {
 			
-			String viewName = "/" +logicalViewName+ ".miles";
+			String viewName = "/" +logicalViewName+ ".tiles";
 			req.getRequestDispatcher(viewName).forward(req, resp);
 		}
 	}
