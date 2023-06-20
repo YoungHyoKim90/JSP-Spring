@@ -38,4 +38,46 @@
 		<session-timeout>2</session-timeout>
 	</session-config>
 
+<servlet>
+	<servlet-name>T01FirstServlet</servlet-name>
+	<servlet-class>kr.co.yhk.T01FirstServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>T01FirstServlet</servlet-name>
+	<url-pattern>/T01FirstServlet</url-pattern>
+</servlet-mapping>
+
+<servlet>
+	<servlet-name>T02SecondServlet</servlet-name>
+	<servlet-class>kr.co.yhk.T02SecondServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>T02SecondServlet</servlet-name>
+	<url-pattern>/T02SecondServlet</url-pattern>
+</servlet-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </web-app>
