@@ -57,7 +57,7 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
-    <fullyQualifiedTypeName name="org.apache.commons.lang3.StringUtils"/>
     <fullyQualifiedTypeName name="org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="org.apache.commons.lang3.StringUtils"/>
 </qualifiedTypeNameHistroy>
