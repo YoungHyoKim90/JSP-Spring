@@ -23,12 +23,11 @@ public class BloodTypeServlet extends HttpServlet{
 		bloodType.put("BT02", new String[] {"B형", "blood/b"});
 		bloodType.put("BT03", new String[] {"AB형", "blood/ab"});
 		bloodType.put("BT04", new String[] {"O형", "blood/o"});
+		getServletContext().setAttribute("bloodType", bloodType);
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("bloodType", bloodType);
-		
 		String logicalViewName = "blood/formView";
 		String viewName = "/" + logicalViewName + ".tiles";
 		req.getRequestDispatcher(viewName).forward(req, resp);

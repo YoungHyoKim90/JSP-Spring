@@ -16,6 +16,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Model2 구조에서 컨트롤러의 역할
+ * 1. 요청 접수
+ * 2. Model information 생성
+ * 	 * data vs information vs content(view layer, MIME type)
+ * 3. model 을 공유 -> scope's setAttribute(name, value)
+ * 4. view layer 선택 : logical view Name
+ * 5. view 로 이동 : forward [redirect]
+ *
+ */
 @WebServlet("/server")
 public class ServerFileExplorerServlet extends HttpServlet {
 	private ServletContext application;
@@ -50,7 +60,7 @@ public class ServerFileExplorerServlet extends HttpServlet {
 		
 		File[] listFiles = targetFolder.listFiles((d,n)->true);
 		
-		List<FileAdapter> children = Stream.of(listFiles)
+		List<WebResource> children = Stream.of(listFiles)
 											.map((f)->{
 												try {
 													return new FileAdapter(f, application);

@@ -32,7 +32,15 @@
 		}
 	--%>
 	5(*****). 웹 리소스 확보 	
+	path : context relative path
+	String realPath = application.getRealPath(path)
+	URL resource = application.getResource(path)
+	InputStream is = application.getResourceAsStream(path)
 	<%
+		
+// 		client side : context path + 이후 경로
+	//  context relative path : 서버 사이드 경로 표기
+// 		server side : /resources/images/cat1.jpg
 		String logicalUrl = "/resources/images/cat1.jpg";
 // 		String realPath = application.getRealPath(logicalUrl);
 // 		File srcFile = new File(realPath);
@@ -57,6 +65,7 @@
 	logical : <%=logicalUrl %>
 <%-- 	realPath : <%=realPath %> --%>
 </pre>
+<img src="<%=request.getContextPath() %>/resources/images/cat1.jpg" />
 <img src="<%=request.getContextPath() + destUrl %>" />
 </body>
 </html>

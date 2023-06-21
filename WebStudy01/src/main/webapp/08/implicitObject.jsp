@@ -22,7 +22,13 @@
 	exception : 에러 처리 목적의 페이지에서 발생한 예외나 에러에 대한 정보를 가진 객체.
 	
 	*** pageContext : 가장 먼저 생성되는 기본객체로, JSP 페이지에 대한 모든 정보를 가진 객체.
-					--> 나머지 기본 객체들에 대한 참조를 소유함.
+					--> 나머지 기본 객체들에 대한 참조를 소유함. --> EL 에서 주로 활용.
+		<%=pageContext.getRequest() %>			
+		<%=pageContext.getResponse() %>			
+		<%=pageContext.getSession() %>			
+		<%=pageContext.getServletContext() %>			
+		<%=pageContext.getException() %>
+		==> <%=request %>,  ${pageContext.request }			
 </pre>
 </body>
 </html>

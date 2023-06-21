@@ -21,7 +21,7 @@
 			String clz = tmp.getClzValue();
 			String logicalPath = tmp.getLogicalPath();
 			%>
-			<li class="<%=clz%>" data-target="<%=logicalPath %>"><%=tmp.getName() %></li>
+			<li class="<%=clz%>" data-target="<%=logicalPath %>" data-length="<%=tmp.length()%>" data-mime-type="<%=tmp.getMimeType()%>"><%=tmp.getName() %></li>
 			<%
 		}
 	%>
@@ -35,8 +35,25 @@
 		if(target)
 			location.href="?target="+target;
 		
-	}).on("click", "li.file" , function(){
-		
+	}).on("click", "li.file" , function(event){
+		let settings = {
+			url : "<%=request.getContextPath() %>/server/fileInfo",
+			dataType : "json", // Accept:application/json / Content-Type,
+			data : {
+				target : event.target.dataset.target 
+			},
+			success : function(resp) {
+				let fileInfo = resp.fileInfo;
+				fileInfoArea.innerHTML = ` \${fileInfo.name} : \${fileInfo.fancySize} , \${fileInfo.mimeType} `;
+			},
+			error : function(jqXHR, status, error) {
+				console.log(jqXHR)
+				console.log(status)
+				console.log(error)
+			}
+		} //request line,header,body -> response processing
+
+		$.ajax(settings);
 	}).find("li.dir").css("cursor", "pointer");
 </script>
 
