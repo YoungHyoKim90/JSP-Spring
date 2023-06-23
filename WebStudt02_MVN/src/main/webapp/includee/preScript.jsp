@@ -5,3 +5,10 @@
 
 <script src="<%=request.getContextPath() %>/resources/js/jquery-3.7.0.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/customLibs.js"></script>
+<script>
+	$(document).on("ajaxError",function(jqXHR,settings,errorText){
+		console.log("XMLHttpRequest : " , jqXHR);
+		console.log("settings : " , settings);
+		console.log("error : " , errorText);
+	});
+</script>

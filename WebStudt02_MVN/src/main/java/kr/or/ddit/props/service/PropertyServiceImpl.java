@@ -37,7 +37,27 @@ public class PropertyServiceImpl implements PropertyService{
 
 	@Override
 	public boolean removeProperty(String propertyName) {
-		// TODO Auto-generated method stub
-		return false;
+		int count = dao.deleteProperty(propertyName);
+		return count > 0;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

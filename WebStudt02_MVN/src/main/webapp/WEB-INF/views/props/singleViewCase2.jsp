@@ -13,6 +13,10 @@
 	<tbody id="listBody">
 	</tbody>
 </table>
+<form id="insertForm" method="post">
+	<input type="text" name="propertyValue" />
+	<input type="submit" value="등록" />
+</form>
 <script src="<%=request.getContextPath() %>/resources/js/app/props/property.js"></script>
 
 

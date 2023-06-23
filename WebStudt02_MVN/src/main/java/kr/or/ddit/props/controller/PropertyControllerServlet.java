@@ -1,13 +1,18 @@
 package kr.or.ddit.props.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 
 import kr.or.ddit.props.service.PropertyService;
 import kr.or.ddit.props.service.PropertyServiceImpl;
@@ -16,6 +21,12 @@ import kr.or.ddit.vo.PropertyVO;
 @WebServlet("/property")
 public class PropertyControllerServlet extends HttpServlet {
 	private PropertyService service = new PropertyServiceImpl();
+	
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		super.service(req, resp);
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,7 +47,36 @@ public class PropertyControllerServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		service.createProperty(null);
+		
+		String propertyValue = req.getParameter("propertyValue");
+		
+		if(StringUtils.isBlank(propertyValue)) {
+			resp.sendError(400, "필수 파라미터 누락");
+			return;
+		}
+		PropertyVO propVO = new PropertyVO();
+		propVO.setPropertyValue(propertyValue);
+		// call by reference
+		boolean success = service.createProperty(propVO);
+		
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("prop", propVO);
+		resultMap.put("success", success);
+		req.setAttribute("result", resultMap);
+		String viewName = null;
+		if(success) {
+			viewName = "redirect:/property";
+		}else {
+			viewName = "/jsonView.view";
+		}
+		
+		if(viewName.startsWith("redirect:")) {
+			viewName = viewName.substring("redirect:".length());
+			resp.sendRedirect(req.getContextPath() + viewName);
+		}else {
+			req.getRequestDispatcher(viewName).forward(req, resp);
+		}
 	}
 	
 	@Override
@@ -46,6 +86,47 @@ public class PropertyControllerServlet extends HttpServlet {
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		service.removeProperty(null);
+		InputStream is = req.getInputStream();
+		System.out.println(is.available());
+		
+		String propertyName = req.getParameter("propertyName");
+		if(StringUtils.isBlank(propertyName)) {
+			resp.sendError(400, "필수파라미터 누락");
+			return;
+		}
+		
+		boolean success = service.removeProperty(propertyName);
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("success", success);
+		req.setAttribute("result", resultMap);
+		String viewName = null;
+		
+		if(success) {
+			viewName = "redirect:/property";
+		}else {
+			viewName = "/jsonView.view";
+		}
+		
+		if(viewName.startsWith("redirect:")) {
+			viewName = viewName.substring("redirect:".length());
+			resp.sendRedirect(req.getContextPath() + viewName);
+		}else {
+			req.getRequestDispatcher(viewName).forward(req, resp);
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

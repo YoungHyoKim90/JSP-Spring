@@ -8,8 +8,10 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -50,9 +52,20 @@ public class PropertyDAOImpl_FS implements PropertyDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	private String generatePropertyName() {
+		int maxNum = dataSource.keySet().stream()
+								.map(Object::toString)
+								.max(Comparator.naturalOrder())
+								.map(mk->Integer.parseInt( mk.substring("prop".length()) ))
+								.orElse(0);
+		return MessageFormat.format("prop{0}", maxNum+1);
+	}
 
 	@Override
 	public int insertProperty(PropertyVO prop) {
+		String propertyName = generatePropertyName();
+		prop.setPropertyName(propertyName);
 		dataSource.setProperty(prop.getPropertyName(), prop.getPropertyValue());
 		storeToFile();
 		return 1;
@@ -83,8 +96,30 @@ public class PropertyDAOImpl_FS implements PropertyDAO {
 
 	@Override
 	public int deleteProperty(String propertyName) {
-		// TODO Auto-generated method stub
-		return 0;
+		Object deletedValue = dataSource.remove(propertyName);
+		storeToFile();
+		return deletedValue == null ? 0 : 1;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
