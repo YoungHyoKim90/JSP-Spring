@@ -11,17 +11,19 @@ $(function(){
 				let tr = $("<tr>").append(
 					$("<td>").html(prop.propertyName),
 					$("<td>").html(prop.propertyValue),
+					$("<td>").html(prop.description),
 					$("<td>").html(
 						$("<button type='button'>")
 							.addClass("delBtn")
 							.text("삭제")
 					)
 				).addClass("datatr")
+				.prop("id", prop.propertyName)
 				.data("source", prop);
 				trTags.push(tr);
 			});
 		}else{
-			trTags = `<tr><td colspan="3">프로퍼티 없음.</td></tr>`;
+			trTags = `<tr><td colspan="4">프로퍼티 없음.</td></tr>`;
 		}
 		$(listBody).html(trTags);
 	}
@@ -38,14 +40,20 @@ $(function(){
 		let settings = {
 			url:location.href,
 			method:"delete",
-			data:{
+			data:JSON.stringify( {
 				propertyName : prop.propertyName
-			},
+			} ),
+			contentType:"application/json",
 			dataType : "json"
 		};
 		$.ajax(settings)
 			.done(resp=>{
-				console.log(resp);
+				let propertyName = resp.result.prop.propertyName;
+				if(resp.result.success){
+					$(`#${propertyName}`).remove();
+				}else{
+					alert(`${propertyName} 삭제 실패`);
+				}
 			});
 	});
 	let $insertForm = $(insertForm).on("submit", function(event){
@@ -53,7 +61,8 @@ $(function(){
 		let settings = {
 			url:insertForm.action,
 			method:insertForm.method,
-			data:$insertForm.serialize(),
+			data: JSON.stringify($insertForm.serializeObject()),
+			contentType:"application/json;charset=UTF-8",
 			dataType:"json"
 		};
 		$.ajax(settings)

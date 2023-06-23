@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.or.ddit.props.service.PropertyService;
 import kr.or.ddit.props.service.PropertyServiceImpl;
 import kr.or.ddit.vo.PropertyVO;
@@ -45,17 +47,25 @@ public class PropertyControllerServlet extends HttpServlet {
 		req.getRequestDispatcher(viewName).forward(req, resp);
 	}
 	
+	private boolean validate(PropertyVO propVO) {
+		boolean valid = true;
+		return valid;
+	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PropertyVO propVO = null;
+		try(
+			InputStream is = req.getInputStream();
+		){
+			propVO = new ObjectMapper().readValue(is, PropertyVO.class);
+		}
 		
-		String propertyValue = req.getParameter("propertyValue");
-		
-		if(StringUtils.isBlank(propertyValue)) {
+		if(validate(propVO)) {
 			resp.sendError(400, "필수 파라미터 누락");
 			return;
 		}
-		PropertyVO propVO = new PropertyVO();
-		propVO.setPropertyValue(propertyValue);
+		
 		// call by reference
 		boolean success = service.createProperty(propVO);
 		
@@ -86,26 +96,34 @@ public class PropertyControllerServlet extends HttpServlet {
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		InputStream is = req.getInputStream();
-		System.out.println(is.available());
+		Map<String, Object> resultMap = new HashMap<>();
+		String propertyName = null;
+		try(
+			InputStream is = req.getInputStream();
+		){
+		 	PropertyVO prop = new ObjectMapper().readValue(is, PropertyVO.class);
+		 	propertyName = prop.getPropertyName();
+		 	resultMap.put("prop", prop);
+		}
 		
-		String propertyName = req.getParameter("propertyName");
+//		String propertyName = req.getParameter("propertyName");
+		
 		if(StringUtils.isBlank(propertyName)) {
 			resp.sendError(400, "필수파라미터 누락");
 			return;
 		}
 		
 		boolean success = service.removeProperty(propertyName);
-		Map<String, Object> resultMap = new HashMap<>();
+		
 		resultMap.put("success", success);
 		req.setAttribute("result", resultMap);
 		String viewName = null;
 		
-		if(success) {
-			viewName = "redirect:/property";
-		}else {
+//		if(success) {
+//			viewName = "redirect:/property"; // delete
+//		}else {
 			viewName = "/jsonView.view";
-		}
+//		}
 		
 		if(viewName.startsWith("redirect:")) {
 			viewName = viewName.substring("redirect:".length());
