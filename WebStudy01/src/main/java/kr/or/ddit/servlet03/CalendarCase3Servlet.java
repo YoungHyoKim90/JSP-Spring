@@ -21,13 +21,13 @@ import javax.servlet.http.HttpServletResponse;
  * 특정 년도와 월, 로케일, 시간대 파라미터를 이용해 달력을 처리하는 컨트롤러(Model2)
  *
  */
-@WebServlet("/calendarCase3")
+@WebServlet("/calendarSubject")
 //@MultipartConfig
 public class CalendarCase3Servlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String logicalViewName = "calendar/calendarCase3";
+		String logicalViewName = "calendar/calendarCaseSubject";
 		
 		String viewName = "/"+logicalViewName+".tiles";
 		req.getRequestDispatcher(viewName).forward(req, resp);
@@ -63,7 +63,7 @@ public class CalendarCase3Servlet extends HttpServlet{
 		
 		request.setAttribute("infoVO", infoVO);
 		
-		String viewName = "/WEB-INF/views/calendar/calView.jsp";
+		String viewName = "/WEB-INF/views/calendar/calViewSubject.jsp";
 		request.getRequestDispatcher(viewName).forward(request, resp);
 	}
 }
