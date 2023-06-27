@@ -13,11 +13,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 
+import kr.or.ddit.login.service.AuthenticateService;
+import kr.or.ddit.login.service.AuthenticateServiceImpl;
+import kr.or.ddit.vo.MemberVO;
+
 @WebServlet("/login/loginProcess")
 public class LoginProcessServlet extends HttpServlet{
-	private boolean authenticate(String memId, String memPass) {
-		return memId.equals(memPass);
-	}
+	private AuthenticateService service = new AuthenticateServiceImpl();
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,8 +50,13 @@ public class LoginProcessServlet extends HttpServlet{
 //		* 2. Model information 생성
 //		* 	 * data vs information vs content(view layer, MIME type)
 			
-			if(authenticate(memId, memPass)) {
-				session.setAttribute("authId", memId);
+			MemberVO inputData = new MemberVO();
+			inputData.setMemId(memId);
+			inputData.setMemPass(memPass);
+			
+			try {
+			 	MemberVO authMember = service.authenticate(inputData);
+			 	session.setAttribute("authMember", authMember);
 				// redirect ?? 현재 요청에 대한 정보를 제거.
 				viewName = "redirect:/";
 //				Cookie : client side 저장 데이터
@@ -63,11 +70,9 @@ public class LoginProcessServlet extends HttpServlet{
 					idCookie.setMaxAge(0);
 				}
 				resp.addCookie(idCookie);
-				
-			}else {
-				session.setAttribute("message", "아이디나 비번 오류");
+			}catch (AuthenticateException e) {
+				session.setAttribute("message", e.getMessage());
 				viewName = "redirect:/login/loginForm.jsp";
-//			req.getRequestDispatcher(viewName).forward(req, resp);
 			}
 		}
 

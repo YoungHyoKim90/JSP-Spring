@@ -26,5 +26,6 @@
 	</environments>
 	<mappers>
 		<mapper resource="kr/or/ddit/db/mybatis/mapper/Property.xml"/>
+		<mapper resource="kr/or/ddit/db/mybatis/mapper/Member.xml"/>
 	</mappers>
 </configuration>

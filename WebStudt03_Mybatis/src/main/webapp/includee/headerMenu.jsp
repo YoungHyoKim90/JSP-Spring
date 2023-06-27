@@ -8,16 +8,16 @@
   </button>
   <ul class="nav px-3 col">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">상단메뉴1</a>
+      <a class="nav-link" href="${pageContext.request.contextPath }/property">프로퍼티 관리</a>
     </li>
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">상단메뉴2</a>
+      <a class="nav-link" href="${pageContext.request.contextPath }/member/memberList.do">회원관리</a>
     </li>
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">상단메뉴3</a>
+      <a class="nav-link" href="${pageContext.request.contextPath }/prod/prodList.do">상품관리</a>
     </li>
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">상단메뉴4</a>
+      <a class="nav-link" href="${pageContext.request.contextPath }/board/boardList.do">게시판</a>
     </li>
     <%
     	Map<String, String> menuMap = (Map) request.getAttribute("welcomeMenu");
@@ -31,14 +31,53 @@
     %>
   </ul>
   <ul class="nav px-3 col-2">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="<%=request.getContextPath() %>/login/loginForm.jsp">Sign in</a>
-    </li>
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="<%=request.getContextPath() %>/login/logout.do">Sign out</a>
-    </li>
+<!--   	조건문으로 인증 여/부에 따라 선택적 랜더링. -->
+	<%
+		if(session.getAttribute("authMember")==null){
+			%>
+		    <li class="nav-item text-nowrap">
+		      <a class="nav-link" href="<%=request.getContextPath() %>/login/loginForm.jsp">Sign in</a>
+		    </li>
+			<%
+		}else{
+			%>
+			<li class="nav-item text-nowrap">
+				<a class="nav-link" href="${pageContext.request.contextPath }/mypage">${authMember.memName }님</a>
+			</li>
+		    <li class="nav-item text-nowrap">
+		    <form id="logoutForm" method="post" action="<%=request.getContextPath() %>/login/logout"></form>
+		      <a class="nav-link" href="javascript:logoutForm.submit();">Sign out</a>
+		    </li>
+			<%
+		}
+	%>
   </ul>
 </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

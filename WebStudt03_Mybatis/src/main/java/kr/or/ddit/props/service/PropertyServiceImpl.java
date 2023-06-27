@@ -5,11 +5,11 @@ import java.util.List;
 
 import kr.or.ddit.exception.PKNotFoundException;
 import kr.or.ddit.props.dao.PropertyDAO;
-import kr.or.ddit.props.dao.PropertyDAOImpl_DB;
+import kr.or.ddit.props.dao.PropertyDAOImpl;
 import kr.or.ddit.vo.PropertyVO;
 
 public class PropertyServiceImpl implements PropertyService{
-	private PropertyDAO dao = new PropertyDAOImpl_DB();
+	private PropertyDAO dao = new PropertyDAOImpl();
 	
 	public boolean createProperty(PropertyVO prop){
 		int count = dao.insertProperty(prop);

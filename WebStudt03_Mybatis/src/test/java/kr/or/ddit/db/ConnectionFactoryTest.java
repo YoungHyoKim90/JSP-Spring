@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.apache.commons.dbcp2.ConnectionFactory;
 import org.junit.jupiter.api.Test;
 
 class ConnectionFactoryTest {
