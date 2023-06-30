@@ -6,7 +6,7 @@
 			, MEM_HP, MEM_MAIL
 			, MEM_BIR
 		FROM MEMBER
-		WHERE MEM_ID = #{memId}
+		WHERE MEM_ID = #{memId} AND MEM_DELETE IS NULL
 	</select>
 
 	<select id="selectMemberList" resultType="MemberVO">
@@ -26,7 +26,7 @@
 		    MEM_MEMORIAL,    MEM_MEMORIALDAY,    MEM_MILEAGE,
 		    MEM_DELETE
 		FROM    MEMBER
-		WHERE MEM_ID = #{memId}
+		WHERE MEM_ID = #{memId} 
 	</select>
 	
 	<insert id="insertMember" parameterType="MemberVO">
@@ -87,6 +87,17 @@
 			, MEM_MEMORIALDAY = #{memMemorialday,jdbcType=DATE}
 		WHERE MEM_ID = #{memId}
 	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+	
+	UPDATE MEMBER
+	SET
+	MEM_DELETE ='1'
+	WHERE MEM_ID = #{memId}
+		
+	</delete>
+
+	
 </mapper>
 
 

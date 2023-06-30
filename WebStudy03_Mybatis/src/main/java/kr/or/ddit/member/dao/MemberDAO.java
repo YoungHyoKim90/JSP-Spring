@@ -2,6 +2,8 @@ package kr.or.ddit.member.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import kr.or.ddit.vo.MemberVO;
 
 /**
@@ -43,7 +45,7 @@ public interface MemberDAO {
 	 * @param memId
 	 * @return 삭제된 레코드수, > 0 성공
 	 */
-	public int deleteMember(String memId);
+	public int deleteMember(@Param("memId") String memId);
 }
 
 

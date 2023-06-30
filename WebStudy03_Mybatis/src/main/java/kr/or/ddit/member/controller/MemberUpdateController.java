@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import kr.or.ddit.enumpkg.ServiceResult;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
@@ -19,29 +21,29 @@ import kr.or.ddit.validate.groups.UpdateGroup;
 import kr.or.ddit.vo.MemberVO;
 
 @WebServlet("/member/memberUpdate.do")
-public class MemberUpdateController extends HttpServlet {
-
+public class MemberUpdateController extends HttpServlet{
+	
 	private MemberService service = new MemberServiceImpl();
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		MemberVO authMember = (MemberVO) req.getSession().getAttribute("authMember");
 		MemberVO member = service.retrieveMember(authMember.getMemId());
-
+		
 		req.setAttribute("member", member);
-
+		
 		String logicalViewName = "member/memberForm";
 		String viewName = "/" + logicalViewName + ".tiles";
 		req.getRequestDispatcher(viewName).forward(req, resp);
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		Front Controller Pattern 으로 중복 패턴 해결 필요함.
 		req.setCharacterEncoding("UTF-8");
-
+		
 		MemberVO authMember = (MemberVO) req.getSession().getAttribute("authMember");
-
+		
 		MemberVO member = new MemberVO();
 		member.setMemId(authMember.getMemId());
 		req.setAttribute("member", member);
@@ -56,25 +58,25 @@ public class MemberUpdateController extends HttpServlet {
 
 		String viewName = null;
 		String logicalViewName = null;
-
+		
 		if (errors.isEmpty()) {
 			ServiceResult result = service.modifyMember(member);
 			switch (result) {
-			case INVALIDPASSWORD:
-				req.setAttribute("message", "비밀번호 오류");
-				logicalViewName = "member/memberForm";
-				viewName = "/" + logicalViewName + ".tiles";
-				break;
-			case OK:
-				viewName = "redirect:/mypage";
-				break;
-			default:
-				req.setAttribute("message", "서버 오류, 잠시 뒤 다시 시도하시오.");
-				logicalViewName = "member/memberForm";
-				viewName = "/" + logicalViewName + ".tiles";
-				break;
+				case INVALIDPASSWORD:
+					req.setAttribute("message", "비밀번호 오류");
+					logicalViewName = "member/memberForm";
+					viewName = "/" + logicalViewName + ".tiles";
+					break;
+				case OK:
+					viewName = "redirect:/mypage";
+					break;
+				default:
+					req.setAttribute("message", "서버 오류, 잠시 뒤 다시 시도하시오.");
+					logicalViewName = "member/memberForm";
+					viewName = "/" + logicalViewName + ".tiles";
+					break;
 			}
-		} else {
+		}else {
 			logicalViewName = "member/memberForm";
 			viewName = "/" + logicalViewName + ".tiles";
 		}
@@ -87,5 +89,5 @@ public class MemberUpdateController extends HttpServlet {
 
 		}
 	}
-
+	
 }
