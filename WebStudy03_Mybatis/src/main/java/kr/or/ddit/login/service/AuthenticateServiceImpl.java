@@ -4,11 +4,11 @@ import java.text.MessageFormat;
 
 import kr.or.ddit.login.AuthenticateException;
 import kr.or.ddit.member.dao.MemberDAO;
-import kr.or.ddit.member.dao.MemberDAOImpl;
+import kr.or.ddit.member.dao.MemberDAOimpl;
 import kr.or.ddit.vo.MemberVO;
 
 public class AuthenticateServiceImpl implements AuthenticateService {
-	private MemberDAO dao = new MemberDAOImpl();
+	private MemberDAO dao = new MemberDAOimpl();
 	
 	@Override
 	public MemberVO authenticate(MemberVO inputData) throws AuthenticateException {

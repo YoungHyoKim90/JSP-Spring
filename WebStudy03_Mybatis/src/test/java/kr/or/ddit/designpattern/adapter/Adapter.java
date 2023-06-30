@@ -1,10 +1,7 @@
 package kr.or.ddit.designpattern.adapter;
 
 public class Adapter implements Target {
-
-	private Adaptee adaptee; // has A 관계
-	
-	
+	private Adaptee adaptee; // has A
 	
 	public Adapter(Adaptee adaptee) {
 		super();
@@ -14,7 +11,6 @@ public class Adapter implements Target {
 	@Override
 	public void request() {
 		adaptee.specificRequest();
-
 	}
 
 }

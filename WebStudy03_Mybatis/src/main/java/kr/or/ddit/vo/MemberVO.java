@@ -3,9 +3,12 @@ package kr.or.ddit.vo;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
 
@@ -13,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import kr.or.ddit.validate.groups.DeleteGroup;
 import kr.or.ddit.validate.groups.InsertGroup;
+import kr.or.ddit.validate.groups.UpdateGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -51,6 +55,8 @@ public class MemberVO implements Serializable{
 	private LocalDate memMemorialday;
 	private Integer memMileage;
 	private boolean memDelete;
+	
+	private List<ProdVO> prodList; // has many
 }
 
 

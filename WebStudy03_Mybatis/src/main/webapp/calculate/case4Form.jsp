@@ -68,7 +68,7 @@
 			settings.contentType = "application/json;charset=UTF-8";
 			let nativeData = $(calForm).serializeObject();
 			settings.data = JSON.stringify(nativeData);
-		}else{ // --> mashalling
+		}else{
 			settings.data = $(calForm).serialize();
 		}
 		

@@ -1,5 +1,5 @@
 package kr.or.ddit.validate.groups;
 
-public class DeleteGroup {
+public interface DeleteGroup {
 
 }

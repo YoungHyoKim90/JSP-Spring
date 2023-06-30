@@ -30,10 +30,26 @@ $(function(){
 	
 	$.getJSON(location.href)
 		.done(fn_modifyListBody);	
+	
+	$(searchForm).on("submit", function(event){
+		event.preventDefault();
+		let what = this.propertyName.value;
+		$.getJSON("?what="+what)
+			.done(resp=>{
+				resp.propList = [];
+				resp.propList.push(resp.prop);
+				
+				fn_modifyListBody(resp);
+			});
+	});
 		
 	$(listBody).on("click", "tr.datatr" ,function(event){
 		let prop = $(this).data("source");
-		console.log(prop);
+		// console.log(prop);
+		// 상세 조회용 새로운 요청 발생
+		searchForm.propertyName.value = prop.propertyName;
+		// $(searchForm).submit();
+		searchForm.requestSubmit();
 	}).on("click", ".delBtn" ,function(){
 		let prop = $(this).parents("tr.datatr").data("source");
 		

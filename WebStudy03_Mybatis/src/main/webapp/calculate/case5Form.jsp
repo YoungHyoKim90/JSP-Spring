@@ -20,12 +20,11 @@
 	<input type="radio" name="contentType" value="json"/>JSON
 </div>
 <div style="border: 1px solid black">
-	<h4>request accept header == response content-type : server side marshalling 여부</h4>
+	<h4>request accept header  == response content-type : server side marshalling 여부</h4>
 	<input type="radio" name="acceptType" value="json"/>JSON
 	<input type="radio" name="acceptType" value="xml"/>XML
 	<input type="radio" name="acceptType" value="html" />HTML
 </div>
-
 <form id="calForm" action="<%=request.getContextPath() %>/calculate/Case5ProcessServlet" method="post">
 	<input type="number" name="leftOp" />
 	<select name="opParam">
@@ -41,7 +40,6 @@
 	<input type="number" name="rightOp" />
 	<button type="submit">=</button>
 </form>
-
 <div id="resultArea">
 
 </div>
@@ -66,18 +64,17 @@
 		
 		let data = null;
 		let headers = {};
-		
 		let dataType = $("[name=acceptType]:checked").val() ?? "html";
 // 			dataType ? dataType : "html" => dataType ?? "html"
-		let contentType = $("[name=contentType]:checked").val() ?? "parameter";
+		let contentType = $("[name=contentType]:checked").val() ?? "parameter"; 
 		if(contentType.toLowerCase()=="json"){
 			let nativeData = $(calForm).serializeObject();
 			data = JSON.stringify(nativeData);
-			headers['Contnet-Type'] = "application/json;charset=UTF-8";
+			headers['Content-Type'] = "application/json;charset=UTF-8";
 		}else{
 			data = $(calForm).serialize();
 		}
-		
+			
 		let success = functions[dataType];
 		let settings = {
 			url : url,

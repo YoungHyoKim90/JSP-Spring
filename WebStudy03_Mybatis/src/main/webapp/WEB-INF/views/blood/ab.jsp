@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 	<p style="TEXT-ALIGN: center">
 		<strong><span style="COLOR: #ff0000">AB형</span></strong>
 	</p>

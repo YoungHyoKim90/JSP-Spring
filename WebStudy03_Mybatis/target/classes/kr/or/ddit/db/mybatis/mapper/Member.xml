@@ -16,7 +16,16 @@
 		FROM MEMBER
 	</select>
 	
-	<select id="selectMember" parameterType="string" resultType="MemberVO">
+	<resultMap type="MemberVO" id="memberMap" autoMapping="true">
+		<id property="memId" column="MEM_ID"/>
+		<collection property="prodList" ofType="ProdVO" autoMapping="true" />
+	</resultMap>
+	
+	<select id="selectMember" parameterType="string" resultMap="memberMap">
+		WITH CARTVIEW AS (
+			SELECT CART_MEMBER, CART_PROD, PROD_ID, PROD_NAME
+			FROM CART INNER JOIN PROD ON (CART_PROD = PROD_ID)
+		)
 		SELECT
 		    MEM_ID,    MEM_PASS,    MEM_NAME,
 		    MEM_REGNO1,    MEM_REGNO2,    MEM_BIR,
@@ -25,8 +34,9 @@
 		    MEM_MAIL,    MEM_JOB,    MEM_LIKE,
 		    MEM_MEMORIAL,    MEM_MEMORIALDAY,    MEM_MILEAGE,
 		    MEM_DELETE
-		FROM    MEMBER
-		WHERE MEM_ID = #{memId} 
+		    , PROD_ID, PROD_NAME
+		FROM    MEMBER LEFT OUTER JOIN  CARTVIEW ON (MEM_ID = CART_MEMBER)
+		WHERE MEM_ID = #{memId}
 	</select>
 	
 	<insert id="insertMember" parameterType="MemberVO">
@@ -88,17 +98,31 @@
 		WHERE MEM_ID = #{memId}
 	</update>
 	
-	<delete id="deleteMember" parameterType="String">
-	
-	UPDATE MEMBER
-	SET
-	MEM_DELETE ='1'
-	WHERE MEM_ID = #{memId}
-		
+	<delete id="deleteMember" parameterType="string">
+		UPDATE MEMBER
+		SET
+		MEM_DELETE = '1'
+		WHERE MEM_ID = #{memId}
 	</delete>
-
-	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -11,7 +11,7 @@
 </head>
 <body>
 <h4>HttpServletResponse</h4>
-<pre> case 1~5까지! 
+<pre>
 	: 서버가 클라이언트로 전송하는 응답에 대한 모든 정보를 가진 객체.
 	
 	HTTP response packaging
@@ -42,9 +42,9 @@
 	2. Response Header : response body 의 메타데이터 , name/value
 	 	* Content-* (Content-Type, Content-Length)
 	 	* Cache-*
-	 	* auto request(Refresh - 갱신 주기 , 초단위)
-	 		->동기 요청 구조상에서 document에 대한 제어권이 필요함.
-	 		cf) JS 비동기 요청 구조에서 auto request : JS 스케쥴링 함수 활용 가능. 
+	 	* auto request (Refresh - 갱신 주기, 초단위)
+	 		: 동기 요청구조상에서 document 에 대한 제어권이 필요함.
+	 		cf) JS 비동기 요청 구조에서 auto request : JS 스케쥴링 함수 활용 가능.
 	 	* redirect Location
 	 	
 	3. Response Body(Content Body, Message Body)

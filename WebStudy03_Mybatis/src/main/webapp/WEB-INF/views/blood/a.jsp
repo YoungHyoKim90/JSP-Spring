@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
 	<p style="TEXT-ALIGN: center">
 		<strong><span style="COLOR: #ff0000">A형</span></strong>
 	</p>
@@ -11,7 +9,7 @@
 	<p style="TEXT-ALIGN: center">그러나 일단 A형과 친해지고 난 후</p>
 	<p style="TEXT-ALIGN: center">무언가 상당히 공통된 특성을 발견 할</p>
 	<p style="TEXT-ALIGN: center">수 있습니다.</p>
-	<p style="TEXT-ALIGN: center">3
+	<p style="TEXT-ALIGN: center">
 		그 <strong><span style="COLOR: #6600ff">특징</span></strong>에 대하여 살펴보자면
 	</p>
 	<p style="TEXT-ALIGN: center">
