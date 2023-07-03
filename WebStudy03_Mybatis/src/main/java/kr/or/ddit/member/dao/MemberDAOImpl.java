@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import kr.or.ddit.mybatis.CustomSqlSessionFactoryBuilder;
 import kr.or.ddit.vo.MemberVO;
 
-public class MemberDAOimpl implements MemberDAO {
+public class MemberDAOImpl implements MemberDAO {
 	
 	private SqlSessionFactory sqlSessionFactory = 
 			CustomSqlSessionFactoryBuilder.getSqlSessionFactory();

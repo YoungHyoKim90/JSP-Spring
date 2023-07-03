@@ -28,5 +28,20 @@
 		<mapper resource="kr/or/ddit/db/mybatis/mapper/Property.xml"/>
 		<mapper resource="kr/or/ddit/db/mybatis/mapper/Member.xml"/>
 		<mapper resource="kr/or/ddit/db/mybatis/mapper/ProdDAO.xml"/>
+		<mapper resource="kr/or/ddit/db/mybatis/mapper/Others.xml"/>
 	</mappers>
 </configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

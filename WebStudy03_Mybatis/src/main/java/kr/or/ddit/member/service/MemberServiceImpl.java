@@ -3,21 +3,26 @@ package kr.or.ddit.member.service;
 import java.text.MessageFormat;
 import java.util.List;
 
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import kr.or.ddit.enumpkg.ServiceResult;
 import kr.or.ddit.exception.PKNotFoundException;
 import kr.or.ddit.login.AuthenticateException;
 import kr.or.ddit.login.service.AuthenticateService;
 import kr.or.ddit.login.service.AuthenticateServiceImpl;
 import kr.or.ddit.member.dao.MemberDAO;
-import kr.or.ddit.member.dao.MemberDAOimpl;
+import kr.or.ddit.member.dao.MemberDAOImpl;
 import kr.or.ddit.vo.MemberVO;
 import lombok.Data;
 
 public class MemberServiceImpl implements MemberService {
 	
 	// 의존관계 형성 --> 결합력 발생 --> 차후 DI(Dependency Injection) 구조로 해결.
-	private MemberDAO memberDAO = new MemberDAOimpl();
+	private MemberDAO memberDAO = new MemberDAOImpl();
 	private AuthenticateService authService = new AuthenticateServiceImpl();
+	
+	private PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
 	@Override
 	public ServiceResult createMember(MemberVO member) {
@@ -26,10 +31,17 @@ public class MemberServiceImpl implements MemberService {
 			retrieveMember(member.getMemId());
 			result = ServiceResult.PKDUPLICATE;
 		}catch (PKNotFoundException e) {
+			encryptMember(member);
 			int cnt = memberDAO.insertMember(member);
 			result = cnt > 0 ? ServiceResult.OK : ServiceResult.FAIL;
 		}		
 		return result;
+	}
+
+	private void encryptMember(MemberVO member) {
+		String plain = member.getMemPass();
+		String encoded = encoder.encode(plain);
+		member.setMemPass(encoded);
 	}
 
 	@Override

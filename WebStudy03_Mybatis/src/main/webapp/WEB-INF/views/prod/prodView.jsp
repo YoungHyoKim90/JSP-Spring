@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<c:url value='/prod/prodUpdate.do' var="updateURL">
+	<c:param name="what" value="${prod.prodId }" />
+</c:url>
+<a href="${updateURL }" class="btn btn-primary">상품수정</a>
 <table class="table table-border">
 	<tr>
 		<th>상품코드</th>

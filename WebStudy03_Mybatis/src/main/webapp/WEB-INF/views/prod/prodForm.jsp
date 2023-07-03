@@ -1,36 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <form method="post">
+	<input type="hidden" name="prodId" value="${prod.prodId }" />
 <table class="table table-border">
 	<tr>
-		<th>상품코드(???)</th>
-		<td>
-			<input class="form-control" type="text" name="prodId"
-				value="${prod.prodId }" />
-			<span class="error">${errors["prodId"]}</span>
-		</td>
-	</tr>
-	<tr>
 		<th>상품명</th>
-		<td>
+		<td> 
 			<input class="form-control" type="text" name="prodName"
 				value="${prod.prodName }" />
 			<span class="error">${errors["prodName"]}</span>
-		</td>
+		</td>	
 	</tr>
 	<tr>
 		<th>상품분류(???)</th>
 		<td>
-			<input class="form-control" type="text" name="prodLgu"
-				value="${prod.prodLgu }" />
+			<select name="prodLgu" class="form-select">
+				<option value>분류선택</option>
+				<c:forEach items="${lprodList }" var="lprod">
+					<option value="${lprod.lprodGu }">${lprod.lprodNm }</option>
+				</c:forEach>
+			</select>
 			<span class="error">${errors["prodLgu"]}</span>
 		</td>
 	</tr>
 	<tr>
 		<th>거래처(???)</th>
 		<td>
-			<input class="form-control" type="text" name="prodBuyer"
-				value="${prod.prodBuyer }" />
+			<select name="prodBuyer" class="form-select">
+				<option value>거래처선택</option>
+				<c:forEach items="${buyerList }" var="buyer">
+					<option value="${buyer.buyerId }" class="${buyer.buyerLgu }">
+						${buyer.buyerName }
+					</option>
+				</c:forEach>
+			</select>
 			<span class="error">${errors["prodBuyer"]}</span>
 		</td>
 	</tr>
@@ -171,4 +175,31 @@
 	</tr>
 </table>
 </form>
+
+<script>
+	let $prodBuyer = $('[name="prodBuyer"]').val("${prod.prodBuyer}");
+	$('[name="prodLgu"]').on("change", function(event){
+		let lprodGu = $(this).val();
+		if(lprodGu){
+			$prodBuyer.find("option").hide();
+			$prodBuyer.find(`option:first`).show();
+			$prodBuyer.find(`option.\${lprodGu}`).show();
+		}else{
+			$prodBuyer.find("option").show();
+		}
+	}).val("${prod.prodLgu}")
+	  .trigger("change");
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
