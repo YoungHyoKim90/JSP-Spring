@@ -3,12 +3,13 @@ package kr.or.ddit.vo;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import kr.or.ddit.validate.groups.DeleteGroup;
+import kr.or.ddit.validate.groups.UpdateGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -28,7 +29,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(of = "prodId")
 public class ProdVO implements Serializable {
-	@NotBlank
+	@NotBlank(groups = {UpdateGroup.class, DeleteGroup.class})
 	private String prodId;
 	@NotBlank
 	private String prodName;

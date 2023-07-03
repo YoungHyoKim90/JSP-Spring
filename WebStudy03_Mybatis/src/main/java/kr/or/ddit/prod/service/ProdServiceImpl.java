@@ -1,5 +1,6 @@
 package kr.or.ddit.prod.service;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import kr.or.ddit.enumpkg.ServiceResult;
@@ -13,14 +14,15 @@ public class ProdServiceImpl implements ProdService {
 
 	@Override
 	public ServiceResult createProd(ProdVO prod) {
-		// TODO Auto-generated method stub
-		return null;
+		return prodDAO.insertProd(prod) > 0 ? ServiceResult.OK : ServiceResult.FAIL; 
 	}
 
 	@Override
 	public ProdVO retrieveProd(String prodId) throws PKNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		ProdVO prod = prodDAO.selectProd(prodId);
+		if(prod==null)
+			throw new PKNotFoundException(MessageFormat.format("{0} 해당 상품 없음", prodId));
+		return prod;
 	}
 
 	@Override
@@ -30,8 +32,7 @@ public class ProdServiceImpl implements ProdService {
 
 	@Override
 	public ServiceResult modifyProd(ProdVO prod) {
-		// TODO Auto-generated method stub
-		return null;
+		return prodDAO.updateProd(prod) > 0 ? ServiceResult.OK : ServiceResult.FAIL;
 	}
 
 }

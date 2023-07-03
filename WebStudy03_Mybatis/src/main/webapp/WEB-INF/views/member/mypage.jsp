@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<table>
+<table class="table table-border">
 	<tr>
 		<th>회원아이디</th>
 		<td>${member.memId }</td>
@@ -78,6 +78,32 @@
 		<th>탈퇴여부</th>
 		<td>${member.memDelete }</td>
 	</tr>
+	<c:set var="prodList" value="${member.prodList }" />
+	<c:if test="${not empty member.prodList }">
+		<tr>
+			<th>구매내역</th>
+			<td>
+				<table class="table table-border">
+					<thead>
+						<tr>
+							<th>구매상품명</th>
+							<th>분류명</th>
+							<th>판매가</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${prodList }" var="prod">
+							<tr>
+								<td>${prod.prodName }</td>
+								<td>${prod.lprod.lprodNm }</td>
+								<td>${prod.prodPrice }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</c:if>
 	<tr>
 		<td colspan="2">
 			<button type="button" id="updateBtn" onclick="location.href='<c:url value="/member/memberUpdate.do"/>';">수정</button>

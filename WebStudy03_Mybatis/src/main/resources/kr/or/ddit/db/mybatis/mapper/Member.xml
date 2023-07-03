@@ -24,7 +24,10 @@
 	<select id="selectMember" parameterType="string" resultMap="memberMap">
 		WITH CARTVIEW AS (
 			SELECT CART_MEMBER, CART_PROD, PROD_ID, PROD_NAME
+				, PROD_PRICE
+				, LPROD_NM "lprod.lprodNm"
 			FROM CART INNER JOIN PROD ON (CART_PROD = PROD_ID)
+					INNER JOIN LPROD ON (PROD_LGU = LPROD_GU)
 		)
 		SELECT
 		    MEM_ID,    MEM_PASS,    MEM_NAME,
@@ -34,7 +37,7 @@
 		    MEM_MAIL,    MEM_JOB,    MEM_LIKE,
 		    MEM_MEMORIAL,    MEM_MEMORIALDAY,    MEM_MILEAGE,
 		    MEM_DELETE
-		    , PROD_ID, PROD_NAME
+		    , CARTVIEW.*
 		FROM    MEMBER LEFT OUTER JOIN  CARTVIEW ON (MEM_ID = CART_MEMBER)
 		WHERE MEM_ID = #{memId}
 	</select>

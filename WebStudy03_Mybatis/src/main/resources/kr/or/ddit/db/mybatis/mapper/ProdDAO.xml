@@ -47,14 +47,66 @@
 		    FROM BUYER INNER JOIN LPROD ON (BUYER_LGU = LPROD_GU)
 		), CARTVIEW AS(
 			SELECT CART_PROD, CART_MEMBER, MEM_NAME, MEM_ID
+				, MEM_MAIL, MEM_ADD1
 			FROM CART INNER JOIN MEMBER ON (CART_MEMBER = MEM_ID)
 		)
 		SELECT    PRODVIEW.*, BUYERVIEW.*
-				, MEM_ID, MEM_NAME
+					
 		FROM PRODVIEW INNER JOIN BUYERVIEW ON (PROD_BUYER = BUYER_ID)
 				LEFT OUTER JOIN CARTVIEW ON (PROD_ID = CART_PROD)
-		WHERE PROD_ID = 'P101000001'
+		WHERE PROD_ID = #{prodId}
 	</select>
+	
+	<insert id="insertProd" parameterType="ProdVO">
+		<selectKey order="BEFORE" resultType="string" keyProperty="prodId">
+			SELECT #{prodLgu} || LPAD(NVL(TO_NUMBER(SUBSTR(MAX(PROD_ID), 5)), 0) + 1, 6, '0')
+			FROM PROD
+			WHERE PROD_LGU  = #{prodLgu}
+		</selectKey>
+		INSERT INTO PROD(
+			PROD_ID
+			, PROD_NAME
+			, PROD_LGU
+			, PROD_BUYER
+			, PROD_COST
+			, PROD_PRICE
+			, PROD_SALE
+			, PROD_OUTLINE
+			, PROD_DETAIL
+			, PROD_IMG
+			, PROD_TOTALSTOCK
+			, PROD_INSDATE
+			, PROD_PROPERSTOCK
+			, PROD_SIZE
+			, PROD_COLOR
+			, PROD_DELIVERY
+			, PROD_UNIT
+			, PROD_QTYIN
+			, PROD_QTYSALE
+			, PROD_MILEAGE
+		)VALUES(
+			#{prodId,jdbcType=VARCHAR}
+			, #{prodName,jdbcType=VARCHAR}
+			, #{prodLgu,jdbcType=CHAR}
+			, #{prodBuyer,jdbcType=CHAR}
+			, #{prodCost,jdbcType=NUMERIC}
+			, #{prodPrice,jdbcType=NUMERIC}
+			, #{prodSale,jdbcType=NUMERIC}
+			, #{prodOutline,jdbcType=VARCHAR}
+			, #{prodDetail,jdbcType=CLOB}
+			, #{prodImg,jdbcType=VARCHAR}
+			, #{prodTotalstock,jdbcType=NUMERIC}
+			, #{prodInsdate,jdbcType=DATE}
+			, #{prodProperstock,jdbcType=NUMERIC}
+			, #{prodSize,jdbcType=VARCHAR}
+			, #{prodColor,jdbcType=VARCHAR}
+			, #{prodDelivery,jdbcType=VARCHAR}
+			, #{prodUnit,jdbcType=VARCHAR}
+			, #{prodQtyin,jdbcType=NUMERIC}
+			, #{prodQtysale,jdbcType=NUMERIC}
+			, #{prodMileage,jdbcType=NUMERIC}
+		)		
+	</insert>
 </mapper>
 
 
