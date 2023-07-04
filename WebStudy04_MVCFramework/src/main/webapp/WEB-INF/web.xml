@@ -28,6 +28,7 @@
 	<servlet-mapping>
 		<servlet-name>FrontController</servlet-name>
 		<url-pattern>*.do</url-pattern>
+		<url-pattern>/index.do</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

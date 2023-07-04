@@ -18,6 +18,7 @@ import kr.or.ddit.mvc.simple.HandlerMapping;
 public class FrontController extends HttpServlet{
 	private HandlerMapping handlerMapping;
 	private HandlerAdapter handlerAdapter;
+	private ViewResolver viewResolver;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -25,6 +26,8 @@ public class FrontController extends HttpServlet{
 		String location = config.getInitParameter("configLocation");
 		handlerMapping = new AbstractControllerHandlerMapping(location);
 		handlerAdapter = new AbstractControllerHandlerAdapter();
+		viewResolver = new ViewResolverComposite();
+		
 	}
 	
 	@Override
@@ -52,9 +55,22 @@ public class FrontController extends HttpServlet{
 			logicalViewName = logicalViewName.substring("redirect:".length());
 			resp.sendRedirect(req.getContextPath() + logicalViewName);
 		} else {
-			String viewName = "/"+logicalViewName+".tiles";
-			req.getRequestDispatcher(viewName).forward(req, resp);
+			
+			viewResolver.resolveView(logicalViewName, req, resp);
 
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

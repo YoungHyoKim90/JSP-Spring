@@ -93,8 +93,11 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${prodList }" var="prod">
+							<c:url value="/prod/prodView.do" var="viewURL">
+								<c:param name="what" value="${prod.prodId }" />
+							</c:url>
 							<tr>
-								<td>${prod.prodName }</td>
+								<td><a href="${viewURL }">${prod.prodName }</a></td>
 								<td>${prod.lprod.lprodNm }</td>
 								<td>${prod.prodPrice }</td>
 							</tr>

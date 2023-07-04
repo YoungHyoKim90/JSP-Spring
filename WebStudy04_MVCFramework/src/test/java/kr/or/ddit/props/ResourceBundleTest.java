@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 import org.junit.jupiter.api.Test;
 
-import kr.or.ddit.IndexServlet;
+import kr.or.ddit.IndexController;
 
 /**
  * * class path resource 검색 : ClassLoader

@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import kr.or.ddit.login.service.AuthenticateService;
 import kr.or.ddit.login.service.AuthenticateServiceImpl;
+import kr.or.ddit.mvc.simple.AbstractController;
 import kr.or.ddit.vo.MemberVO;
 
 @WebServlet("/login/loginProcess")

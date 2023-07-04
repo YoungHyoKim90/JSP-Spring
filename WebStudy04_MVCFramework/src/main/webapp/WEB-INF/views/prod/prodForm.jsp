@@ -170,7 +170,12 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="submit" value="등록">
+			<input class="btn btn-success" type="submit" value="등록">
+			<input class="btn btn-danger" type="reset" value="취소">
+			<input class="btn btn-secondary" type="button" value="뒤로가기"
+				onclick="history.back();"
+			>
+			<a class="btn btn-secondary" href="<c:url value='/prod/prodList.do'/>">목록으로</a>
 		</td>
 	</tr>
 </table>

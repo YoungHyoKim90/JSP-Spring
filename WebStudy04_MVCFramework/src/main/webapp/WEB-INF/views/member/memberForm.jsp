@@ -46,7 +46,7 @@
 		<tr>
 			<th>생일</th>
 			<td>
-				<input class="form-control" type="date" name="memBir"
+				<input class="form-control" type="datetime-local" name="memBir"
 						value="${member.memBir }" />
 				<span class="error">${errors["memBir"]}</span>
 			</td>
@@ -135,7 +135,7 @@
 			<th>기념일자</th>
 			<td>
 				<input class="form-control" type="date"
-				name="memMemorialday" 		value="${member.memMemorialday }" />
+					name="memMemorialday" 		value="${member.memMemorialday }" />
 				<span class="error">${errors["memMemorialday"]}</span>
 			</td>
 		</tr>

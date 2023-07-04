@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<a href="<c:url value='/prod/prodInsert.do'/>" class="btn btn-primary">상품등록</a>    
+<a href="<c:url value='/prod/prodInsert.do'/>" class="btn btn-primary">상품등록</a> 
+<input class="btn btn-secondary" type="button" value="뒤로가기"
+	onclick="history.back();"
+>
+<a class="btn btn-secondary" href="<c:url value='/prod/prodList.do'/>">목록으로</a>   
 <table class="table table-border">
 	<thead>
 		<tr>

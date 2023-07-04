@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.apache.commons.beanutils.Converter"/>
-    <fullyQualifiedTypeName name="org.apache.commons.beanutils.converters.AbstractConverter"/>
-    <fullyQualifiedTypeName name="java.time.temporal.Temporal"/>
-    <fullyQualifiedTypeName name="java.lang.CharSequence"/>
-    <fullyQualifiedTypeName name="com.ctc.wstx.util.StringUtil"/>
-    <fullyQualifiedTypeName name="org.apache.commons.beanutils.ConvertUtils"/>
-    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="org.apache.commons.lang3.StringUtils"/>
     <fullyQualifiedTypeName name="java.lang.Boolean"/>
     <fullyQualifiedTypeName name="kr.or.ddit.login.service.AuthenticateService"/>
@@ -60,4 +53,11 @@
     <fullyQualifiedTypeName name="kr.or.ddit.vo.LprodVO"/>
     <fullyQualifiedTypeName name="kr.or.ddit.vo.BuyerVO"/>
     <fullyQualifiedTypeName name="kr.or.ddit.crypto.PasswordEncoderTest"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.mvc.simple.AbstractController"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.mvc.TilesViewResolver"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.mvc.InternalResourceViewResolver"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.mvc.viewResolver"/>
 </qualifiedTypeNameHistroy>

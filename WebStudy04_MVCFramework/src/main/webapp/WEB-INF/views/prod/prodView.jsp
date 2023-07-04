@@ -5,6 +5,10 @@
 	<c:param name="what" value="${prod.prodId }" />
 </c:url>
 <a href="${updateURL }" class="btn btn-primary">상품수정</a>
+<input class="btn btn-secondary" type="button" value="뒤로가기"
+	onclick="history.back();"
+>
+<a class="btn btn-secondary" href="<c:url value='/prod/prodList.do'/>">목록으로</a>
 <table class="table table-border">
 	<tr>
 		<th>상품코드</th>
@@ -33,9 +37,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>	
+					<tr>
 						<c:set var="buyer" value="${prod.buyer }" />
-						<td>${buyer.buyerName }</td>
+						<c:url value="/buyer/buyerView.do" var="viewURL">
+							<c:param name="what" value="${buyer.buyerId }" />
+						</c:url>	
+						<td><a href="${viewURL }">${buyer.buyerName }</a></td>
 						<td>${buyer.lprod.lprodNm }</td>
 						<td>${buyer.buyerAdd1 }</td>
 						<td>${buyer.buyerBank }</td>

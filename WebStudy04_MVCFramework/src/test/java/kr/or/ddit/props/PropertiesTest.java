@@ -11,7 +11,7 @@ import java.util.Properties;
 
 import org.junit.jupiter.api.Test;
 
-import kr.or.ddit.IndexServlet;
+import kr.or.ddit.IndexController;
 
 /**
  * * class path resource 검색 : ClassLoader
@@ -28,7 +28,7 @@ class PropertiesTest {
 	void readTest() {
 		String qualifiedName = "/kr/or/ddit/props/AlterDB.properties";
 		try(
-			InputStream is = IndexServlet.class.getResourceAsStream(qualifiedName);
+			InputStream is = IndexController.class.getResourceAsStream(qualifiedName);
 		){
 			Properties props = new Properties();
 			props.load(is);
@@ -44,7 +44,7 @@ class PropertiesTest {
 	@Test
 	void writeTest() {
 		String qualifiedName = "/kr/or/ddit/props/AlterDB.properties";
-		URL url = IndexServlet.class.getResource(qualifiedName);
+		URL url = IndexController.class.getResource(qualifiedName);
 		String realPath = url.getFile(); // real path
 		File file = new File(realPath);
 		try(
