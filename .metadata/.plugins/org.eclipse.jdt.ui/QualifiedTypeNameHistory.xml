@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.apache.commons.beanutils.BeanUtils"/>
-    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
-    <fullyQualifiedTypeName name="org.apache.commons.beanutils.converters.DateConverter"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="kr.or.ddit.util.PopulateUtils"/>
     <fullyQualifiedTypeName name="org.apache.commons.beanutils.Converter"/>
     <fullyQualifiedTypeName name="org.apache.commons.beanutils.converters.AbstractConverter"/>
     <fullyQualifiedTypeName name="java.time.temporal.Temporal"/>
@@ -46,18 +41,23 @@
     <fullyQualifiedTypeName name="javax.validation.constraints.NotNull"/>
     <fullyQualifiedTypeName name="javax.validation.constraints.Min"/>
     <fullyQualifiedTypeName name="kr.or.ddit.enumpkg.ServiceResult"/>
-    <fullyQualifiedTypeName name="kr.or.ddit.exception.PKNotFoundException"/>
-    <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
     <fullyQualifiedTypeName name="kr.or.ddit.mybatis.CustomSqlSessionFactoryBuilder"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactory"/>
-    <fullyQualifiedTypeName name="kr.or.ddit.prod.dao.ProdDAO"/>
-    <fullyQualifiedTypeName name="kr.or.ddit.prod.service.ProdService"/>
     <fullyQualifiedTypeName name="kr.or.ddit.prod.service.ProdServiceImpl"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="lombok.EqualsAndHashCode"/>
     <fullyQualifiedTypeName name="javax.validation.constraints.NotBlank"/>
     <fullyQualifiedTypeName name="kr.or.ddit.vo.ProdVO"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.prod.dao.ProdDAO"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.exception.PKNotFoundException"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.prod.service.ProdService"/>
+    <fullyQualifiedTypeName name="javax.sound.sampled.AudioFormat.Encoding"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+    <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.vo.LprodVO"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.vo.BuyerVO"/>
+    <fullyQualifiedTypeName name="kr.or.ddit.crypto.PasswordEncoderTest"/>
 </qualifiedTypeNameHistroy>
