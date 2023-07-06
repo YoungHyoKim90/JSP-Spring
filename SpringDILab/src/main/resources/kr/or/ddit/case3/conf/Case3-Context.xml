@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="case3DAO" class="kr.or.ddit.case3.dao.Case3DAOImpl" />
+	
+	<bean id="case3Service" class="kr.or.ddit.case3.service.Case3ServiceImpl">
+		<constructor-arg name="dao" ref="case3DAO" />
+	</bean>
+	
+	<bean id="case3View" class="kr.or.ddit.case3.view.Case3View">
+		<property name="service" ref="case3Service" />
+	</bean>
+</beans>
