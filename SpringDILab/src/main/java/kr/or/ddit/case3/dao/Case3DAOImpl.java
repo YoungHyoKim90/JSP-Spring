@@ -2,6 +2,9 @@ package kr.or.ddit.case3.dao;
 
 import java.text.MessageFormat;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class Case3DAOImpl implements Case3DAO {
 
 	@Override

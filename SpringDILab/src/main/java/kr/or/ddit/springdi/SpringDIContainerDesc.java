@@ -22,6 +22,13 @@ import lombok.extern.slf4j.Slf4j;
  * 6. container.getBean(검색조건-id/type) 으로 필요 객체 주입.
  * 7. 컨테이너 종료 설정(registerShutdownHook)  
  *
+ * 스프링 컨테이너의 빈 관리 특성
+ * 1. 특별한 설정(scope)이 없는 한 모든 빈을 싱글턴 구조로 관리됨.
+ * 		singleton : 해당 빈의 인스턴스가 하나로 공유되는 구조.
+ * 		prototype : (+lazy) 주입되기 전까지 인스턴스 생성을 지연시키고, 주입될때마다 새로운 인스턴스가 주입됨.
+ * 		request/session (web app 에서 사용됨)
+ *  2. 특별한 설정(lazy-init)이 없는 한 컨테이너가 초기화될때 등록된 모든 빈의 인스턴스를 일시에 생성함.
+ *  3. depends-on 으로 직접 생성 순서를 설정할 수도 있음. 주의! 주입이 되지는 않음.
  */
 @Slf4j
 public class SpringDIContainerDesc {

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	<util:list id="sampleList" list-class="java.util.LinkedList" value-type="java.lang.String" scope="prototype">
+		<value>listValue1</value>
+		<value>listValue2</value>
+	</util:list>
+	<util:set id="sampleSet">
+		<value>setValue1</value>
+		<bean class="java.lang.StringBuilder" />
+	</util:set>
+	<util:map id="sampleMap" >
+		<entry key="key1" value="mapValue1" />
+		<entry key="key2">
+			<bean class="java.util.Date" />
+		</entry>
+	</util:map>
+	<util:properties id="sampleProps" location="classpath:kr/or/ddit/db/dbInfo.properties">
+		<prop key="prop1">propValue1</prop>
+		<prop key="prop2">propValue2</prop>
+	</util:properties>
+
+<!-- 	FactoryBean 활용. : FactoryBean 의 getObject 메소드의 반환 객체가 빈으로 등록됨. -->
+	<bean id="stringArray" class="kr.or.ddit.springdi.collection.StringArrayFactoryBean"></bean>
+
+	<bean id="vo1" class="kr.or.ddit.springdi.collection.CollectionDIVO"
+		c:sampleList-ref="sampleList"
+		c:sampleSet-ref="sampleSet"
+		c:sampleMap-ref="sampleMap"
+		c:sampleProps-ref="sampleProps"
+		c:sampleArray-ref="stringArray"
+	/>
+
+	<bean id="vo2" class="kr.or.ddit.springdi.collection.CollectionDIVO" 
+		p:sampleList-ref="sampleList"
+		p:sampleSet-ref="sampleSet"
+		p:sampleMap-ref="sampleMap"
+		p:sampleProps-ref="sampleProps"
+		p:sampleArray-ref="stringArray"
+	/>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

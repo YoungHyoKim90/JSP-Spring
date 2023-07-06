@@ -2,6 +2,9 @@ package kr.or.ddit.case3.dao;
 
 import java.text.MessageFormat;
 
+import org.springframework.stereotype.Repository;
+
+@Repository("case3Mysql")
 public class Case3DAOImpl_Mysql implements Case3DAO {
 
 	@Override

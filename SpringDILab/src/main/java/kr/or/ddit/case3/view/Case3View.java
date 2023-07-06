@@ -2,10 +2,15 @@ package kr.or.ddit.case3.view;
 
 import java.text.MessageFormat;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import kr.or.ddit.case3.service.Case3Service;
 
+@Controller
 public class Case3View {
 	private Case3Service service;
+	@Autowired
 	public void setService(Case3Service service) {
 		this.service = service;
 	}
