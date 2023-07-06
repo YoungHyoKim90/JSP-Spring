@@ -9,9 +9,21 @@
 	<configs>
 		<config>java:kr.or.ddit.springdi.javaconfig.SampleJavaConfig</config>
 		<config>src/main/resources/kr/or/ddit/jdbc_mybatis/dataSource-context.xml</config>
+		<config>src/main/resources/kr/or/ddit/jdbc_mybatis/mapper-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
 	<configSets>
+		<configSet>
+			<name><![CDATA[mybatis]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>src/main/resources/kr/or/ddit/jdbc_mybatis/dataSource-context.xml</config>
+				<config>src/main/resources/kr/or/ddit/jdbc_mybatis/mapper-context.xml</config>
+			</configs>
+			<profiles>
+			</profiles>
+		</configSet>
 	</configSets>
 </beansProjectDescription>
