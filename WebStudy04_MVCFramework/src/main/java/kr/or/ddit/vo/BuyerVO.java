@@ -1,5 +1,6 @@
 package kr.or.ddit.vo;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,9 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(of="buyerId")
 public class BuyerVO {
+	
+
+	
 	@NotBlank(groups = UpdateGroup.class)
 	private String buyerId;
 	@NotBlank
