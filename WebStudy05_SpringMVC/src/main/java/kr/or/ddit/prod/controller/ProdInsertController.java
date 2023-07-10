@@ -1,14 +1,8 @@
 package kr.or.ddit.prod.controller;
 
-import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +16,8 @@ import kr.or.ddit.enumpkg.ServiceResult;
 import kr.or.ddit.prod.dao.OthersDAO;
 import kr.or.ddit.prod.service.ProdService;
 import kr.or.ddit.validate.groups.InsertGroup;
+import kr.or.ddit.vo.BuyerVO;
+import kr.or.ddit.vo.LprodVO;
 import kr.or.ddit.vo.ProdVO;
 
 @Controller
@@ -30,15 +26,25 @@ public class ProdInsertController{
 	private ProdService service;
 	@Inject
 	private OthersDAO othersDAO;
+
+	@ModelAttribute("lprodList")
+	public List<LprodVO> lprodList() {
+		return othersDAO.selectLprodList();
+	}
 	
+	@ModelAttribute("buyerList")
+	public List<BuyerVO> buyerList(){
+		return othersDAO.selectBuyerList();
+	}
+	
+	@ModelAttribute("prod")
+	public ProdVO prod() {
+		return new ProdVO();
+	}
 	
 	
 	@GetMapping("/prod/prodInsert.do")
-	public String getHandler(Model model){
-		model.addAttribute("lprodList", othersDAO.selectLprodList());
-		model.addAttribute("buyerList", othersDAO.selectBuyerList());
-		model.addAttribute("prod", new ProdVO());
-		
+	public String getHandler(){
 		return "prod/prodForm";
 	}
 	
@@ -51,8 +57,6 @@ public class ProdInsertController{
 			
 			){
 		
-		model.addAttribute("lprodList", othersDAO.selectLprodList());
-		model.addAttribute("buyerList", othersDAO.selectBuyerList());
 		
 //		ProdVO prod = new ProdVO();
 //		req.setAttribute("prod", prod);
