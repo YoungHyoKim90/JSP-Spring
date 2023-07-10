@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<util:properties id="dbInfo" location="classpath:kr/or/ddit/db/dbInfo.properties"/>
-
+<!-- 데이터를 사용하기위한 전략개체 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
 	
 		p:driverClassName="#{dbInfo.driverClassName}"
@@ -22,6 +22,7 @@
 		p:maxWaitMillis="#{dbInfo.maxWait}"
 		
 	/>
+	
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
 	

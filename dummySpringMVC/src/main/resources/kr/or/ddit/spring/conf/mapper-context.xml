@@ -6,7 +6,7 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd">
-
+<!--  데이터를 주입받은 sqlSessionFactory 세션 오픈, 클로즈 시그니처 호출. -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" 
 		p:dataSource-ref="dataSource"
 		p:configLocation="classpath:kr/or/ddit/db/mybatis/Configuration.xml"
@@ -18,6 +18,7 @@
 		c:sqlSessionFactory-ref="sqlSessionFactory"
 	/>
 <!-- 	ant path matching wild card : ** -->
+<!--  스캐너를 통해 매퍼를 자동으로 등록해줌. DAO의 구현체를 줄이기 위해. -->
 	<mybatis-spring:scan base-package="kr.or.ddit.**.dao"
 		annotation="org.apache.ibatis.annotations.Mapper"
 		factory-ref="sqlSessionFactory"
