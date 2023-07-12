@@ -15,6 +15,9 @@
       	<Logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="trace" additivity="false">
       <AppenderRef ref="Console"/>
     </Logger>
+          	<Logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="trace" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
   	<Logger name="org.springframework" level="info" additivity="false">
       <AppenderRef ref="Console"/>
     </Logger>
@@ -29,4 +32,5 @@
     </Root>
   </Loggers>
 </Configuration>
+
 

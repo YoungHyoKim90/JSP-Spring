@@ -13,88 +13,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.or.ddit.enumpkg.OperatorType;
 
-@WebServlet("/calculate/Case4ProcessServlet")
-public class Case4ProcessServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private ObjectMapper mapper = new ObjectMapper();
+@Controller
+@RequestMapping("/calculate/Case4ProcessServlet")
+public class Case4ProcessServlet {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-//		String contentType = request.getContentType();
-		String contentType = Optional.ofNullable(request.getContentType())
-										.orElse("");
-		int status = HttpServletResponse.SC_OK;
-		CalculateVO target = null;
-		if(contentType.contains("json")) {
-			try(
-				InputStream is = request.getInputStream();
-			){
-				target = mapper.readValue(is, CalculateVO.class);
-			}
-		}else {
-			try {
-				String leftOp = request.getParameter("leftOp");
-				String rightOp = request.getParameter("rightOp");
-				String opParam = request.getParameter("opParam");
-				
-				double left = Double.parseDouble(leftOp); 
-				double right = Double.parseDouble(rightOp); 
-				OperatorType operator = OperatorType.valueOf(opParam);
-				
-				target = new CalculateVO();
-				target.setLeftOp(left);
-				target.setRightOp(right);
-				target.setOpParam(operator);
-			}catch (Exception e) {
-				status = HttpServletResponse.SC_BAD_REQUEST;
-				e.printStackTrace();
-			}
-		}
-		
-		
-		response.setContentType("application/json;charset=UTF-8");
-		
-		try(
-			PrintWriter out = response.getWriter();	
-		){
-//				out.println(expr);
-			mapper.writeValue(out, target);
-		}
+//	@RequestBody : 요청 payload를 언마샬링 할때 사용 . (consumes과 함께사용)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public CalculateVO jsonPayload(@RequestBody CalculateVO commandObject) {
+		return commandObject;
+	}
+
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public CalculateVO parameter(CalculateVO commandObject) {
+		return commandObject;
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

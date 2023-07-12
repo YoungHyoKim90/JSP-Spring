@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 import kr.or.ddit.login.service.AuthenticateService;
 import kr.or.ddit.validate.groups.DeleteGroup;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.MemberVOWrapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -50,6 +52,7 @@ public class LoginProcessController{
 			, @RequestParam(required = false) Optional<Object> idSave
 			, HttpSession session
 			, HttpServletResponse resp
+			, HttpServletRequest req
 			
 			){
 //		* 1. 요청 접수(파라미터나 헤더와 관련된 데이터 확보->검증)
@@ -76,6 +79,8 @@ public class LoginProcessController{
 			
 			try {
 			 	MemberVO authMember = service.authenticate(inputData);
+			 	
+			 	
 			 	session.setAttribute("authMember", authMember);
 				// redirect ?? 현재 요청에 대한 정보를 제거.
 				viewName = "redirect:/";

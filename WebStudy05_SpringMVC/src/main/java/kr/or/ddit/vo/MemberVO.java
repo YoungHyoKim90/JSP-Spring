@@ -39,8 +39,10 @@ public class MemberVO implements Serializable{
 	private transient String memRegno1;
 	@NotBlank(groups = InsertGroup.class)
 	private transient String memRegno2;
+	
 	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime memBir;
+	
 	@NotBlank
 	private String memZip;
 	@NotBlank
@@ -56,12 +58,16 @@ public class MemberVO implements Serializable{
 	private String memJob;
 	private String memLike;
 	private String memMemorial;
+	
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate memMemorialday;
+	
 	private Integer memMileage;
 	private boolean memDelete;
 	
 	private List<ProdVO> prodList; // has many
+	
+	private String memRole;
 }
 
 

@@ -14,7 +14,7 @@
 </head>
 <body>
 <form id="calForm" action="<%=request.getContextPath() %>/calculate/Case2ProcessServlet" method="post">
-	<input type="number" name="leftOp" />
+	<input type="number" name="left" />
 	<select name="opParam">
 		<option value>연산자</option>
 		<%
@@ -25,7 +25,7 @@
 			out.println(options);
 		%>
 	</select>
-	<input type="number" name="rightOp" />
+	<input type="number" name="right" />
 	<button type="submit">=</button>
 </form>
 <div id="resultArea">
