@@ -1,39 +1,37 @@
 package kr.or.ddit.servlet01;
 
 import java.io.File;
-import java.io.IOException;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/imageForm3.do")
-public class ImageFormControllerServlet extends HttpServlet{
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.ServletContextAware;
+
+@Controller
+public class ImageFormControllerServlet implements ServletContextAware{
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		this.application = servletContext;
+	}
 	private ServletContext application;
 	
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		application = getServletContext();
-	}
+	@Value("#{appInfo.mediaFolder}")
+	private String folderPath;
+	@Value("#{appInfo.mediaFolder}")
+	private File folder;
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String folderPath = application.getInitParameter("mediaFolder");
-		File folder = new File(folderPath);
-		
+	@RequestMapping("/imageForm3.do")
+	public String doGet(Model model){
 		String[] imageFiles = folder.list((d,n)->{
 			String mime = application.getMimeType(n);
 			return mime!=null && mime.startsWith("image/");
 		});
 		
-		req.setAttribute("imageFiles", imageFiles);
-		String viewName = "/WEB-INF/views/images/imageForm3.jsp";
-		req.getRequestDispatcher(viewName).forward(req, resp);
+		model.addAttribute("imageFiles", imageFiles);
+		return "images/imageForm3";
 	}
 }
 

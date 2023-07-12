@@ -117,7 +117,7 @@
 			
 			//----------------------
 			
-			dataType : "json", // request Accept:application/json, response Content-type:application/json
+			dataType : "text", // request Accept:application/json, response Content-type:application/json
 			
 			success : function(resp) {
 				alert(resp.message);

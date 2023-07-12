@@ -11,7 +11,7 @@ import kr.or.ddit.enumpkg.OperatorType;
 public class Case1ProcessServlet{
 	private static final long serialVersionUID = 1L;
 
-	@PostMapping(value = "/calculate/Case1ProcessServlet", produces = "text.html;chatset=UTF-8")
+	@PostMapping(value = "/calculate/Case1ProcessServlet", produces = "text/html;chatset=UTF-8")
 	@ResponseBody // 컨트롤러의 반환값이 response body 의 컨텐츠로 사용될 때.(produeces 속성과 함께 사용)
 	protected String doPost(
 			@RequestParam double leftOp

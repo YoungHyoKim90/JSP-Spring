@@ -1,47 +1,38 @@
 package kr.or.ddit.servlet03;
 
-import java.io.IOException;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
-import java.time.temporal.TemporalField;
-import java.time.temporal.WeekFields;
 import java.util.Locale;
 import java.util.Optional;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 특정 년도와 월, 로케일, 시간대 파라미터를 이용해 달력을 처리하는 컨트롤러(Model2)
  *
  */
-@WebServlet("/calendarCase2")
+@Controller
 //@MultipartConfig
-public class CalendarCase2Servlet extends HttpServlet{
-	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+public class CalendarCase2Servlet{
+	
+	@RequestMapping("/calendarCase2")
+	public String service(
+			@RequestParam(name = "year" , required = false, defaultValue = "-1") int yearValue
+			, @RequestParam(name = "month" , required = false, defaultValue = "-1") int monthValue
+			, @RequestParam(name="locale", required = false) Optional<String> localeParam
+			, @RequestParam(name="zone", required = false) Optional<String> zoneParam
+			, Model model
+			){
+				
+		Locale locale = localeParam.map(lp->Locale.forLanguageTag(lp))
+							  	   .orElse(Locale.getDefault());
 		
-		int yearValue = Optional.ofNullable(request.getParameter("year"))
-								.map(yp->Integer.parseInt(yp))
-								.orElse(-1);
-		int monthValue = Optional.ofNullable(request.getParameter("month"))
-								.map(mp->Integer.parseInt(mp))
-								.orElse(-1);
-		
-		Locale locale = Optional.ofNullable(request.getParameter("locale"))
-								.map(lp->Locale.forLanguageTag(lp))
-								.orElse(Locale.getDefault());
-		
-		ZoneId zone = Optional.ofNullable(request.getParameter("zone"))
-								.map(zp->ZoneId.of(zp))
-								.orElse(ZoneId.systemDefault());
+		ZoneId zone = zoneParam.map(zp->ZoneId.of(zp))
+							   .orElse(ZoneId.systemDefault());
 
 		LocalDate TODAY = LocalDate.now(zone);
 		
@@ -52,10 +43,9 @@ public class CalendarCase2Servlet extends HttpServlet{
 		
 		CalendarInfo infoVO = new CalendarInfo(targetYM, locale, zone);
 		
-		request.setAttribute("infoVO", infoVO);
+		model.addAttribute("infoVO", infoVO);
 		
-		String viewName = "/WEB-INF/views/calendar/calView.jsp";
-		request.getRequestDispatcher(viewName).forward(request, resp);
+		return "calendar/ajax/calView.jsp";
 	}
 }
 

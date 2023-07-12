@@ -3,13 +3,20 @@ package kr.or.ddit.props.service;
 import java.text.MessageFormat;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
 import kr.or.ddit.exception.PKNotFoundException;
 import kr.or.ddit.props.dao.PropertyDAO;
 import kr.or.ddit.props.dao.PropertyDAOImpl;
 import kr.or.ddit.vo.PropertyVO;
 
+@Service
 public class PropertyServiceImpl implements PropertyService{
-	private PropertyDAO dao = new PropertyDAOImpl();
+	
+	@Inject
+	private PropertyDAO dao;
 	
 	public boolean createProperty(PropertyVO prop){
 		int count = dao.insertProperty(prop);

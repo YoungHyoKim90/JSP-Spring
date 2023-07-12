@@ -1,77 +1,70 @@
 package kr.or.ddit.servlet01;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
-import javax.servlet.ServletConfig;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-public class ImageStreamingServlet extends HttpServlet{
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.WebApplicationContext;
+
+@Controller
+public class ImageStreamingServlet{
+	@Value("#{appInfo.mediaFolder}")
 	private String folderPath;
+	@Value("#{appInfo.mediaFolder}")
+	private File folder;
+	
+	@Inject
+	private WebApplicationContext context;
 	private ServletContext application;
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		application = getServletContext();
-		
-		folderPath = application.getInitParameter("mediaFolder");
+	@PostConstruct
+	public void init(){
+		application = context.getServletContext();
 	}
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
-			throws ServletException, IOException {
-		String fileName = req.getParameter("image");
+	@RequestMapping("/image.do")
+	public ResponseEntity<?> doGet(@RequestParam String image){
 		
-		if(fileName==null || fileName.isEmpty()) {
-			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-			return;
-		}
-		
-		File imageFile = new File(folderPath, fileName);
-		
-		if(!imageFile.exists()) {
-			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return;
-		}
-		
+		File imageFile = new File(folder, image);
+		HttpStatus status = HttpStatus.OK;
+		String message = null;
 //		MIME(Multipuposed Internet Mail Extension)
-		String mime = getServletContext().getMimeType(fileName);
-		
-		if(mime==null || !mime.startsWith("image/")) {
-			resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
-			return;
+		String mime = application.getMimeType(image);
+		Object body = null;
+		MediaType contentType = null;
+		long contentLength = -1;
+		if(!imageFile.exists()) {
+			status = HttpStatus.NOT_FOUND;
+			body = "파일이 없음.";
+			contentType = MediaType.parseMediaType("text/plain;charset=UTF-8");
+			contentLength = body.toString().length();
+		}else if(mime==null || !mime.startsWith("image/")) {
+			status = HttpStatus.UNSUPPORTED_MEDIA_TYPE;
+			body = "지원하지 않는 파일형식임.";
+			contentType = MediaType.parseMediaType("text/plain;charset=UTF-8");
+			contentLength = body.toString().length();
+		}else {
+			status = HttpStatus.OK;
+			body  = new FileSystemResource(imageFile);
+			contentType = MediaType.parseMediaType(mime);
+			contentLength = imageFile.length();
 		}
 		
-		resp.setContentType(mime);
-		resp.setContentLengthLong(imageFile.length());
-		FileInputStream fis = null;
-		OutputStream os = null;
-		try {
-			fis = new FileInputStream(imageFile);
-			os = resp.getOutputStream();
-	//		stream(byte/char) copy
-			byte[] buffer = new byte[1024];
-			int cnt = -1; // EOF, EOS 문자 (-1, null)
-			while((cnt = fis.read(buffer)) != -1) {
-				os.write(buffer, 0, cnt);
-			}
-		}finally {
-			if(fis!=null)
-				fis.close();
-			if(os!=null)
-				os.close();
-		}
+		return ResponseEntity.status(status)
+						.contentType(contentType)
+						.contentLength(contentLength)
+						.body(body);
 		
-//		1. request 입력 
-//		2. 처리
-//		3. response 출력
 	}
 }
 

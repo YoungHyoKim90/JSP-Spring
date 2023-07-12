@@ -1,61 +1,64 @@
 package kr.or.ddit.servlet04;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/bloodType")
-public class BloodTypeServlet extends HttpServlet{
-	private Map<String, String[]> bloodType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.WebApplicationContext;
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
+@Controller
+@RequestMapping("/bloodType")
+public class BloodTypeServlet{
+	
+	@Inject
+	private WebApplicationContext context;
+	
+	private Map<String, String[]> bloodType;
+	
+	ServletContext application;
+
+	@PostConstruct
+	public void init(){
+		
+		application = context.getServletContext();
 		bloodType = new HashMap<>();
 		bloodType.put("BT01", new String[] {"A형", "blood/a"});
 		bloodType.put("BT02", new String[] {"B형", "blood/b"});
 		bloodType.put("BT03", new String[] {"AB형", "blood/ab"});
 		bloodType.put("BT04", new String[] {"O형", "blood/o"});
-		getServletContext().setAttribute("bloodType", bloodType);
+		application.setAttribute("bloodType", bloodType);
 	}
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String logicalViewName = "blood/formView";
-		String viewName = "/" + logicalViewName + ".tiles";
-		req.getRequestDispatcher(viewName).forward(req, resp);
+	@GetMapping
+	public String doGet(){
+		return "blood/formView";
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
+	@PostMapping
+	public Object doPost(@RequestParam(name="blood") String code){
 		
-		String code = req.getParameter("blood");
 		int status = 200;
-		String logicalViewName = null;
 		
-		if(code==null || code.isEmpty()) {
-			status = HttpServletResponse.SC_BAD_REQUEST;
-		}else if(!bloodType.containsKey(code)){
+		if(!bloodType.containsKey(code)){
 			status = HttpServletResponse.SC_NOT_FOUND;
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.contentType(MediaType.parseMediaType("text/html;charset=UTF-8"))
+					.body("이런 혈액형은 없어요.");
 		}else {
 			String[] bloodInfo = bloodType.get(code);
-			logicalViewName = bloodInfo[1];
-		}
-		
-		if(status!=200) {
-			resp.sendError(status);
-		}else {
-			
-			String viewName = "/" +logicalViewName+ ".tiles";
-			req.getRequestDispatcher(viewName).forward(req, resp);
+			return bloodInfo[1];
 		}
 	}
 }

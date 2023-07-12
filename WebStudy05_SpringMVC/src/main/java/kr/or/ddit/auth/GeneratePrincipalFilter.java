@@ -40,7 +40,7 @@ public class GeneratePrincipalFilter implements Filter{
 					if(session!=null && !session.isNew() && session.getAttribute("authMember")!=null) {
 						MemberVO authMember = (MemberVO) session.getAttribute("authMember");
 						MemberVOWrapper principal = new MemberVOWrapper(authMember);
-						return principal;
+						return principal; // 핵심 코드 -> 기존의 코드를 wrapping하는 코드를 이용해 코드의 기능을 추가한다.
 					}else {
 						return super.getUserPrincipal();
 					}
