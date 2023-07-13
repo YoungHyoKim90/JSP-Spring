@@ -5,7 +5,7 @@
 <div style="border: 1px solid red;">
 <%--    ${requestScope } --%>
 </div>
-<form:form method="post" modelAttribute="prod">
+<form:form method="post" modelAttribute="prod" enctype="multipart/form-data">
    <form:hidden path="prodId"/>
    <table>
       <tr>
@@ -78,8 +78,9 @@
       <tr>
          <th>이미지경로</th>
          <td>
-            <form:input path="prodImg" class="form-control"/>
-            <form:errors path="prodImg" class="error"/>
+         		<input type="file" name="prodImage"/>
+<%--             <form:input path="prodImg" class="form-control"/> --%>
+<%--             <form:errors path="prodImg" class="error"/> --%>
          </td>
       </tr>
       <tr>

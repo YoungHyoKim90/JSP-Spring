@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.teaching.dao.TeachingDAO">
+	
+	<resultMap type="TeachingVO" id="teachingMap" autoMapping="true">
+		<association property="subject" autoMapping="true" />
+		<association property="professor" autoMapping="true" />
+	</resultMap>
+	
+	<select id="selectAll" resultType="TeachingVO">
+		SELECT * FROM TEACHING
+	</select>
+	<select id="selecListByProCd" resultMap="teachingMap">
+		SELECT T.*, SUB_NAME, SUB_POINT, PRO_NAME, PRO_TELNO, PRO_DEPT 
+		FROM TEACHING T 
+		INNER JOIN SUBJECT S ON (T.SUB_CD = S.SUB_CD)    
+		INNER JOIN PROFESSOR P ON T.PRO_CD = P.PRO_CD
+		WHERE T.PRO_CD = RPAD(#{proCd}, 5, ' ')
+	</select>
+	
+</mapper>

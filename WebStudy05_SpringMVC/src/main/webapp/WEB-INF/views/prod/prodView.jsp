@@ -74,8 +74,8 @@
 		<td>${prod.prodDetail }</td>
 	</tr>
 	<tr>
-		<th>이미지경로</th>
-		<td>${prod.prodImg }</td>
+		<th>이미지</th>
+		<td><img alt="상품의 이미지다" src='<c:url value='/resources/prodImages/${prod.prodImg }'></c:url>'></td>
 	</tr>
 	<tr>
 		<th>총재고</th>

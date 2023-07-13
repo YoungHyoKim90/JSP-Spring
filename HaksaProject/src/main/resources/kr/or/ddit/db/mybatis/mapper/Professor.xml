@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.professor.dao.ProfessorDAO">
+
+	<select id="selectForAuth" parameterType="ProfessorVO" resultType="ProfessorVO">
+		SELECT PRO_CD, PRO_NAME, PRO_TELNO, PRO_DEPT
+		FROM PROFESSOR
+		WHERE PRO_CD = #{proCd} AND PRO_DEPT = #{proDept}
+	</select>
+	
+	<select id="select" parameterType="ProfessorVO" resultType="ProfessorVO">
+		SELECT TRIM(PRO_CD) PRO_CD, PRO_NAME, TRIM(PRO_DEPT) PRO_DEPT
+		FROM PROFESSOR
+		WHERE PRO_CD = RPAD(#{proCd}, 5, ' ')
+	</select>
+	
+	<select id="selectList">
+		SELECT TRIM(PRO_CD) PRO_CD, PRO_NAME, PRO_TELNO, TRIM(PRO_DEPT) PRO_DEPT
+		FROM PROFESSOR
+	</select>
+	
+</mapper>
