@@ -1,8 +1,5 @@
 package kr.or.ddit.member.controller;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -31,7 +28,7 @@ public class MemberInsertController {
 	/**
 	 * 가입 양식 제공
 	 */
-	@GetMapping("/member/memberInsert.do")
+	@GetMapping
 	public String getHandler(){
 		return "member/memberForm";
 	}
@@ -46,13 +43,15 @@ public class MemberInsertController {
 	 * 양식을 통해 입력된 개인 정보 처리
 	 *
 	 */
-	@PostMapping("/member/memberInsert.do")
+	@PostMapping
 	public String postHandler(
 			@Validated(InsertGroup.class) @ModelAttribute("member") MemberVO member //command object
 			,Errors errors
 			,Model model
 			){
 
+		String logicalViewName = null;
+		System.out.println(member.toString());
 		if (!errors.hasErrors()) {
 			ServiceResult result = service.createMember(member);
 			switch (result) {

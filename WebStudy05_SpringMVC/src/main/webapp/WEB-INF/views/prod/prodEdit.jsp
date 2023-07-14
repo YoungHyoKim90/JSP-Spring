@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<form:form method="post" modelAttribute="prod">
+<form:form method="post" modelAttribute="prod" enctype="multipart/form-data">
 	<form:hidden path="prodId"/>
 <table class="table table-border">
 	<tr>
@@ -73,6 +73,7 @@
 	<tr>
 		<th>이미지경로</th>
 		<td>
+			<input type="file" name="prodImage" accept="image/*"> 
 			<form:input path="prodImg" class="form-control" />
 			<form:errors path="prodImg" class="error"/>
 		</td>

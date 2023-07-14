@@ -1,7 +1,7 @@
 <%
  /**
-  * @Class Name : EgovArticleBlogDetail.jsp
-  * @Description : EgovArticleBlogDetail 화면
+  * @Class Name : EgovArticleDetail.jsp
+  * @Description : EgovArticleDetail 화면
   * @Modification Information
   * @
   * @  수정일             수정자                   수정내용
@@ -22,7 +22,6 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
-<%@ taglib prefix="egovc" uri="/WEB-INF/tlds/egovc.tld" %>
 <%pageContext.setAttribute("crlf", "\r\n"); %>
 <c:set var="pageTitle"><spring:message code="comCopBbs.articleVO.title"/></c:set>
 <!DOCTYPE html>
@@ -159,7 +158,7 @@ function fn_egov_select_commentList(pageNo) {
 			<th><spring:message code="comCopBbs.articleVO.detail.atchFile" /></th>
 			<td colspan="5">
 				<c:import url="/cmm/fms/selectFileInfs.do" charEncoding="utf-8">
-				<c:param name="param_atchFileId" value="${egovc:encrypt(result.atchFileId)}" />
+				<c:param name="param_atchFileId" value="${result.atchFileId}" />
 			</c:import>
 			</td>
 		</tr>

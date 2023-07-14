@@ -171,7 +171,7 @@
                     WHERE CODE_ID = 'COM036' 
                       AND CODE = REPRT_STTUS) AS REPRT_STTUS_NM,
                    FRST_REGISTER_ID,
-                   DATE_FORMAT(FRST_REGIST_PNTTM,'%Y-%m-%d') AS FRST_REGIST_PNTTM
+                   FRST_REGIST_PNTTM                   
               FROM COMTNREPRTSTATS  
              WHERE 1 = 1
                AND REPRT_TY = #{reprtTy}

@@ -46,7 +46,6 @@ import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 /**
  * 게시물 관리를 위한 컨트롤러 클래스
- * 
  * @author 공통서비스개발팀 이삼섭
  * @since 2009.06.01
  * @version 1.0
@@ -153,7 +152,7 @@ public class EgovArticleController {
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();	//KISA 보안취약점 조치 (2018-12-10, 이정은)
 
         if(!isAuthenticated) {
-        	return "redirect:/uat/uia/egovLoginUsr.do";
+            return "egovframework/com/uat/uia/EgovLoginUsr";
         }
 	
 		BoardMasterVO vo = new BoardMasterVO();
@@ -210,6 +209,8 @@ public class EgovArticleController {
 		return "egovframework/com/cop/bbs/EgovArticleList";
     }
     
+    
+    
     /**
      * 게시물에 대한 상세 정보를 조회한다.
      * 
@@ -225,10 +226,11 @@ public class EgovArticleController {
 		
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();	//KISA 보안취약점 조치 (2018-12-10, 이정은)
 
-		if (!isAuthenticated) {
-			return "redirect:/uat/uia/egovLoginUsr.do";
-		}
+        if(!isAuthenticated) {
+            return "egovframework/com/uat/uia/EgovLoginUsr";
+        }
 
+	
 		boardVO.setLastUpdusrId((user == null || user.getUniqId() == null) ? "" : user.getUniqId());
 		BoardVO vo = egovArticleService.selectArticleDetail(boardVO);
 	
@@ -330,11 +332,11 @@ public class EgovArticleController {
 
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-
-		if (!isAuthenticated) { // KISA 보안취약점 조치 (2018-12-10, 이정은)
-			return "redirect:/uat/uia/egovLoginUsr.do";
-		}
-
+		
+		if(!isAuthenticated) {	//KISA 보안취약점 조치 (2018-12-10, 이정은)
+            return "egovframework/com/uat/uia/EgovLoginUsr";
+        }
+	
 		beanValidator.validate(board, bindingResult);
 		if (bindingResult.hasErrors()) {
 	
@@ -396,6 +398,7 @@ public class EgovArticleController {
 		}else{
 			return "forward:/cop/bbs/selectArticleList.do";
 		}
+		
     }
 
     /**
@@ -412,9 +415,9 @@ public class EgovArticleController {
 	
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();//KISA 보안취약점 조치 (2018-12-10, 이정은)
 
-		if (!isAuthenticated) {
-			return "redirect:/uat/uia/egovLoginUsr.do";
-		}
+        if(!isAuthenticated) {
+            return "egovframework/com/uat/uia/EgovLoginUsr";
+        }
         
 		BoardMasterVO master = new BoardMasterVO();
 		BoardVO articleVO = new BoardVO();
@@ -461,9 +464,11 @@ public class EgovArticleController {
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 		
 		if(!isAuthenticated) {	//KISA 보안취약점 조치 (2018-12-10, 이정은)
-            return "redirect:/uat/uia/egovLoginUsr.do";
+            return "egovframework/com/uat/uia/EgovLoginUsr";
         }
-	
+		
+		beanValidator.validate(board, bindingResult);
+		if (bindingResult.hasErrors()) {
 		    BoardMasterVO master = new BoardMasterVO();
 		    
 		    master.setBbsId(boardVO.getBbsId());
@@ -478,9 +483,6 @@ public class EgovArticleController {
 		    if (master.getTmplatCours() == null || master.getTmplatCours().equals("")) {
 			master.setTmplatCours("/css/egovframework/com/cop/tpl/egovBaseTemplate.css");
 		    }
-		    
-			beanValidator.validate(board, bindingResult);
-			if (bindingResult.hasErrors()) {
 	
 		    model.addAttribute("articleVO", boardVO);
 		    model.addAttribute("boardMasterVO", master);
@@ -488,23 +490,9 @@ public class EgovArticleController {
 	
 		    return "egovframework/com/cop/bbs/EgovArticleReply";
 		}
-			
-			// 인증된 권한 목록
-			List<String> authList = (List<String>) EgovUserDetailsHelper.getAuthorities();
-			// 관리자 권한 체크
-			if (!authList.contains("ROLE_ADMIN")) {
-				BoardVO vo = egovArticleService.selectArticleDetail(boardVO);
-				if (vo == null || "Y".equals(vo.getSecretAt())) {
-
-					model.addAttribute("articleVO", boardVO);
-					model.addAttribute("boardMasterVO", master);
-
-					model.addAttribute("resultMsg", "errors.auth.invalid");
-
-					return "egovframework/com/cop/bbs/EgovArticleReply";
-				}
-			}
 	
+		if (isAuthenticated) {
+		    //final Map<String, MultipartFile> files = multiRequest.getFileMap();
 		    final List<MultipartFile> files = multiRequest.getFiles("file_1");
 		    String atchFileId = "";
 	
@@ -535,6 +523,7 @@ public class EgovArticleController {
 		    board.setNttCn(unscript(board.getNttCn()));	// XSS 방지
 		    
 		    egovArticleService.insertArticle(board);
+		}
 		
 		return "forward:/cop/bbs/selectArticleList.do";
     }
@@ -612,7 +601,7 @@ public class EgovArticleController {
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 		
 		if(!isAuthenticated) {	//KISA 보안취약점 조치 (2018-12-10, 이정은)
-			return "redirect:/uat/uia/egovLoginUsr.do";
+            return "egovframework/com/uat/uia/EgovLoginUsr";
         }
 		
 		//--------------------------------------------------------------------------------------------
@@ -751,7 +740,7 @@ public class EgovArticleController {
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 		
 		if(!isAuthenticated) {	//KISA 보안취약점 조치 (2018-12-10, 이정은)
-			return "redirect:/uat/uia/egovLoginUsr.do";
+            return "egovframework/com/uat/uia/EgovLoginUsr";
         }
 		
 		// 수정 및 삭제 기능 제어를 위한 처리
@@ -816,11 +805,11 @@ public class EgovArticleController {
 
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-
-		if (!isAuthenticated) { // KISA 보안취약점 조치 (2018-12-10, 이정은)
-			return "redirect:/uat/uia/egovLoginUsr.do";
-		}
-
+	
+		if(!isAuthenticated) {	//KISA 보안취약점 조치 (2018-12-10, 이정은)
+            return "egovframework/com/uat/uia/EgovLoginUsr";
+        }
+		
 		beanValidator.validate(board, bindingResult);
 		if (bindingResult.hasErrors()) {
 	
@@ -916,11 +905,11 @@ public class EgovArticleController {
 
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-
-		if (!isAuthenticated) { // KISA 보안취약점 조치 (2018-12-10, 이정은)
-			return "redirect:/uat/uia/egovLoginUsr.do";
-		}
-
+		
+		if(!isAuthenticated) {	//KISA 보안취약점 조치 (2018-12-10, 이정은)
+            return "egovframework/com/uat/uia/EgovLoginUsr";
+        }
+	
 		// 수정 및 삭제 기능 제어를 위한 처리
 		model.addAttribute("sessionUniqId", (user == null || user.getUniqId() == null) ? "" : user.getUniqId());
 		
@@ -971,11 +960,11 @@ public class EgovArticleController {
 		//BBST02, BBST04
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-
-		if (!isAuthenticated) { // KISA 보안취약점 조치 (2018-12-10, 이정은)
-			return "redirect:/uat/uia/egovLoginUsr.do";
-		}
-
+		
+		if(!isAuthenticated) {	//KISA 보안취약점 조치 (2018-12-10, 이정은)
+            return "egovframework/com/uat/uia/EgovLoginUsr";
+        }
+	
 		beanValidator.validate(board, bindingResult);
 		if (bindingResult.hasErrors()) {
 	
@@ -1051,7 +1040,7 @@ public class EgovArticleController {
     	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();	//KISA 보안취약점 조치 (2018-12-10, 이정은)
 
         if(!isAuthenticated) {
-        	return "redirect:/uat/uia/egovLoginUsr.do";
+            return "egovframework/com/uat/uia/EgovLoginUsr";
         }
 		
 		BlogVO blogVo = new BlogVO();
@@ -1352,10 +1341,6 @@ public class EgovArticleController {
     	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
     	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();	//KISA 보안취약점 조치 (2018-12-10, 이정은)
 
-    	if (!isAuthenticated) {
-			throw new IllegalAccessException("Login Required!");
-		}
-    	
     	String tmplatCours = boardVO.getSearchWrd();
     	
 		BlogVO master = new BlogVO();

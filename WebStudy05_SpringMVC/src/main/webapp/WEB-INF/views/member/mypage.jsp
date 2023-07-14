@@ -14,6 +14,10 @@
 		<th>회원명</th>
 		<td>${member.memName }</td>
 	</tr>
+		<tr>
+		<th>프로필</th>
+		<td><img src="data:image/*;base64,${member.base64Img }"></td>
+	</tr>
 	<tr>
 		<th>주민번호1</th>
 		<td>${member.memRegno1 }</td>

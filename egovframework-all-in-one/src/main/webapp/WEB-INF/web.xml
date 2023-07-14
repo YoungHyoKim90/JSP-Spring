@@ -20,8 +20,7 @@
     </login-config>
 
     <session-config>
-        <session-timeout>60</session-timeout>
-    	<!-- <tracking-mode>COOKIE</tracking-mode> -->
+        <session-timeout>600</session-timeout>
     </session-config>
 
     <error-page>

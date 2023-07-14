@@ -36,13 +36,15 @@
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
     
+	<!--
 	<bean id="egovWebLogInterceptor" class="egovframework.com.sym.log.wlg.web.EgovWebLogInterceptor" />
+	-->
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
         <property name="interceptors">
             <list>
                 <ref bean="localeChangeInterceptor"/>
-                <ref bean="egovWebLogInterceptor"/>
+                <!-- <ref bean="egovWebLogInterceptor"/> -->
             </list>
         </property>
     </bean>
@@ -76,6 +78,7 @@
 	
 	<!-- Facebook 설정 -->
 	<mvc:default-servlet-handler />
+	<!--
 	<bean class="org.springframework.social.connect.web.ProviderSignInController">
 		<constructor-arg ref="connectionFactoryLocator" />
 		<constructor-arg ref="usersConnectionRepository" />
@@ -96,5 +99,6 @@
 	<mvc:view-controller path="/uss/ion/fbk/facebook.do" view-name="egovframework/com/uss/ion/fbk/EgovFacebookHome" />
 	<mvc:view-controller path="/uss/ion/fbk/facebookSignin.do" view-name="egovframework/com/uss/ion/fbk/EgovFacebookSignin" />
 	<mvc:view-controller path="/uss/ion/fbk/facebookSignout.do" view-name="egovframework/com/uss/ion/fbk/EgovFacebookHome" />
+	-->
 
 </beans>

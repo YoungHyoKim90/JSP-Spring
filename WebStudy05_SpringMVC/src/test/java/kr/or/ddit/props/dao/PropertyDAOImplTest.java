@@ -2,19 +2,25 @@ package kr.or.ddit.props.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+import javax.inject.Inject;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.transaction.annotation.Transactional;
+
+import kr.or.ddit.AbstractRootTest;
 import kr.or.ddit.vo.PropertyVO;
 
-class PropertyDAOImplTest {
+@Transactional
+class PropertyDAOImplTest extends AbstractRootTest{
 	
-	private PropertyDAO dao = new PropertyDAOImpl();
+	@Inject
+	private PropertyDAO dao;
 
 	@Test
 	void testInsertProperty() {
 		PropertyVO prop = new PropertyVO();
-		prop.setPropertyName("nonCommitPN");
-		prop.setPropertyValue("nonCommitPV");
+		prop.setPropertyName("nonCommitPN99");
+		prop.setPropertyValue("nonCommitPV99");
 //		prop.setDescription("nonCommitDS");
 		int cnt = dao.insertProperty(prop);
 		assertEquals(1, cnt);

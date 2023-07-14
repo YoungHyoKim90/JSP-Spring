@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +13,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,10 +48,6 @@ import egovframework.com.cmm.util.EgovUserDetailsHelper;
 @Controller
 public class EgovFileDownloadController {
 
-	/** 암호화서비스 */
-	@Resource(name = "egovEnvCryptoService")
-	EgovEnvCryptoService cryptoService;
-
 	@Resource(name = "EgovFileMngService")
 	private EgovFileMngService fileService;
 
@@ -87,32 +80,17 @@ public class EgovFileDownloadController {
 	 */
 	@RequestMapping(value = "/cmm/fms/FileDown.do")
 	public void cvplFileDownload(@RequestParam Map<String, Object> commandMap, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+		HttpServletResponse response) throws Exception {
+
+		String atchFileId = (String)commandMap.get("atchFileId");
+		String fileSn = (String)commandMap.get("fileSn");
 
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
 		if (isAuthenticated) {
 
-			// 암호화된 atchFileId 를 복호화하고 동일한 세션인 경우만 다운로드할 수 있다. (2022.12.06 추가) - 파일아이디가 유추
-			// 불가능하도록 조치
-			String param_atchFileId = (String) commandMap.get("atchFileId");
-			param_atchFileId = param_atchFileId.replaceAll(" ", "+");
-			byte[] decodedBytes = Base64.getDecoder().decode(param_atchFileId);
-			String decodedString = cryptoService.decrypt(new String(decodedBytes));
-			String decodedSessionId = StringUtils.substringBefore(decodedString, "|");
-			String decodedFileId = StringUtils.substringAfter(decodedString, "|");
-			String fileSn = (String) commandMap.get("fileSn");
-
-			String sessionId = request.getSession().getId();
-
-			boolean isSameSessionId = StringUtils.equals(decodedSessionId, sessionId);
-
-			if (!isSameSessionId) {
-				throw new Exception();
-			}
-
 			FileVO fileVO = new FileVO();
-			fileVO.setAtchFileId(decodedFileId);
+			fileVO.setAtchFileId(atchFileId);
 			fileVO.setFileSn(fileSn);
 			FileVO fvo = fileService.selectFileInf(fileVO);
 
@@ -164,11 +142,8 @@ public class EgovFileDownloadController {
 				PrintWriter printwriter = response.getWriter();
 
 				printwriter.println("<html>");
-				printwriter.println("<br><br><br><h2>Could not get file name:<br>"
-						+ EgovWebUtil.clearXSSMaximum(fvo.getOrignlFileNm()) + "</h2>");// 2022.01 Potential XSS in
-																						// Servlet
-				printwriter
-						.println("<br><br><br><center><h3><a href='javascript: history.go(-1)'>Back</a></h3></center>");
+				printwriter.println("<br><br><br><h2>Could not get file name:<br>"+ EgovWebUtil.clearXSSMaximum(fvo.getOrignlFileNm()) + "</h2>");//2022.01 Potential XSS in Servlet
+				printwriter.println("<br><br><br><center><h3><a href='javascript: history.go(-1)'>Back</a></h3></center>");
 				printwriter.println("<br><br><br>&copy; webAccess");
 				printwriter.println("</html>");
 

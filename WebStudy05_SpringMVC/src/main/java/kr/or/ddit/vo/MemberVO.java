@@ -1,10 +1,13 @@
 package kr.or.ddit.vo;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +17,8 @@ import javax.validation.groups.Default;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -68,6 +73,25 @@ public class MemberVO implements Serializable{
 	private List<ProdVO> prodList; // has many
 	
 	private String memRole;
+	
+	private byte[] memImg;
+	
+	private MultipartFile memImage;
+	
+	public void setMemImage(MultipartFile memImage) throws IOException {
+		if(!memImage.isEmpty()) {
+			this.memImage = memImage;
+			this.memImg = memImage.getBytes();
+//			memImg = StreamUtils.copyToByteArray(memImage.getInputStream());
+		}
+	}
+	public String getBase64Img() {
+		if(memImg == null) {
+			return null;
+		}else {
+			return Base64.getEncoder().encodeToString(memImg);
+		}
+	}
 }
 
 

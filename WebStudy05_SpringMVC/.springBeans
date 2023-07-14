@@ -7,11 +7,12 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
+		<config>src/main/resources/kr/or/ddit/spring/conf/aop-context.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/resources/kr/or/ddit/spring/conf/mapper-context.xml</config>
 		<config>src/main/resources/kr/or/ddit/spring/conf/root-context.xml</config>
-		<config>src/main/resources/kr/or/ddit/spring/conf/datasource-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/servlet-context.xml</config>
 	</autoconfigs>
 	<configSets>
 		<configSet>
@@ -19,7 +20,6 @@
 			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
 			<incomplete>false</incomplete>
 			<configs>
-				<config>src/main/resources/kr/or/ddit/spring/conf/datasource-context.xml</config>
 				<config>src/main/resources/kr/or/ddit/spring/conf/mapper-context.xml</config>
 				<config>src/main/resources/kr/or/ddit/spring/conf/root-context.xml</config>
 			</configs>
