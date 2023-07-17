@@ -9,7 +9,6 @@
 <script>
 	<c:if test="${not empty message }">
 		alert("${message}");
-		<c:remove var="message" scope="session" />
 	</c:if>
 
 	$(document).on("ajaxError", function(jqXHR, settings, errorText){

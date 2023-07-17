@@ -4,13 +4,22 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * 페이징 처리와 관련된 모든 속성을 가진 객체
  *
  */
+@NoArgsConstructor
 @Getter
 public class PaginationInfo<T> {
+	
+	public PaginationInfo(int screenSize, int blockSize) {
+		super();
+		this.screenSize = screenSize;
+		this.blockSize = blockSize;
+	}
+
 	private long totalRecord; // DB 조회
 	private int screenSize = 10;
 	private int blockSize = 5;
@@ -24,7 +33,13 @@ public class PaginationInfo<T> {
 	private long startPage; // 연산4
 	private long endPage; // 연산5
 	
+	private SimpleCondition simpleCondition;
+	
 	private List<T> dataList;
+	
+	public void setSimpleCondition(SimpleCondition simpleCondition) {
+		this.simpleCondition = simpleCondition;
+	}
 	
 	public void setDataList(List<T> dataList) {
 		this.dataList = dataList;
@@ -46,7 +61,7 @@ public class PaginationInfo<T> {
 	}
 	
 	
-	String htmlPattern = "<a href=''?page={0}''>{1}</a>";
+	String htmlPattern = "<a href=''javascript:fn_paging({0});'' data-page=''{0}''>{1}</a>";
 	public String getPagingHTML() {
 		StringBuilder html = new StringBuilder();
 		

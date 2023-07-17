@@ -12,6 +12,7 @@
 	<autoconfigs>
 		<config>src/main/resources/kr/or/ddit/spring/conf/mapper-context.xml</config>
 		<config>src/main/resources/kr/or/ddit/spring/conf/root-context.xml</config>
+		<config>src/main/resources/kr/or/ddit/spring/conf/datasource-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/servlet-context.xml</config>
 	</autoconfigs>
 	<configSets>
@@ -22,6 +23,8 @@
 			<configs>
 				<config>src/main/resources/kr/or/ddit/spring/conf/mapper-context.xml</config>
 				<config>src/main/resources/kr/or/ddit/spring/conf/root-context.xml</config>
+				<config>src/main/resources/kr/or/ddit/spring/conf/datasource-context.xml</config>
+				<config>src/main/resources/kr/or/ddit/spring/conf/aop-context.xml</config>
 			</configs>
 			<profiles>
 			</profiles>

@@ -9,12 +9,10 @@ import org.springframework.stereotype.Service;
 
 import kr.or.ddit.exception.PKNotFoundException;
 import kr.or.ddit.props.dao.PropertyDAO;
-import kr.or.ddit.props.dao.PropertyDAOImpl;
 import kr.or.ddit.vo.PropertyVO;
 
 @Service
 public class PropertyServiceImpl implements PropertyService{
-	
 	@Inject
 	private PropertyDAO dao;
 	

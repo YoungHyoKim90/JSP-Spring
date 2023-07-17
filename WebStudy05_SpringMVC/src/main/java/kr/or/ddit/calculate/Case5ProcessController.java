@@ -1,11 +1,26 @@
 package kr.or.ddit.calculate;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.Optional;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.or.ddit.enumpkg.OperatorType;
 
 /**
  * 1. request parameter / html response
@@ -15,8 +30,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 4. request json payload / json response
  *
  */
-@RequestMapping("/calculate/Case5ProcessServlet")
 @Controller
+@RequestMapping("/calculate/Case5ProcessServlet")
 public class Case5ProcessController{
 	
 	@PostMapping(produces = MediaType.TEXT_HTML_VALUE)
@@ -41,8 +56,7 @@ public class Case5ProcessController{
 	@ResponseBody
 	public CalculateVO jsonToJson(@RequestBody CalculateVO commandObject){
 		return commandObject;
-	}	
-
+	}
 }
 
 

@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +15,7 @@ import lombok.ToString;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"atchFileId","fileSn"})
+@EqualsAndHashCode(of = {"atchFileId", "fileSn"})
 public class AtchFileDetailVO {
 	private MultipartFile uploadFile;
 	public AtchFileDetailVO(MultipartFile uploadFile) {
@@ -22,13 +23,12 @@ public class AtchFileDetailVO {
 		this.uploadFile = uploadFile;
 		
 		this.orignlFileNm = uploadFile.getOriginalFilename();
-		this.fileExtsn =FilenameUtils.getExtension(orignlFileNm);
-		this.fileSize=uploadFile.getSize();
-		this.fileMime=uploadFile.getContentType();
+		this.fileExtsn = FilenameUtils.getExtension(orignlFileNm);
+		this.fileSize = uploadFile.getSize();
+		this.fileMime = uploadFile.getContentType();
 		
-		this.streFileNm =UUID.randomUUID().toString();
+		this.streFileNm = UUID.randomUUID().toString();
 	}
-	
 	
 	@NotBlank
 	private int atchFileId;
@@ -45,5 +45,4 @@ public class AtchFileDetailVO {
 	private String fileCn;
 	private long fileSize;
 	private String fileMime;
-	
 }

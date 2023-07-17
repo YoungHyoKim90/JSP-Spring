@@ -20,13 +20,11 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
-public class ProdRetrieveController {
-	
-
+public class ProdRetrieveController{
 	private final ProdService service;
 	
-	@RequestMapping("prod/prodList.do")
-	public String getHandler(Model model){
+	@RequestMapping("/prod/prodList.do")
+	public String list(Model model){
 		
 		List<ProdVO> prodList = service.retrieveProdList();
 		model.addAttribute("prodList", prodList);
@@ -34,22 +32,17 @@ public class ProdRetrieveController {
 		return "prod/prodList";
 	}
 	
-	@RequestMapping("prod/prodView.do")
-	public ModelAndView View(@RequestParam(name = "what", required = true) String prodId){
-
+	@RequestMapping("/prod/prodView.do")
+	public ModelAndView view(@RequestParam(name = "what", required = true) String prodId ){
+		
 		ProdVO prod = service.retrieveProd(prodId);
 		
 		ModelAndView mav = new ModelAndView();
-		
 		mav.addObject("prod", prod);
 		mav.setViewName("prod/prodView");
 		return mav;
-		
 	}
-	
 }
-
-// 핸들러 어뎁터를 어떻게 사용할거냐, 파라미터, 모델,뷰 어떻게 받을거냐.
 
 
 

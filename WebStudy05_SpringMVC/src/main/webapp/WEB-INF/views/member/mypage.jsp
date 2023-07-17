@@ -7,16 +7,14 @@
 		<td>${member.memId }</td>
 	</tr>
 	<tr>
-		<th>비밀번호</th>
-		<td>${member.memPass }</td>
-	</tr>
-	<tr>
 		<th>회원명</th>
 		<td>${member.memName }</td>
 	</tr>
-		<tr>
+	<tr>
 		<th>프로필</th>
-		<td><img src="data:image/*;base64,${member.base64Img }"></td>
+		<td>
+			<img src="data:image/*;base64,${member.base64Img }" />
+		</td>
 	</tr>
 	<tr>
 		<th>주민번호1</th>

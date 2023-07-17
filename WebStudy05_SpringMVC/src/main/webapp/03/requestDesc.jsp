@@ -120,7 +120,7 @@
 			dataType : "text", // request Accept:application/json, response Content-type:application/json
 			
 			success : function(resp) {
-				alert(resp.message);
+				alert(resp);
 			},
 			error : function(jqXHR, status, error) {
 				console.log(jqXHR)

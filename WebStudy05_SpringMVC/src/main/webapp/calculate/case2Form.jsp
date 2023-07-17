@@ -15,7 +15,7 @@
 <body>
 <form id="calForm" action="<%=request.getContextPath() %>/calculate/Case2ProcessServlet" method="post">
 	<input type="number" name="left" />
-	<select name="opParam">
+	<select name="operator">
 		<option value>연산자</option>
 		<%
 			OperatorType[] opTypes = OperatorType.values();

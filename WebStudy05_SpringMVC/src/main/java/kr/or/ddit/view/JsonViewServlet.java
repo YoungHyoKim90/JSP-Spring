@@ -27,6 +27,7 @@ public class JsonViewServlet extends HttpServlet{
 								.registerModule(new JavaTimeModule())
 								.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 								
+	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/json;charset=UTF-8");

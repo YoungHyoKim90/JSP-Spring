@@ -29,8 +29,8 @@ import org.springframework.web.context.ServletContextAware;
  *
  */
 @Controller
-public class serverFileExplorerServlet implements ServletContextAware{
-	
+
+public class ServerFileExplorerController implements ServletContextAware{
 	@Override
 	public void setServletContext(ServletContext servletContext) {
 		this.application = servletContext;

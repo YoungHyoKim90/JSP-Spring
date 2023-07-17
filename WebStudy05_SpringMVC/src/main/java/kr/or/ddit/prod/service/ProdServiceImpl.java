@@ -7,12 +7,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.enumpkg.ServiceResult;
 import kr.or.ddit.exception.PKNotFoundException;
@@ -24,39 +22,36 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ProdServiceImpl implements ProdService {
 	@Inject
-	private ProdDAO prodDAO ;
-	
+	private ProdDAO prodDAO;
 	@Value("#{appInfo.prodSavePath}")
-	private String prodSavePath;
+	private String prodSavePath; 
 	@Value("#{appInfo.prodSavePath}")
 	private Resource prodSaveRes;
-	
 	@PostConstruct
-	private void init() {
-		log.info("상품 이미지 저장 경로 : {}" , prodSaveRes);
+	public void init() {
+		log.info("상품 이미지 저장 경로 : {}", prodSaveRes);
 	}
-	 private ServiceResult processProdImage(ProdVO prod) {
-		 if(prod.getProdImage()==null) return ServiceResult.OK;
-//		 if(1==1) throw new RuntimeException("트랜잭션 관리 여부 확인을 위한 강제 발생 예외");
-		 
-		 try {
-				File saveFile = new File(prodSaveRes.getFile(), prod.getProdImg());
-				prod.getProdImage().transferTo(saveFile);
-				return ServiceResult.OK;
-				}catch(IOException e){
-					throw new RuntimeException(e);
-				}
-	 }
-	 
-	 // POP,FOP,OOP => 모듈화를 통한 중복제거! 그럼에도 중복이 해결되지 않아서 AOP가 나옴.
-	 //선언적 프로그래밍에 의한 트랜잭션 관리 : AOP
-	 
+
+	private ServiceResult processProdImage(ProdVO prod) {
+		if(prod.getProdImage()==null) return ServiceResult.OK;
+//		if(1==1) throw new RuntimeException("트랜잭션 관리 여부 확인을 위한 강제 발생 예외");
+		try {
+			File saveFile = new File(prodSaveRes.getFile(), prod.getProdImg());
+			prod.getProdImage().transferTo(saveFile);
+			return ServiceResult.OK;
+		}catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+//	POP, FOP, OOP
+//	선언적 프로그래밍에 의핸 트랜잭션 관리 : AOP
+	
 	@Override
 	public ServiceResult createProd(ProdVO prod) {
 		ServiceResult result = null;
-		
-		int cnt = prodDAO.insertProd(prod); 
-		if(cnt>0) {
+		int cnt = prodDAO.insertProd(prod);
+		if(cnt > 0) {
 			result = processProdImage(prod);
 		}else {
 			result = ServiceResult.FAIL;
@@ -79,10 +74,9 @@ public class ProdServiceImpl implements ProdService {
 
 	@Override
 	public ServiceResult modifyProd(ProdVO prod) {
-ServiceResult result = null;
-		
-		int cnt = prodDAO.updateProd(prod); 
-		if(cnt>0) {
+		ServiceResult result = null;
+		int cnt = prodDAO.updateProd(prod);
+		if(cnt > 0) {
 			result = processProdImage(prod);
 		}else {
 			result = ServiceResult.FAIL;
@@ -91,3 +85,17 @@ ServiceResult result = null;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

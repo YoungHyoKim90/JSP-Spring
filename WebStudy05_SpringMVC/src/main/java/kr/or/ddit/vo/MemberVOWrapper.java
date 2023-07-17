@@ -11,7 +11,7 @@ public class MemberVOWrapper implements Principal{
 	}
 
 	@Override
-	public String getName() { //getName는 식별자를 의미한다.
+	public String getName() {
 		return realUser.getMemId();
 	}
 	

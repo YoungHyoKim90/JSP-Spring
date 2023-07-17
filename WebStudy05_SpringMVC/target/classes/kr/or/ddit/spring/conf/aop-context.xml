@@ -9,8 +9,8 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
+	<tx:annotation-driven transaction-manager="transactionManager"/> 
+
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="retrieve*" read-only="true"/>
@@ -20,20 +20,35 @@
 		</tx:attributes>
 	</tx:advice>
 	
-	<bean  id="LoggingAdvice" class="kr.or.ddit.advice.LoggingAdvice" />
+	<bean id="loggingAdvice" class="kr.or.ddit.advice.LoggingAdvice" />
 	
 	
 	<aop:config>
-		<aop:pointcut expression="execution(* kr.or.ddit.*.service.*.*(..))" id="pointcut"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>	
-		<aop:aspect ref="LoggingAdvice">
-		
+		<aop:pointcut expression="execution(* kr.or.ddit..service.*.*(..))" id="pointcut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+		<aop:aspect ref="loggingAdvice">
+			
 <!-- 			<aop:before method="before" pointcut-ref="pointcut"/> -->
 <!-- 			<aop:after-returning method="afterReturning" pointcut-ref="pointcut" returning="retValue"/> -->
-
 			<aop:around method="around" pointcut-ref="pointcut"/>
-		</aop:aspect>	
+		</aop:aspect>
 	</aop:config>
-	
-	
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

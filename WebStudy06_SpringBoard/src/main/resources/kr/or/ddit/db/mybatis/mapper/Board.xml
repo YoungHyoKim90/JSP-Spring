@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.ddit.board.dao.FreeboardDAO">
-	<select id="selectTotalRecord" resultType="long">
+	<sql id="searchFrag">
+		<where>
+        	<if test="simpleCondition neq null and simpleCondition.searchWord neq null and not simpleCondition.searchWord.isEmpty()">
+	        	<choose>
+	        		<when test="simpleCondition.searchType eq 'writer'">
+	        			INSTR(BO_WRITER, #{simpleCondition.searchWord}) > 0
+	        		</when>
+	        		<when test="simpleCondition.searchType eq 'title'">
+	        			INSTR(BO_TITLE, #{simpleCondition.searchWord}) > 0
+	        		</when>
+	        		<when test="simpleCondition.searchType eq 'content'">
+	        			INSTR(BO_CONTENT, #{simpleCondition.searchWord}) > 0
+	        		</when>
+	        		<otherwise>
+		        		INSTR(BO_WRITER, #{simpleCondition.searchWord}) > 0
+		        		OR
+		        		INSTR(BO_TITLE, #{simpleCondition.searchWord}) > 0
+		        		OR
+		        		INSTR(BO_CONTENT, #{simpleCondition.searchWord}) > 0
+	        		</otherwise>
+	        	</choose>
+        	</if>
+        </where>
+	</sql>
+	<select id="selectTotalRecord" resultType="long" parameterType="PaginationInfo">
 		SELECT COUNT(*)
 		FROM FREEBOARD
+		<include refid="searchFrag" />
 	</select>
 	<select id="selectBoardList" resultType="FreeboardVO" parameterType="PaginationInfo">
 		SELECT B.*
@@ -14,11 +39,20 @@
 		            BO_NO, BO_TITLE, BO_WRITER
 		            , BO_DATE, BO_HIT
 		        FROM FREEBOARD
+		        <include refid="searchFrag" />
 		        ORDER BY BO_NO DESC
 		    ) A
 		) B
 		<![CDATA[   
 		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}
 		]]>
+	</select>
+	<select id="selectBoard" parameterType="int" resultType="FreeboardVO">
+		SELECT
+			BO_NO, BO_TITLE, BO_WRITER
+			, BO_IP, BO_MAIL, BO_PASS
+			, BO_CONTENT, BO_DATE, BO_HIT
+		FROM FREEBOARD
+		WHERE BO_NO = #{boNo}
 	</select>
 </mapper>

@@ -1,6 +1,6 @@
 <%@page import="kr.or.ddit.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <table class="table table-border">
 	<tr>
 		<th>회원아이디</th>
@@ -75,35 +75,7 @@
 		<td>${member.memMileage }</td>
 	</tr>
 	<tr>
-		<th>이미지</th>
-		<td>${member.memImg }</td>
-	</tr>
-	<tr>
 		<th>탈퇴여부</th>
 		<td>${member.memDelete }</td>
 	</tr>
 </table>
-
-<script>
-  // Assuming the binary image data is stored in the 'memberImgData' variable as an ArrayBuffer
-
-  // Convert ArrayBuffer to base64
-  function arrayBufferToBase64(buffer) {
-    var binary = '';
-    var bytes = new Uint8Array(buffer);
-    var len = bytes.byteLength;
-    for (var i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return window.btoa(binary);
-  }
-
-  // Usage example
-  var memberImgData = /* Provide the binary image data here */;
-  var base64Img = arrayBufferToBase64(memberImgData);
-
-  // Use the base64Img string to display the image
-  var imgElement = document.createElement('img');
-  imgElement.src = 'data:image/png;base64,' + base64Img;
-  document.body.appendChild(imgElement);
-</script>

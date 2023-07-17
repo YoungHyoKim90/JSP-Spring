@@ -9,9 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(of = "atchFileId")
+@EqualsAndHashCode(of="atchFileId")
 public class AtchFileVO {
-
 	@NotBlank
 	private int atchFileId;
 	@NotBlank

@@ -14,9 +14,7 @@ import kr.or.ddit.login.AuthenticateException;
 import kr.or.ddit.login.service.AuthenticateService;
 import kr.or.ddit.member.dao.MemberDAO;
 import kr.or.ddit.vo.MemberVO;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
 	
@@ -29,28 +27,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Inject
 	private PasswordEncoder encoder;
-	
-//	@Value("#{appInfo.memSavePath}")
-//	private String memSavePath;
-//	@Value("#{appInfo.memSaveRes}")
-//	private Resource memSaveRes;
-//
-//	@PostConstruct
-//	private void init() {
-//		log.info("멤버 이미지 저장 경로 : {}" , memSaveRes);
-//	}
-//	 private ServiceResult processMemImage(MemberVO member) {
-//		 if(member.getMemImage()==null) return ServiceResult.OK;
-//		 
-//		 try {
-//				File saveFile = new File(memSaveRes.getFile(), member.getMemImg());
-//				member.getMemImage().transferTo(saveFile);
-//				return ServiceResult.OK;
-//				}catch(IOException e){
-//					throw new RuntimeException(e);
-//				}
-//	 }
-	
+
 	@Override
 	public ServiceResult createMember(MemberVO member) {
 		ServiceResult result = null;

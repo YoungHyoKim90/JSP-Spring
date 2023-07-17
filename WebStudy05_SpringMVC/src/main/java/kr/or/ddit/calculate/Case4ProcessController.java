@@ -9,19 +9,49 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/calculate/Case4ProcessServlet")
-public class Case4ProcessServlet {
-
-//	@RequestBody : 요청 payload를 언마샬링 할때 사용 . (consumes과 함께사용)
+public class Case4ProcessController{
+	
+//	@RequestBody : 요청 payload 를 unmarshalling 할때 사용.(consumes 과 함께 사용)
+	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public CalculateVO jsonPayload(@RequestBody CalculateVO commandObject) {
+	public CalculateVO jsonPayload(@RequestBody CalculateVO commandObject){
 		return commandObject;
 	}
-
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public CalculateVO parameter(CalculateVO commandObject) {
+	public CalculateVO parameter(CalculateVO commandObject){
 		return commandObject;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -26,42 +26,39 @@ import kr.or.ddit.vo.PropertyVO;
 
 @Controller
 @RequestMapping("/property")
-public class PropertyController {
-	//property를 CRUD를 다함.
-	
+public class PropertyControllerServlet{
 	@Inject
 	private PropertyService service;
 	
 	@GetMapping
-	public String html () {
+	public String html() {
 		return "props/singleViewCase2";
 	}
-	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public String jsonList(Model model){
 		List<PropertyVO> propList = service.retrieveProperties();
 		model.addAttribute("propList", propList);
 		return "jsonView";
 	}
-	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = "what")
-	public String jsonDetail(@RequestParam("what") String propertyName , Model model){
+	public String jsonDetail(@RequestParam("what") String propertyName, Model model){
 		PropertyVO prop = service.retrieveProperty(propertyName);
 		model.addAttribute("prop", prop);
 		return "jsonView";
 	}
-
+	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public String doPost(@Valid @RequestBody PropertyVO propVO
-						, Errors errors
-						, Model model
-			){
+	public String doPost(
+		@Valid @RequestBody PropertyVO propVO
+		, Errors errors
+		, Model model
+	){
 		Map<String, Object> resultMap = new HashMap<>();
 		model.addAttribute("result", resultMap);
 		String viewName = null;
 		if(errors.hasErrors()) {
-			resultMap.put("success", false );
-			resultMap.put("status", 400 );
+			resultMap.put("success", false);
+			resultMap.put("status", 400);
 			viewName = "jsonView";
 		}else {
 			// call by reference
@@ -77,20 +74,22 @@ public class PropertyController {
 			}
 		}
 		return viewName;
+		
 	}
 	
 	@PutMapping
 	public String doPut(
-			@Valid @RequestBody PropertyVO propVO
-			,Errors errors
-			,Model model
-			){
+		@Valid @RequestBody PropertyVO propVO
+		, Errors errors
+		, Model model
+		
+	){
 		Map<String, Object> resultMap = new HashMap<>();
 		model.addAttribute("result", resultMap);
 		String viewName = null;
 		if(errors.hasErrors()) {
-			resultMap.put("success", false );
-			resultMap.put("status", 400 );
+			resultMap.put("success", false);
+			resultMap.put("status", 400);
 			viewName = "jsonView";
 		}else {
 			// call by reference
@@ -109,30 +108,28 @@ public class PropertyController {
 	}
 	
 	@DeleteMapping
-	public String doDelete(@Validated(DeleteGroup.class) @RequestBody PropertyVO prop
-							, Errors errors
-							, Model model
-			){
+	public String doDelete(
+		@Validated(DeleteGroup.class) @RequestBody PropertyVO prop
+		, Errors errors
+		, Model model
+	) {
 		Map<String, Object> resultMap = new HashMap<>();
 		model.addAttribute("result", resultMap);
 		resultMap.put("prop", prop);
 		String propertyName = prop.getPropertyName();
-				
+		
 //		String propertyName = req.getParameter("propertyName");
 		
 		if(errors.hasErrors()) {
 			resultMap.put("success", false);
 			resultMap.put("status", 400);
-			resultMap.put("errorMsg", "필수파라미터누락");
+			resultMap.put("errorMsg", "필수파라미터 누락");
 		}else {
 			boolean success = service.removeProperty(propertyName);
-			
 			resultMap.put("success", success);
 			
 		}
 		return "jsonView";
-		
-		
 	}
 }
 

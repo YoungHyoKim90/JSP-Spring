@@ -20,18 +20,16 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Controller
 @RequestMapping("/bloodType")
-public class BloodTypeServlet{
-	
+public class BloodTypeController{
 	@Inject
 	private WebApplicationContext context;
 	
 	private Map<String, String[]> bloodType;
-	
-	ServletContext application;
+
+	private ServletContext application;
 
 	@PostConstruct
 	public void init(){
-		
 		application = context.getServletContext();
 		bloodType = new HashMap<>();
 		bloodType.put("BT01", new String[] {"A형", "blood/a"});
@@ -48,18 +46,19 @@ public class BloodTypeServlet{
 	
 	@PostMapping
 	public Object doPost(@RequestParam(name="blood") String code){
-		
 		int status = 200;
 		
 		if(!bloodType.containsKey(code)){
 			status = HttpServletResponse.SC_NOT_FOUND;
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.contentType(MediaType.parseMediaType("text/html;charset=UTF-8"))
-					.body("이런 혈액형은 없어요.");
+						.contentType(MediaType.parseMediaType("text/html;charset=UTF-8"))
+						.body("이런 혈액형은 없음.");
 		}else {
 			String[] bloodInfo = bloodType.get(code);
 			return bloodInfo[1];
 		}
+		
+		
 	}
 }
 

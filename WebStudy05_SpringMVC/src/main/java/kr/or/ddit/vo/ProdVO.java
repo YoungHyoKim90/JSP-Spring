@@ -64,6 +64,7 @@ public class ProdVO implements Serializable {
 			this.prodImage = prodImage;
 			this.prodImg = UUID.randomUUID().toString();
 		}
+		
 	}
 	
 	@Min(0)

@@ -71,10 +71,9 @@
 		</td>
 	</tr>
 	<tr>
-		<th>이미지경로</th>
+		<th>이미지</th>
 		<td>
-			<input type="file" name="prodImage" accept="image/*"> 
-			<form:input path="prodImg" class="form-control" />
+			<input type="file" name="prodImage" accept="image/*"/>
 			<form:errors path="prodImg" class="error"/>
 		</td>
 	</tr>

@@ -20,10 +20,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/member/memberInsert.do")
-public class MemberInsertController {
+public class MemberInsertController{
 	
 	@Inject
-	private final MemberService service ;
+	private final MemberService service;
+	
+	@ModelAttribute("member")
+	public MemberVO member() {
+		return new MemberVO();
+	}
 	
 	/**
 	 * 가입 양식 제공
@@ -32,12 +37,6 @@ public class MemberInsertController {
 	public String getHandler(){
 		return "member/memberForm";
 	}
-		@ModelAttribute("member")
-		public MemberVO member() {
-			return new MemberVO();
-			
-		
-	}
 
 	/**
 	 * 양식을 통해 입력된 개인 정보 처리
@@ -45,13 +44,12 @@ public class MemberInsertController {
 	 */
 	@PostMapping
 	public String postHandler(
-			@Validated(InsertGroup.class) @ModelAttribute("member") MemberVO member //command object
-			,Errors errors
-			,Model model
-			){
-
+		@Validated(InsertGroup.class) @ModelAttribute("member") MemberVO member // command object
+		, Errors errors
+		, Model model
+	){
 		String logicalViewName = null;
-		System.out.println(member.toString());
+		
 		if (!errors.hasErrors()) {
 			ServiceResult result = service.createMember(member);
 			switch (result) {

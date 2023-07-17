@@ -25,7 +25,6 @@ import kr.or.ddit.vo.ProdVO;
 @Controller
 @RequestMapping("/prod/prodInsert.do")
 public class ProdInsertController{
-	
 	@Inject
 	private ProdService service;
 	@Autowired

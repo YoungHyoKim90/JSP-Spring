@@ -50,7 +50,8 @@ $(function(){
 		searchForm.propertyName.value = prop.propertyName;
 		// $(searchForm).submit();
 		searchForm.requestSubmit();
-	}).on("click", ".delBtn" ,function(){
+	}).on("click", ".delBtn" ,function(event){
+		event.stopPropagation();
 		let prop = $(this).parents("tr.datatr").data("source");
 		
 		let settings = {

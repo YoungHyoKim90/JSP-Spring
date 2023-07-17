@@ -129,6 +129,7 @@
 			<if test="prodImg neq null and not prodImg.isEmpty()">
 				, PROD_IMG = #{prodImg,jdbcType=VARCHAR}
 			</if>
+			
 		WHERE PROD_ID = #{prodId,jdbcType=VARCHAR}
 	</update>
 </mapper>

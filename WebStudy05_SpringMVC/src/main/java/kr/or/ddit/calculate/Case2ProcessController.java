@@ -11,22 +11,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.ddit.enumpkg.OperatorType;
 
 @Controller
-public class Case2ProcessController {
+public class Case2ProcessController{
 	private static final long serialVersionUID = 1L;
 
 	@PostMapping(value="/calculate/Case2ProcessServlet", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	protected Map<String, Object> doPost(
-			double left
-			, double right
-			, OperatorType operator
-
-	) {
-
+	public Map<String, Object> doPost(
+		double left	
+		, double right
+		, OperatorType operator
+	){
 		double result = operator.biOperate(left, right);
-
+		
 		String expr = operator.expression(left, right);
-
+		
 		// native
 		Map<String, Object> target = new HashMap<>();
 		target.put("expr", expr);
@@ -35,8 +33,27 @@ public class Case2ProcessController {
 		target.put("right", right);
 		target.put("operator", operator);
 		return target;
-
-
-
+		
 	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

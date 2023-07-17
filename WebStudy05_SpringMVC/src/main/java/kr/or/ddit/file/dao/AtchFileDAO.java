@@ -8,8 +8,7 @@ import kr.or.ddit.file.vo.AtchFileVO;
 @Mapper
 public interface AtchFileDAO {
 	public AtchFileDetailVO selectAtchFileDetail(AtchFileDetailVO condition);
-	public AtchFileVO selectAtchFileGroup(int AtchFileId);
-
-	public int insertAtchFileGroup(AtchFileVO atchFileGroup); 
+	public AtchFileVO selectAtchFileGroup(int atchFileId);
 	
+	public int insertAtchFileGroup(AtchFileVO atchFileGroup);
 }

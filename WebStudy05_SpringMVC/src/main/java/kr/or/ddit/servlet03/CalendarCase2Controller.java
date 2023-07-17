@@ -17,22 +17,22 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 //@MultipartConfig
-public class CalendarCase2Servlet{
+public class CalendarCase2Controller{
 	
 	@RequestMapping("/calendarCase2")
 	public String service(
-			@RequestParam(name = "year" , required = false, defaultValue = "-1") int yearValue
-			, @RequestParam(name = "month" , required = false, defaultValue = "-1") int monthValue
-			, @RequestParam(name="locale", required = false) Optional<String> localeParam
-			, @RequestParam(name="zone", required = false) Optional<String> zoneParam
-			, Model model
-			){
-				
+		@RequestParam(name="year", required = false, defaultValue = "-1") int yearValue
+		, @RequestParam(name="month", required = false, defaultValue = "-1") int monthValue
+		, @RequestParam(name="locale", required = false) Optional<String> localeParam
+		, @RequestParam(name="zone", required = false) Optional<String> zoneParam
+		, Model model
+	){
+		
 		Locale locale = localeParam.map(lp->Locale.forLanguageTag(lp))
-							  	   .orElse(Locale.getDefault());
+								.orElse(Locale.getDefault());
 		
 		ZoneId zone = zoneParam.map(zp->ZoneId.of(zp))
-							   .orElse(ZoneId.systemDefault());
+								.orElse(ZoneId.systemDefault());
 
 		LocalDate TODAY = LocalDate.now(zone);
 		
@@ -45,7 +45,7 @@ public class CalendarCase2Servlet{
 		
 		model.addAttribute("infoVO", infoVO);
 		
-		return "calendar/ajax/calView.jsp";
+		return "calendar/ajax/calView";
 	}
 }
 

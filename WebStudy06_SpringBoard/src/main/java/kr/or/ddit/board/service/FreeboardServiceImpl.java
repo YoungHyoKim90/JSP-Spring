@@ -22,7 +22,7 @@ public class FreeboardServiceImpl implements FreeboardService {
 
 	@Override
 	public List<FreeboardVO> retrieveBoardList(PaginationInfo paging) {
-		long totalRecord = boardDAO.selectTotalRecord();
+		long totalRecord = boardDAO.selectTotalRecord(paging);
 		paging.setTotalRecord(totalRecord);
 		return boardDAO.selectBoardList(paging);
 	}

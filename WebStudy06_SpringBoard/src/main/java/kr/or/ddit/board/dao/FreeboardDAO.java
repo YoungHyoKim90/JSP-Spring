@@ -11,7 +11,7 @@ import kr.or.ddit.board.vo.PaginationInfo;
 public interface FreeboardDAO {
 	public int insertBoard(FreeboardVO board);
 	
-	public long selectTotalRecord();
+	public long selectTotalRecord(PaginationInfo paging);
 	public List<FreeboardVO> selectBoardList(PaginationInfo paging);
 	
 	public FreeboardVO selectBoard(int boNo);

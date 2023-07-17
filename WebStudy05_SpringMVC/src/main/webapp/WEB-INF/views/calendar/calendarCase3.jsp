@@ -50,7 +50,7 @@
 		%>
 	</select>
 	<select name="locale" data-locale="<%=Locale.getDefault().toLanguageTag()%>">
-	<option value>로케일 선택 </option>
+		<option value>로케일 선택</option>
 		<%=
 			Stream.of(Locale.getAvailableLocales())
 					.filter(l->! l.getDisplayName(l).isEmpty())

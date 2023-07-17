@@ -7,7 +7,7 @@
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<properties>
-		<java-version>1.8</java-version>
+		<java-home>1.8</java-home>
 		<com.fasterxml.jackson-version>2.15.2</com.fasterxml.jackson-version>
 		<org.apache.logging.log4j-version>2.20.0</org.apache.logging.log4j-version>
 		<org.slf4j-version>1.7.36</org.slf4j-version>
@@ -21,8 +21,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
-					<source>${java-version}</source>
-					<target>${java-version}</target>
+					<source>${java-home}</source>
+					<target>${java-home}</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -33,8 +33,7 @@
 		</plugins>
 	</build>
 	<dependencies>
-
-		<!-- 스프링 DI -->
+		<!-- Spring DI Container -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -55,7 +54,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-			<!-- AOP지원용 -->
+		<!-- AOP 지원용 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -100,6 +99,11 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.5.13</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.1.1</version>
+		</dependency>
 
 		<!--Domain Layer 지원용 -->
 		<dependency>
@@ -117,17 +121,6 @@
 			<groupId>org.glassfish</groupId>
 			<artifactId>jakarta.el</artifactId>
 			<version>3.0.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.5.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>2.1.1</version>
 		</dependency>
 
 		<!-- View Layer 지원용 -->
@@ -228,12 +221,24 @@
 			<version>5.9.3</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- poi 테스트용 -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.7</version>
+		</dependency>
+
 	</dependencies>
 </project>

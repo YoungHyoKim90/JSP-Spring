@@ -2,19 +2,13 @@ package kr.or.ddit.prod.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import javax.inject.Inject;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import kr.or.ddit.AbstractRootTest;
 import kr.or.ddit.vo.ProdVO;
 
-
-class ProdDAOImplTest extends AbstractRootTest{
-
-	@Inject
-	private ProdDAO dao;
+class ProdDAOImplTest {
+	private ProdDAO dao = new ProdDAOImpl();
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {

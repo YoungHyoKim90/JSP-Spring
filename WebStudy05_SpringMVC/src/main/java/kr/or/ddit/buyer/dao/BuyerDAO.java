@@ -3,7 +3,6 @@ package kr.or.ddit.buyer.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import kr.or.ddit.vo.BuyerVO;
 
@@ -41,5 +40,5 @@ public interface BuyerDAO {
 	 * @param buyerId
 	 * @return row count > 0 : 삭제
 	 */
-	public int deleteBuyer(@Param("buyerId") String buyerId);
+	public int deleteBuyer(String buyerId);
 }

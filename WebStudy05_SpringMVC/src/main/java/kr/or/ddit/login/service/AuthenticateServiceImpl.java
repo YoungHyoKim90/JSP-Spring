@@ -22,10 +22,10 @@ public class AuthenticateServiceImpl implements AuthenticateService {
 	@Override
 	public MemberVO authenticate(MemberVO inputData) throws AuthenticateException {
 		MemberVO saved = dao.selectMemberForAuth(inputData.getMemId());
-		if(saved==null) 
+		if(saved==null)
 			throw new AuthenticateException(MessageFormat.format("{0} 해당 사용자는 없음.", inputData.getMemId()));
 		String inputPass = inputData.getMemPass();
-		String savedPass = saved.getMemPass(); 
+		String savedPass = saved.getMemPass();
 		if(encoder.matches(inputPass, savedPass)) {
 			return saved;
 		}else {

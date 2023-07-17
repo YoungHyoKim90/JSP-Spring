@@ -24,7 +24,6 @@ import kr.or.ddit.validate.groups.DeleteGroup;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.MemberVOWrapper;
 import lombok.extern.slf4j.Slf4j;
-
 @Slf4j
 @Controller
 public class LoginProcessController{
@@ -34,31 +33,30 @@ public class LoginProcessController{
 	
 	@Inject
 	private AuthenticateService service;
-	
+
 	private ServletContext application;
 	
 	@PostConstruct
 	public void init() {
 		application = context.getServletContext();
-		log.info("WebApplicationContext: {}", context);
-		log.info("ServletContext: {}", application);
+		log.info("WebApplicationContext : {}", context);
+		log.info("ServletContext : {}", application);
 	}
 	
-	@RequestMapping(value = "/login/loginProcess", method = RequestMethod.POST )
+	@RequestMapping(value="/login/loginProcess", method = RequestMethod.POST)
 	public String loginProcess(
+		@Validated(DeleteGroup.class) MemberVO inputData
+		, Errors errors
+		, @RequestParam(required = false) Optional<String> idSave
+		, HttpSession session
+		, HttpServletResponse resp
+		, HttpServletRequest req
 			
-			@ Validated(DeleteGroup.class) MemberVO inputData
-			, Errors errors
-			, @RequestParam(required = false) Optional<Object> idSave
-			, HttpSession session
-			, HttpServletResponse resp
-			, HttpServletRequest req
-			
-			){
+	){
 //		* 1. 요청 접수(파라미터나 헤더와 관련된 데이터 확보->검증)
 //		req.setCharacterEncoding("UTF-8");
 		
-		boolean saveFlag =idSave.map(c->true)
+		boolean saveFlag = idSave.map(c->true)
 								.orElse(false);
 		
 		
@@ -80,7 +78,6 @@ public class LoginProcessController{
 			try {
 			 	MemberVO authMember = service.authenticate(inputData);
 			 	
-			 	
 			 	session.setAttribute("authMember", authMember);
 				// redirect ?? 현재 요청에 대한 정보를 제거.
 				viewName = "redirect:/";
@@ -100,18 +97,17 @@ public class LoginProcessController{
 				viewName = "redirect:/login/loginForm.jsp";
 			}
 		}
-
-			return viewName;
-		 
+		return viewName;
 	}
+	
 	@PostMapping("/login/logout")
-	public String doPost(HttpSession session) {
+	public String doPost(HttpSession session){
 		if(session!=null && !session.isNew()) {
+//			session.removeAttribute("authId");
 			session.invalidate();
 		}
 		return "redirect:/";
 	}
-	
 }
 
 
