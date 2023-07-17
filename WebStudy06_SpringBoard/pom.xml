@@ -1,11 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>kr.or.ddit</groupId>
-  <artifactId>webStudy06_SpringBoard</artifactId>
-  <version>1.0</version>
-  <packaging>war</packaging>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>kr.or.ddit</groupId>
+	<artifactId>WebStudy06_SpringBoard</artifactId>
+	<version>1.0</version>
+	<packaging>war</packaging>
+	<properties>
 		<java-version>1.8</java-version>
 		<com.fasterxml.jackson-version>2.15.2</com.fasterxml.jackson-version>
 		<org.apache.logging.log4j-version>2.20.0</org.apache.logging.log4j-version>
@@ -31,9 +32,8 @@
 			</plugin>
 		</plugins>
 	</build>
-	<dependencies>
-
-		<!-- Spring DI container-->
+		<dependencies>
+		<!-- Spring DI Container -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -54,7 +54,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-			<!-- AOP지원용 -->
+		<!-- AOP 지원용 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -99,6 +99,11 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.5.13</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.1.1</version>
+		</dependency>
 
 		<!--Domain Layer 지원용 -->
 		<dependency>
@@ -116,17 +121,6 @@
 			<groupId>org.glassfish</groupId>
 			<artifactId>jakarta.el</artifactId>
 			<version>3.0.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.5.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>2.1.1</version>
 		</dependency>
 
 		<!-- View Layer 지원용 -->
@@ -227,7 +221,6 @@
 			<version>5.9.3</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -235,6 +228,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-  
-  
 </project>

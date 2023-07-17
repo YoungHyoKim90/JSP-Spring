@@ -54,7 +54,43 @@
 	/>
 	
 	<mvc:resources location="/resources/" mapping="/resources/**" cache-period="0" />
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" 
+		p:basenames="kr/or/ddit/msg/Messages"
+	/>
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" 
+		p:cookiePath="/"
+		p:cookieName="langCookie"
+		p:cookieMaxAge="#{60*60*24*7}"
+	/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" 
+				p:paramName="lang"
+			/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
