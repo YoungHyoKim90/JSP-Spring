@@ -62,7 +62,47 @@ public class PaginationInfo<T> {
 	
 	
 	String htmlPattern = "<a href=''javascript:fn_paging({0});'' data-page=''{0}''>{1}</a>";
+	String liPtrn = "<li class=''page-item {0}''>";
+	String aPtrn = "<a class='page-link' href=''javascript:fn_paging({0});'' data-page=''{0}''>{1}</a>";
+	String curPtrn = "<li class=''page-item active'' aria-current=''page''><a class=''page-link'' href=''#''>{0}</a></li>";
+
 	public String getPagingHTML() {
+		StringBuilder html = new StringBuilder();
+		html.append("<nav aria-label='...'>");
+		html.append("<ul class='pagination'>");
+		
+		html.append(MessageFormat.format(liPtrn, startPage<=1 ? "disabled" : ""));
+		html.append(
+			MessageFormat.format(aPtrn, startPage-1, "이전")	
+		);
+		html.append("</li>");
+		
+		endPage = endPage > totalPage ? totalPage : endPage;
+		
+		for(long page = startPage; page <= endPage; page++ ) {
+			if(page==currentPage) {
+				html.append(MessageFormat.format(curPtrn, page));
+			}else {
+				html.append(MessageFormat.format(liPtrn, ""));
+				html.append(
+					MessageFormat.format(aPtrn, page, page)	
+				);
+				html.append("</li>");
+			}
+		}
+		
+		html.append(MessageFormat.format(liPtrn, endPage >= totalPage ? "disabled" : ""));
+		html.append(
+			MessageFormat.format(aPtrn, endPage+1, "다음")	
+		);
+		html.append("</li>");
+		
+		html.append("</ul>");
+		html.append("</nav>");
+		return html.toString();
+	}
+	
+	public String getPagingHTMLSimple() {
 		StringBuilder html = new StringBuilder();
 		
 		if(startPage>1) {
@@ -84,7 +124,6 @@ public class PaginationInfo<T> {
 				MessageFormat.format(htmlPattern, endPage+1, "다음")	
 			);
 		}
-		
 		return html.toString();
 	}
 }

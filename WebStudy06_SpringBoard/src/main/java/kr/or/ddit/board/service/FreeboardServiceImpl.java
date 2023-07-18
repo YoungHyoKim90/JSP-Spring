@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.board.dao.FreeboardDAO;
@@ -14,11 +15,21 @@ import kr.or.ddit.board.vo.PaginationInfo;
 public class FreeboardServiceImpl implements FreeboardService {
 	@Inject
 	private FreeboardDAO boardDAO;
+	@Inject
+	private PasswordEncoder encoder;
 
+	private void encryptBoard(FreeboardVO board) {
+		String plain = board.getBoPass();
+		String encoded = encoder.encode(plain);
+		board.setBoPass(encoded);
+	}
+	
 	@Override
 	public boolean createBoard(FreeboardVO board) {
+		encryptBoard(board);
 		return boardDAO.insertBoard(board) > 0;
 	}
+
 
 	@Override
 	public List<FreeboardVO> retrieveBoardList(PaginationInfo paging) {

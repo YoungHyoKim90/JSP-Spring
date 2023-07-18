@@ -40,22 +40,31 @@
 	<tfoot>
 		<tr>
 			<td colspan="5">
+				<div class="d-flex justify-content-center mb-3">
 				${paging.pagingHTML }
-				<div id="searchUI">
-					<form:select path="simpleCondition.searchType">
-						<form:option value="" label="전체" />
-						<form:option value="writer" label="작성자" />
-						<form:option value="title" label="제목" />
-						<form:option value="content" label="내용" />
-					</form:select>
-					<form:input path="simpleCondition.searchWord" />
-					<input type="button" value="검색" id="searchBtn"/>
+				</div>
+				<div id="searchUI" class="row justify-content-center">
+					<div  class="col-auto">
+						<form:select path="simpleCondition.searchType" class="form-select">
+							<form:option value="" label="전체" />
+							<form:option value="writer" label="작성자" />
+							<form:option value="title" label="제목" />
+							<form:option value="content" label="내용" />
+						</form:select>
+					</div>
+					<div  class="col-auto">
+						<form:input path="simpleCondition.searchWord" class="form-control"/>
+					</div>
+					<div  class="col-auto">
+						<input type="button" value="검색" id="searchBtn" class="btn btn-success"/>
+						<a href="<c:url value='/board/boardInsert.do'/>" class="btn btn-primary">새글쓰기</a>
+					</div>
 				</div>
 			</td>
 		</tr>
 	</tfoot>
 </table>
-<form:form id="searchForm" modelAttribute="simpleCondition">
+<form:form id="searchForm" modelAttribute="simpleCondition" method="get">
 	<form:hidden path="searchType" />
 	<form:hidden path="searchWord" />
 	<input type="hidden" name="page" />

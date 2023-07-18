@@ -6,6 +6,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import kr.or.ddit.validate.groups.UpdateGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(of="boNo")
 public class FreeboardVO {
 	private long rnum;
-	@NotNull
+	@NotNull(groups = UpdateGroup.class)
 	private Integer boNo;
 	@NotBlank
 	private String boTitle;
@@ -28,4 +31,31 @@ public class FreeboardVO {
 	private String boContent;
 	private LocalDate boDate;
 	private Integer boHit;
+	
+	private MultipartFile[] boFiles;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

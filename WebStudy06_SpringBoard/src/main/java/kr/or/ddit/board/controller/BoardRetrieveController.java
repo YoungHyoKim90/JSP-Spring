@@ -27,7 +27,7 @@ public class BoardRetrieveController {
 			, @ModelAttribute("simpleCondition") SimpleCondition simpleCondition
 			, Model model
 	) {
-		PaginationInfo<FreeboardVO> paging = new PaginationInfo<>(2,3);
+		PaginationInfo<FreeboardVO> paging = new PaginationInfo<>();
 		paging.setCurrentPage(currentPage);
 		paging.setSimpleCondition(simpleCondition);
 		
