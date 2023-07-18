@@ -48,7 +48,7 @@
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" 
 		p:objectMapper-ref="jackson2ObjectMapper"
 	/>
-
+	
 	<bean id="downloadView" class="kr.or.ddit.board.view.AtchDownloadView" />
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" 

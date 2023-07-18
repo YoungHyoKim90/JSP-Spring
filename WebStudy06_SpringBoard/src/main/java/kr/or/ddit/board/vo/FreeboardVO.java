@@ -35,10 +35,9 @@ public class FreeboardVO {
 	
 	private MultipartFile[] boFiles;
 	
-	   private Integer atchFileId;
-	   
-	   private AtchFileVO fileGroup; // has a
-
+	private Integer atchFileId;
+	
+	private AtchFileVO fileGroup; // has a
 }
 
 

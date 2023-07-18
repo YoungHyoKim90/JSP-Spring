@@ -67,6 +67,7 @@
 	</insert>
 	
 	<delete id="deleteAtchFileGroup" parameterType="int">
+<!-- 		ATCH_FILE / ATCH_FILE_DETAILS 동시 삭제 필요	 -->
 		DELETE FROM ATCH_FILE
 		WHERE ATCH_FILE_ID = #{atchFileId}
 	</delete>
@@ -74,7 +75,6 @@
 		DELETE FROM ATCH_FILE_DETAIL
 		WHERE ATCH_FILE_ID = #{atchFileId}
 	</delete>
-	
 </mapper>
 
 

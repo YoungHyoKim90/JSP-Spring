@@ -24,50 +24,51 @@ public class FreeboardServiceImpl implements FreeboardService {
 	@Inject
 	private FreeboardDAO boardDAO;
 	@Inject
-	private PasswordEncoder encoder;
+	private PasswordEncoder passwordEncoder;
+	
 	@Inject
 	private AtchFileService atchService;
 	@Value("#{appInfo.atchPath}")
 	private Resource atchPath;
+	
 
 	private void encryptBoard(FreeboardVO board) {
 		String plain = board.getBoPass();
-		String encoded = encoder.encode(plain);
+		String encoded = passwordEncoder.encode(plain);
 		board.setBoPass(encoded);
 	}
-
+	
 	private void processAtchFileGroup(FreeboardVO board) {
 		MultipartFile[] boFiles = board.getBoFiles();
-		if (boFiles == null)
-			return;
+		if(boFiles==null) return;
 		List<AtchFileDetailVO> detailList = new ArrayList<>();
-		for (MultipartFile boFile : boFiles) {
-			if (boFile.isEmpty())
-				continue;
-			detailList.add(new AtchFileDetailVO(boFile));
+		for(MultipartFile boFile : boFiles) {
+			if(boFile.isEmpty()) continue;
+			detailList.add( new AtchFileDetailVO(boFile) );
 		}
-		if (detailList.size() > 0) {
+		if(detailList.size()>0) {
 			AtchFileVO fileGroup = new AtchFileVO();
 			fileGroup.setDetailList(detailList);
 			try {
-//		1. 첨부파일의 메타 데이터 저장
-//		2. 첨부파일의 2진 데이터 저장
+				//		1. 첨부파일의 메타 데이터 저장
+				//		2. 첨부파일의 2진 데이터 저장
 				int atchFileId = atchService.createAtchFileGroup(fileGroup, atchPath);
 				board.setAtchFileId(atchFileId);
-
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
+			
 		}
-
+		
 	}
-
+	
 	@Override
 	public boolean createBoard(FreeboardVO board) {
 		encryptBoard(board);
 		processAtchFileGroup(board);
 		return boardDAO.insertBoard(board) > 0;
 	}
+
 
 	@Override
 	public List<FreeboardVO> retrieveBoardList(PaginationInfo paging) {
@@ -80,14 +81,46 @@ public class FreeboardServiceImpl implements FreeboardService {
 	public FreeboardVO retrieveBoard(int boNo) {
 		return boardDAO.selectBoard(boNo);
 	}
+	
+	private FreeboardVO boardAuthenticate(FreeboardVO input) {
+		FreeboardVO saved =  boardDAO.selectBoard(input.getBoNo());
+		if(passwordEncoder.matches(input.getBoPass(), saved.getBoPass())) {
+			return saved;
+		}else {
+			return null;
+		}
+	}
 
 	@Override
 	public boolean modifyBoard(FreeboardVO board) {
-		return boardDAO.updateBoard(board) > 0;
+		FreeboardVO saved = boardAuthenticate(board);
+		boolean success = false;
+		if(saved!=null) {
+			success = boardDAO.updateBoard(board) > 0;
+		}
+		return success;
 	}
 
 	@Override
 	public boolean removeBoard(FreeboardVO board) {
-		return boardDAO.deleteBoard(board) > 0;
+		FreeboardVO saved = boardAuthenticate(board);
+		boolean success = false;
+		if(saved!=null) {
+			try {
+				success = boardDAO.deleteBoard(board) > 0;
+				success &= atchService.removeAtchFileGroup(saved.getAtchFileId(), atchPath);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return success;
 	}
 }
+
+
+
+
+
+
+
+

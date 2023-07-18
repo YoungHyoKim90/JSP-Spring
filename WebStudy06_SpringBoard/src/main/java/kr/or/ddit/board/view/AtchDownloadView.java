@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.propertyeditors.URLEditor;
 import org.springframework.web.servlet.view.AbstractView;
 
 import kr.or.ddit.atch.vo.AtchFileDetailVO;
@@ -21,25 +22,39 @@ public class AtchDownloadView extends AbstractView {
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		AtchFileDetailVO atchFile = (AtchFileDetailVO)model.get("atchFile");
+		AtchFileDetailVO atchFile =  (AtchFileDetailVO) model.get("atchFile");
 		log.info("전달된 모델 : {}", atchFile);
 		
 		File readFile = new File(atchFile.getFileStreCours());
 		response.setContentLengthLong(atchFile.getFileSize());
 //		Content-Disposition: "inline[attatchment];filename=\"{0}\"";
-		
-		
 		String filename = URLEncoder.encode(atchFile.getOrignlFileNm(), "UTF-8");
 		String contentDisposition = 
 				MessageFormat.format("attatchment;filename=\"{0}\"", filename);
 		response.setHeader("Content-Disposition", contentDisposition);
 		response.setContentType("application/octet-stream");
-		
-		try (
-				OutputStream os = response.getOutputStream();
+		try(
+			OutputStream os = response.getOutputStream();	
 		){
 			FileUtils.copyFile(readFile, os);
 		}
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

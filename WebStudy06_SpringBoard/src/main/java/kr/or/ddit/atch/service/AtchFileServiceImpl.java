@@ -16,7 +16,6 @@ import kr.or.ddit.atch.vo.AtchFileVO;
 
 @Service
 public class AtchFileServiceImpl implements AtchFileService {
-
 	@Inject
 	private AtchFileDAO atchDAO;
 	
@@ -25,25 +24,23 @@ public class AtchFileServiceImpl implements AtchFileService {
 		AtchFileDetailVO saved = atchDAO.selectAtchFileDetail(condition);
 		if(saved==null) {
 			throw new RuntimeException("조건에 맞는 파일 메타데이터가 없음.");
-			
 		}
-		
 		return saved;
 	}
-	
+
 	@Override
 	public int createAtchFileGroup(AtchFileVO fileGroup, Resource saveRes) throws IOException {
 		List<AtchFileDetailVO> detailList = fileGroup.getDetailList();
-		if (detailList != null) {
-			for (AtchFileDetailVO single : detailList) {
+		if(detailList!=null) {
+			for(AtchFileDetailVO single : detailList) {
 				File saveFile = new File(saveRes.getFile(), single.getStreFileNm());
 				single.setFileStreCours(saveFile.getCanonicalPath());
 			}
 		}
-
+		
 		int cnt = atchDAO.insertAtchFileGroup(fileGroup);
-		if (cnt > 1) {
-			for (AtchFileDetailVO single : detailList) {
+		if(cnt > 1) {
+			for(AtchFileDetailVO single : detailList) {
 				File saveFile = new File(single.getFileStreCours());
 				single.getUploadFile().transferTo(saveFile);
 			}
@@ -55,12 +52,12 @@ public class AtchFileServiceImpl implements AtchFileService {
 	public boolean removeAtchFileGroup(int atchFileId, Resource saveRes) throws IOException {
 		AtchFileVO fileGroup = atchDAO.selectAtchFileGroup(atchFileId);
 		int cnt = 0;
-		if (fileGroup != null) {
+		if(fileGroup!=null) {
 			cnt = atchDAO.deleteAtchFileGroup(atchFileId);
 			cnt += atchDAO.deleteAtchFileDetails(atchFileId);
-			if (cnt > 1) {
+			if(cnt > 1) {
 				List<AtchFileDetailVO> detailList = fileGroup.getDetailList();
-				for (AtchFileDetailVO single : detailList) {
+				for(AtchFileDetailVO single : detailList) {
 					File saveFile = new File(saveRes.getFile(), single.getStreFileNm());
 					FileUtils.deleteQuietly(saveFile);
 				}
@@ -69,5 +66,31 @@ public class AtchFileServiceImpl implements AtchFileService {
 		return cnt > 0;
 	}
 
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
