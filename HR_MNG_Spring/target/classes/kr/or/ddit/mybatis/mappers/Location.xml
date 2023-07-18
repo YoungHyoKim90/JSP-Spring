@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.emp.dao.LocationDAO">
+	
+	<select id="selectRegions" resultMap="kr.or.ddit.mybatis.mappers.ResultMaps.regionMap">
+		SELECT 
+			R.REGION_ID, REGION_NAME
+			, COUNTRY_ID, COUNTRY_NAME
+		FROM REGIONS R LEFT OUTER JOIN COUNTRIES C ON (R.REGION_ID = C.REGION_ID)
+	</select>
+	
+	<select id="selectCountries" resultMap="kr.or.ddit.mybatis.mappers.ResultMaps.countryMap" parameterType="string">
+		SELECT
+			C.COUNTRY_ID, COUNTRY_NAME
+			, C.REGION_ID, REGION_NAME
+			, LOCATION_ID, STREET_ADDRESS
+			, POSTAL_CODE, CITY
+			, STATE_PROVINCE
+		FROM COUNTRIES C INNER JOIN REGIONS R ON (C.REGION_ID = R.REGION_ID)
+						LEFT OUTER JOIN LOCATIONS L ON (C.COUNTRY_ID = L.COUNTRY_ID)
+		<where>
+			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(countryId)">
+				C.REGION_ID = #{regionId}
+			</if>
+		</where>				
+	</select>
+	
+	<select id="selectLocations" resultMap="kr.or.ddit.mybatis.mappers.ResultMaps.locationMap" parameterType="string">
+		SELECT 
+			LOCATION_ID, STREET_ADDRESS
+			, POSTAL_CODE, CITY
+			, STATE_PROVINCE
+			, C.COUNTRY_ID, C.COUNTRY_NAME
+			, R.REGION_ID, R.REGION_NAME
+		FROM LOCATIONS L INNER JOIN COUNTRIES C ON (L.COUNTRY_ID = C.COUNTRY_ID)
+						INNER JOIN REGIONS R ON (C.REGION_ID = R.REGION_ID)	
+		<where>
+			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(countryId)">
+				L.COUNTRY_ID = #{countryId}
+			</if>
+		</where>
+	</select>
+</mapper>

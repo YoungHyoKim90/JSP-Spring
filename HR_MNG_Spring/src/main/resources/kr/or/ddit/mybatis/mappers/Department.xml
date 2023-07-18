@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.emp.dao.DepartmentDAO">
+	<sql id="selectClause">
+		D.DEPARTMENT_ID, DEPARTMENT_NAME
+		, MGR.EMPLOYEE_ID "manager.employeeId", MGR.EMP_NAME "manager.empName" 
+		, D.LOCATION_ID "location.locationId", CITY "location.city"
+		, L.COUNTRY_ID "location.country.countryId", COUNTRY_NAME "location.country.countryName"
+	</sql>
+	<sql id="fromClause">
+		DEPARTMENTS D INNER JOIN EMPLOYEES MGR ON (D.MANAGER_ID = MGR.EMPLOYEE_ID)
+							INNER JOIN LOCATIONS L ON (D.LOCATION_ID = L.LOCATION_ID)
+							INNER JOIN COUNTRIES C ON (L.COUNTRY_ID = C.COUNTRY_ID)
+	</sql>
+	<select id="selectDepartments" parameterType="string" resultType="DepartmentVO">
+		SELECT <include refid="selectClause"/> 
+		FROM <include refid="fromClause" />
+		<where>
+			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(countryId)">
+				L.COUNTRY_ID = #{countryId}
+			</if>
+		</where>							
+	</select>
+	
+	<select id="selectDepartment" parameterType="string" resultType="DepartmentVO">
+		SELECT <include refid="selectClause"/> 
+		FROM <include refid="fromClause" />
+		WHERE D.DEPARTMENT_ID = #{departmentId}							
+	</select>
+</mapper>

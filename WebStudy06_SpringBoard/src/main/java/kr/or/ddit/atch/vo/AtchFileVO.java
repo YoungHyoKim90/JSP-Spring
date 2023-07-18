@@ -11,11 +11,11 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(of="atchFileId")
 public class AtchFileVO {
-	@NotBlank
-	private int atchFileId;
-	@NotBlank
-	private LocalDate creatDt;
-	private boolean useAt;
-	
-	private List<AtchFileDetailVO> detailList;
+    @NotBlank
+    private int atchFileId;
+    @NotBlank
+    private LocalDate creatDt;
+    private boolean useAt;
+    
+    private List<AtchFileDetailVO> detailList;
 }

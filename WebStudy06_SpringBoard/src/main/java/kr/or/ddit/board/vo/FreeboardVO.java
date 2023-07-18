@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.atch.vo.AtchFileVO;
 import kr.or.ddit.validate.groups.UpdateGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,6 +34,11 @@ public class FreeboardVO {
 	private Integer boHit;
 	
 	private MultipartFile[] boFiles;
+	
+	   private Integer atchFileId;
+	   
+	   private AtchFileVO fileGroup; // has a
+
 }
 
 

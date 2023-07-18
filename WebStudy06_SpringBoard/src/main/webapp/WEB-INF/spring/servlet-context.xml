@@ -49,6 +49,8 @@
 		p:objectMapper-ref="jackson2ObjectMapper"
 	/>
 
+	<bean id="downloadView" class="kr.or.ddit.board.view.AtchDownloadView" />
+
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" 
 		p:order="2"
 	/>

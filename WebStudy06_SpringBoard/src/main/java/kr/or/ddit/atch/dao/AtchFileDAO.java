@@ -11,4 +11,7 @@ public interface AtchFileDAO {
 	public AtchFileVO selectAtchFileGroup(int atchFileId);
 	
 	public int insertAtchFileGroup(AtchFileVO atchFileGroup);
+	
+	public int deleteAtchFileGroup(int atchFileId);
+	public int deleteAtchFileDetails(int atchFileId);
 }

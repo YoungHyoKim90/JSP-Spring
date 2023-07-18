@@ -1,12 +1,20 @@
 package kr.or.ddit.board.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.atch.service.AtchFileService;
+import kr.or.ddit.atch.vo.AtchFileDetailVO;
+import kr.or.ddit.atch.vo.AtchFileVO;
 import kr.or.ddit.board.dao.FreeboardDAO;
 import kr.or.ddit.board.vo.FreeboardVO;
 import kr.or.ddit.board.vo.PaginationInfo;
@@ -17,19 +25,49 @@ public class FreeboardServiceImpl implements FreeboardService {
 	private FreeboardDAO boardDAO;
 	@Inject
 	private PasswordEncoder encoder;
+	@Inject
+	private AtchFileService atchService;
+	@Value("#{appInfo.atchPath}")
+	private Resource atchPath;
 
 	private void encryptBoard(FreeboardVO board) {
 		String plain = board.getBoPass();
 		String encoded = encoder.encode(plain);
 		board.setBoPass(encoded);
 	}
-	
+
+	private void processAtchFileGroup(FreeboardVO board) {
+		MultipartFile[] boFiles = board.getBoFiles();
+		if (boFiles == null)
+			return;
+		List<AtchFileDetailVO> detailList = new ArrayList<>();
+		for (MultipartFile boFile : boFiles) {
+			if (boFile.isEmpty())
+				continue;
+			detailList.add(new AtchFileDetailVO(boFile));
+		}
+		if (detailList.size() > 0) {
+			AtchFileVO fileGroup = new AtchFileVO();
+			fileGroup.setDetailList(detailList);
+			try {
+//		1. 첨부파일의 메타 데이터 저장
+//		2. 첨부파일의 2진 데이터 저장
+				int atchFileId = atchService.createAtchFileGroup(fileGroup, atchPath);
+				board.setAtchFileId(atchFileId);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+	}
+
 	@Override
 	public boolean createBoard(FreeboardVO board) {
 		encryptBoard(board);
+		processAtchFileGroup(board);
 		return boardDAO.insertBoard(board) > 0;
 	}
-
 
 	@Override
 	public List<FreeboardVO> retrieveBoardList(PaginationInfo paging) {

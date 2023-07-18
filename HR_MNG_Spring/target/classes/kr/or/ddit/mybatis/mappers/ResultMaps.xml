@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mybatis.mappers.ResultMaps">
+	<resultMap type="LocationVO" id="locationMap" autoMapping="true">
+		<association property="country" javaType="CountryVO" autoMapping="true">
+			<association property="region" javaType="RegionVO" autoMapping="true" />
+		</association>
+	</resultMap>
+	<resultMap type="CountryVO" id="countryMap" autoMapping="true">
+		<id property="countryId" column="COUNTRY_ID"/>
+		<association property="region" autoMapping="true" />
+		<collection property="locations" ofType="LocationVO" autoMapping="true" />
+	</resultMap>
+	<resultMap type="RegionVO" id="regionMap" autoMapping="true">
+		<id property="regionId" column="REGION_ID"/>
+		<collection property="countries" ofType="CountryVO" autoMapping="true" />
+	</resultMap>
+</mapper>

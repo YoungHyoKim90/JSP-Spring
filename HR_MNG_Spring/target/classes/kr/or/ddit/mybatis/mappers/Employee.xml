@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.emp.dao.EmployeeDAO">
+	<sql id="searchFrag">
+		FROM EMPLOYEES EMP LEFT OUTER JOIN EMPLOYEES MGR ON (EMP.MANAGER_ID = MGR.EMPLOYEE_ID)
+				LEFT OUTER JOIN JOBS ON (EMP.JOB_ID = JOBS.JOB_ID)
+				LEFT OUTER JOIN DEPARTMENTS DEPT ON (EMP.DEPARTMENT_ID = DEPT.DEPARTMENT_ID)
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(variousCondition.empName)">
+				AND INSTR(EMP.EMP_NAME, #{variousCondition.empName}) > 0 
+			</if>
+			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(variousCondition.departmentId)">
+				AND EMP.DEPARTMENT_ID = #{variousCondition.departmentId}
+			</if>
+			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(variousCondition.jobId)">
+				AND EMP.JOB_ID = #{variousCondition.jobId}
+			</if>
+			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(variousCondition.startMonth)">
+				AND EMP.HIRE_DATE >= TO_DATE(#{variousCondition.startMonth}, 'YYYY-MM')
+			</if>
+			<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(variousCondition.endMonth)">
+				<![CDATA[
+				AND EMP.HIRE_DATE <= TO_DATE(#{variousCondition.endMonth}, 'YYYY-MM')
+				]]>
+			</if>
+		</trim>	
+	</sql>
+	<select id="selectTotalRecord" resultType="int" parameterType="Pagination">
+		SELECT COUNT(*)
+		<include refid="searchFrag" />
+	</select>
+	
+	<select id="selectEmployees" resultType="EmployeeVO" parameterType="Pagination">
+		SELECT B.*
+		FROM (
+			SELECT ROWNUM RNUM, A.* 
+			FROM (
+				SELECT 
+					EMP.EMPLOYEE_ID, EMP.FIRST_NAME, EMP.LAST_NAME, EMP.EMP_NAME
+					, EMP.EMAIL, EMP.PHONE_NUMBER, EMP.HIRE_DATE
+					, EMP.JOB_ID "job.jobId", JOB_TITLE "job.jobTitle"
+					, EMP.SALARY, EMP.COMMISSION_PCT
+					, EMP.MANAGER_ID "manager.managerId", MGR.EMP_NAME "manager.empName" 
+					, EMP.DEPARTMENT_ID "department.departmentId", DEPARTMENT_NAME "department.departmentName"
+				<include refid="searchFrag" />
+				ORDER BY 1
+			) A
+		) B
+		<where>
+			<if test="startRow gt 0 and endRow gt 0">
+				RNUM BETWEEN #{startRow} AND #{endRow}
+			</if>
+		</where>
+	</select>
+</mapper>

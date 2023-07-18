@@ -65,6 +65,16 @@
 			</foreach>
 		SELECT * FROM DUAL
 	</insert>
+	
+	<delete id="deleteAtchFileGroup" parameterType="int">
+		DELETE FROM ATCH_FILE
+		WHERE ATCH_FILE_ID = #{atchFileId}
+	</delete>
+	<delete id="deleteAtchFileDetails" parameterType="int">
+		DELETE FROM ATCH_FILE_DETAIL
+		WHERE ATCH_FILE_ID = #{atchFileId}
+	</delete>
+	
 </mapper>
 
 
