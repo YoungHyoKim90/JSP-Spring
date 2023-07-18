@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import kr.or.ddit.vo.ProdVO;
 
 class ProdDAOImplTest {
-	private ProdDAO dao = new ProdDAOImpl();
+	private ProdDAO dao = new ProdDAOImplTest();
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {

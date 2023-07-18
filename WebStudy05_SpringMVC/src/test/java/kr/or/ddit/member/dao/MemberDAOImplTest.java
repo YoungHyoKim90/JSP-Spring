@@ -9,7 +9,7 @@ import kr.or.ddit.vo.MemberVO;
 
 class MemberDAOImplTest {
 
-	private MemberDAO dao = new MemberDAOImpl();
+	private MemberDAO dao = new MemberDAOImplTest();
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
