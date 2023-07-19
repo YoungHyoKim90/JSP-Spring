@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 

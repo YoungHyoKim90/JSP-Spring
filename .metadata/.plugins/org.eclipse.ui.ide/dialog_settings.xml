@@ -44,9 +44,11 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\0.tools\eGovFrameDev-4.1.0-64bit\workspace\HR_MNG_Spring"/>
 			<item value="D:\0.tools\eGovFrameDev-4.1.0-64bit\workspace\SpringDILab"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
 			<item value="D:\0.tools\eGovFrameDev-4.1.0-64bit\workspace\WebStudy04_MVCFramework\src\main\resources\kr\or\ddit\db\dbInfo.properties"/>
 		</list>
 	</section>

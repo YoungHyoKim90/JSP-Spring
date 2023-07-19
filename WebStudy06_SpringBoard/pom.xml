@@ -61,13 +61,17 @@
 			<version>1.9.19</version>
 		</dependency>
 
-		<!-- 암호화 지원용 : 차후 security-core 로 변경 예정 -->
+		<!-- 어플리케이션 보안 적용을 위한 의존성 : 암호화 유틸리티 포함. -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
+			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
-
+				<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springframework.security-version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

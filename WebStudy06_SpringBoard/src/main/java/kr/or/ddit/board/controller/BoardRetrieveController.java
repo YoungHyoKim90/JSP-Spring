@@ -45,6 +45,10 @@ public class BoardRetrieveController {
 		FreeboardVO board = service.retrieveBoard(boNo);
 		model.addAttribute("freeboard", board);
 	}
+//	의존성주입의 종류로는 Constructor(생성자),Setter,Field 타입이 있다.
+//	@RequestParam 어노테이션은 사용자가 요청시 전달하는 값을 Handler(Controller)의 
+//	매개변수로 1:1 맵핑할때 사용되는 어노테이션입니다.
+//	@ModelAttribute는 사용자가 요청시 전달하는 값을 오브젝트 형태로 매핑해주는 어노테이션입니다.	
 }
 
 
